@@ -6612,5 +6612,22 @@
             <span>Use search to jump to feeders / substations</span>
         </div>
 
+    
+        <script>
+        (function(){
+            function hideLoader(){
+                var el=document.getElementById('loader');
+                if(el) el.classList.add('gone');
+            }
+            if(document.readyState==='complete'){
+                setTimeout(hideLoader, 400);
+            }else{
+                window.addEventListener('load', function(){ setTimeout(hideLoader, 400); });
+                document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideLoader, 1200); });
+            }
+            setTimeout(hideLoader, 2500);
+        })();
+        </script>
+
     </body>
 </html>
