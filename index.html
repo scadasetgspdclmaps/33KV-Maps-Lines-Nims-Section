@@ -3,81 +3,113 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-<title>TGSPDCL — 33KV NIMS Section GIS</title>
+<title>TGSPDCL — NIMS / Jubilee Hills / Road No.13 Section GIS</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 
-<script src="data/33KVGunnrockNIMS_1.js"></script>
-<script src="data/33KVGunnrockNIMS_AB_Switch_2.js"></script>
-<script src="data/33KVGunnrockNIMS_Double_Pole_Structure_3.js"></script>
-<script src="data/33KVGunnrockNIMS_Cut_Points_4.js"></script>
-<script src="data/33KVGunnrockNIMS_Feeder_Lines_5.js"></script>
-<script src="data/33KVNIMSPunjagutta_6.js"></script>
-<script src="data/33KVNIMSPunjagutta_AB_Switch_7.js"></script>
-<script src="data/33KVNIMSPunjagutta_Double_Pole_Structure_8.js"></script>
-<script src="data/33KVNIMSPunjagutta_Cut_Points_9.js"></script>
-<script src="data/33KVNIMSPunjagutta_Feeder_Lines_10.js"></script>
-<script src="data/33KVAnandnagarErramanjil_11.js"></script>
-<script src="data/33KVAnandnagarErramanjil_AB_Switch_12.js"></script>
-<script src="data/33KVAnandnagarErramanjil_Double_Pole_Structure_13.js"></script>
-<script src="data/33KVAnandnagarErramanjil_Cut_Points_14.js"></script>
-<script src="data/33KVAnandnagarErramanjil_Feeder_Lines_15.js"></script>
-<script src="data/132KVERRAGADDA33KVNIMS_16.js"></script>
-<script src="data/132KVERRAGADDA33KVNIMS_AB_Switch_17.js"></script>
-<script src="data/132KVERRAGADDA33KVNIMS_Double_Pole_Structure_18.js"></script>
-<script src="data/132KVERRAGADDA33KVNIMS_Cut_Points_19.js"></script>
-<script src="data/132KVERRAGADDA33KVNIMS_Feeder_Lines_20.js"></script>
-<script src="data/132KVGUNROCK33KVNIMS_21.js"></script>
-<script src="data/132KVGUNROCK33KVNIMS_AB_Switch_22.js"></script>
-<script src="data/132KVGUNROCK33KVNIMS_Double_Pole_Structure_23.js"></script>
-<script src="data/132KVGUNROCK33KVNIMS_Cut_Points_24.js"></script>
-<script src="data/132KVGUNROCK33KVNIMS_Feeder_Lines_25.js"></script>
-<script src="data/132KVGUNROCK33KVERRAMANJIL_26.js"></script>
-<script src="data/132KVGUNROCK33KVERRAMANJIL_AB_Switch_27.js"></script>
-<script src="data/132KVGUNROCK33KVERRAMANJIL_Double_Pole_Structure_28.js"></script>
-<script src="data/132KVGUNROCK33KVERRAMANJIL_Cut_Points_29.js"></script>
-<script src="data/132KVGUNROCK33KVERRAMANJIL_Feeder_Lines_30.js"></script>
-<script src="data/132KVASIFNAGAR33KVNIMS_31.js"></script>
-<script src="data/132KVASIFNAGAR33KVNIMS_AB_Switch_32.js"></script>
-<script src="data/132KVASIFNAGAR33KVNIMS_Double_Pole_Structure_33.js"></script>
-<script src="data/132KVASIFNAGAR33KVNIMS_Cut_Points_34.js"></script>
-<script src="data/132KVASIFNAGAR33KVNIMS_Feeder_Lines_35.js"></script>
-<script src="data/132KVASIFNAGAR33KVPUNJAGUTTA_36.js"></script>
-<script src="data/132KVASIFNAGAR33KVPUNJAGUTTA_AB_Switch_37.js"></script>
-<script src="data/132KVASIFNAGAR33KVPUNJAGUTTA_Double_Pole_Structure_38.js"></script>
-<script src="data/132KVASIFNAGAR33KVPUNJAGUTTA_Cut_Points_39.js"></script>
-<script src="data/132KVASIFNAGAR33KVPUNJAGUTTA_Feeder_Lines_40.js"></script>
-<script src="data/132KVASIFNAGAR33KVANANDNAGAR_41.js"></script>
-<script src="data/132KVASIFNAGAR33KVANANDNAGAR_AB_Switch_42.js"></script>
-<script src="data/132KVASIFNAGAR33KVANANDNAGAR_Double_Pole_Structure_43.js"></script>
-<script src="data/132KVASIFNAGAR33KVANANDNAGAR_Cut_Points_44.js"></script>
-<script src="data/132KVASIFNAGAR33KVANANDNAGAR_Feeder_Lines_45.js"></script>
-<script src="data/3311KVSSCOORDINATESWITHDATA20_76.js"></script>
-<script src="data/SS_WEB_INTERACT_77.js"></script>
-<script src="data/FeederPoles_78.js"></script>
-<script src="data/Feeder_Segments_WEB_INTERACT_79.js"></script>
-<script src="data/Feeder_Segments_WEB_DISPLAY_80.js"></script>
-<script src="data/EHTSSCOORDINATESWITHDATA_82.js"></script>
-<script src="data/SS_WEB_INTERACT_83.js"></script>
+
+<script src="data/33KVNIMSRoadNo13BHILLS_1.js"></script>
+<script src="data/33KVNIMSRoadNo13BHILLS_AB_Switch_2.js"></script>
+<script src="data/33KVNIMSRoadNo13BHILLS_Double_Pole_Structure_3.js"></script>
+<script src="data/33KVNIMSRoadNo13BHILLS_Cut_Points_4.js"></script>
+<script src="data/33KVNIMSRoadNo13BHILLS_Feeder_Lines_5.js"></script>
+<script src="data/132KVNIMS33KVROADNO13_6.js"></script>
+<script src="data/132KVNIMS33KVROADNO13_AB_Switch_7.js"></script>
+<script src="data/132KVNIMS33KVROADNO13_Double_Pole_Structure_8.js"></script>
+<script src="data/132KVNIMS33KVROADNO13_Cut_Points_9.js"></script>
+<script src="data/132KVNIMS33KVROADNO13_Feeder_Lines_10.js"></script>
+<script src="data/132KVNIMS33KVNIMSOLD_11.js"></script>
+<script src="data/132KVNIMS33KVNIMSOLD_AB_Switch_12.js"></script>
+<script src="data/132KVNIMS33KVNIMSOLD_Double_Pole_Structure_13.js"></script>
+<script src="data/132KVNIMS33KVNIMSOLD_Cut_Points_14.js"></script>
+<script src="data/132KVNIMS33KVNIMSOLD_Feeder_Lines_15.js"></script>
+<script src="data/132KVNIMS33KVNIMSNEW_16.js"></script>
+<script src="data/132KVNIMS33KVNIMSNEW_AB_Switch_17.js"></script>
+<script src="data/132KVNIMS33KVNIMSNEW_Double_Pole_Structure_18.js"></script>
+<script src="data/132KVNIMS33KVNIMSNEW_Cut_Points_19.js"></script>
+<script src="data/132KVNIMS33KVNIMSNEW_Feeder_Lines_20.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13B_21.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13B_AB_Switch_22.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13B_Double_Pole_Structure_23.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13B_Cut_Points_24.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13B_Feeder_Lines_25.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13A_26.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13A_AB_Switch_27.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13A_Double_Pole_Structure_28.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13A_Cut_Points_29.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVROADNO13A_Feeder_Lines_30.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPRASHASANNAGAR_31.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPRASHASANNAGAR_AB_Switch_32.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPRASHASANNAGAR_Double_Pole_Structure_33.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPRASHASANNAGAR_Cut_Points_34.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPRASHASANNAGAR_Feeder_Lines_35.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_36.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_AB_Switch_37.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_Double_Pole_Structure_38.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_Cut_Points_39.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_Feeder_Lines_40.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_41.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_AB_Switch_42.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_Double_Pole_Structure_43.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_Cut_Points_44.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_Feeder_Lines_45.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVNIMS_46.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVNIMS_AB_Switch_47.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVNIMS_Double_Pole_Structure_48.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVNIMS_Cut_Points_49.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVNIMS_Feeder_Lines_50.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMLACOLONY_51.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMLACOLONY_AB_Switch_52.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMLACOLONY_Double_Pole_Structure_53.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMLACOLONY_Cut_Points_54.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMLACOLONY_Feeder_Lines_55.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMPL_56.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMPL_AB_Switch_57.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMPL_Double_Pole_Structure_58.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMPL_Cut_Points_59.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVMPL_Feeder_Lines_60.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVFILMNAGAR_61.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVFILMNAGAR_AB_Switch_62.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVFILMNAGAR_Double_Pole_Structure_63.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVFILMNAGAR_Cut_Points_64.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVFILMNAGAR_Feeder_Lines_65.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_66.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_AB_Switch_67.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_Double_Pole_Structure_68.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_Cut_Points_69.js"></script>
+<script src="data/132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_Feeder_Lines_70.js"></script>
+<script src="data/Feeder_Segments_71.js"></script>
+<script src="data/Feeder_Segments_WEB_DISPLAY_72.js"></script>
+<script src="data/Feeder_Segments_WEB_INTERACT_73.js"></script>
+<script src="data/FeederPoles_74.js"></script>
+<script src="data/3311KVSSCOORDINATESWITHDATA20_75.js"></script>
+<script src="data/SS_WEB_INTERACT_76.js"></script>
+<script src="data/EHTSSCOORDINATESWITHDATA_77.js"></script>
+<script src="data/SS_WEB_INTERACT_78.js"></script>
 
 <style>
-/* CSS: EXACT REPLICATION OF MASTER TEMPLATE */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --navy:#0d1b2a;--panel:#0f2236ee;--live:#00c8ff;--ug:#2196f3;--oh:#f44336;
-  --ab:#ff9800;--dp:#9c27b0;--cut:#78909c;--fault:#ff1744;--ok:#00e676;
-  --border:rgba(0,200,255,0.18);--text:#b0cce0;
+  --ab:#ff9800;--dp:#9c27b0;--cut:#78909c;--fault:#ff1744;--trip:#ffab00;
+  --ok:#00e676;--border:rgba(0,200,255,0.18);--text:#b0cce0;
   --mono:'Share Tech Mono',monospace;--sans:'Arial',sans-serif;
   --ease:cubic-bezier(.4,0,.2,1);
 }
 html,body{width:100%;height:100%;overflow:hidden;background:var(--navy)}
 
+/* MAP */
 #map{position:fixed;inset:52px 0 38px 0;z-index:1}
 .leaflet-tile{transition:opacity .35s ease!important}
-.leaflet-control-zoom a{background:var(--panel)!important;color:var(--live)!important;border:none!important;width:34px!important;height:34px!important;line-height:34px!important}
-.leaflet-control-scale-line{background:rgba(13,27,42,.9)!important;border-color:rgba(0,200,255,.4)!important;color:var(--live)!important;font-family:var(--mono)!important;font-size:10px!important}
+.leaflet-control-zoom{border:none!important;border-radius:10px!important;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.5)!important}
+.leaflet-control-zoom a{background:var(--panel)!important;color:var(--live)!important;border:none!important;width:34px!important;height:34px!important;line-height:34px!important;font-size:17px!important}
+.leaflet-control-zoom a:hover{background:rgba(0,200,255,.2)!important}
+.leaflet-control-attribution{display:none}
+.leaflet-control-scale-line{background:rgba(13,27,42,.9)!important;border-color:rgba(0,200,255,.4)!important;color:var(--live)!important;font-family:var(--mono)!important;font-size:10px!important;padding:2px 7px!important;border-radius:4px!important}
+#map{cursor:grab}#map:active{cursor:grabbing}
 
 /* TOP BAR */
 #topbar{
@@ -90,247 +122,1179 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--navy)}
 .tb-logo{font-family:var(--mono);font-size:13px;color:var(--live);letter-spacing:2px;white-space:nowrap}
 .tb-sep{width:1px;height:28px;background:var(--border);flex-shrink:0}
 .tb-title{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* SEARCH & RADAR */
 #srchWrap{position:relative;flex-shrink:0}
 #srchInput{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:20px;padding:6px 14px 6px 34px;color:var(--text);font-family:var(--sans);font-size:13px;width:190px;outline:none;transition:all .3s}
 #srchInput:focus{width:250px;background:rgba(0,200,255,.08);border-color:var(--live)}
+#srchInput::placeholder{color:rgba(176,204,224,.35)}
 .srch-ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:rgba(176,204,224,.35);font-size:14px;pointer-events:none}
 
-.radar-ping { width:40px;height:40px;background:rgba(255,23,68,0.6);border-radius:50%;animation:ping-anim 1.5s ease-out infinite;pointer-events:none;margin-left:-20px;margin-top:-20px }
-@keyframes ping-anim { 0%{transform:scale(0);opacity:1} 100%{transform:scale(2.5);opacity:0} }
+/* FULLSCREEN BUTTON */
+.fs-btn{
+  color:var(--text);font-size:18px;cursor:pointer;padding:4px 8px;border-radius:5px;transition:0.2s;
+  display:flex;align-items:center;justify-content:center;
+}
+.fs-btn:hover{color:var(--live);background:rgba(0,200,255,0.1);transform:scale(1.05);}
 
-/* SIDE PANEL */
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;padding:4px 12px;border-radius:20px;border:1px solid;white-space:nowrap;flex-shrink:0;transition:all .3s}
+.chip-live{color:var(--ok);border-color:rgba(0,230,118,.35);background:rgba(0,230,118,.08)}
+
+/* LEFT PANEL & RESIZER */
 #panel{
   position:fixed;top:52px;left:0;bottom:38px;z-index:900;width:258px;
   background:linear-gradient(180deg,#0a1828f8,#0d1f33f8);
   backdrop-filter:blur(22px);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;transition:transform .32s var(--ease);
-  box-shadow:4px 0 28px rgba(0,0,0,.4);
-  overflow-y:auto;overflow-x:hidden;
+  display:flex;flex-direction:column;transform:translateX(0);
+  transition:transform .32s var(--ease);box-shadow:4px 0 28px rgba(0,0,0,.4);
+  overflow-y:auto;overflow-x:hidden;min-width:200px;max-width:800px;
+}
+#panel-resize{
+  position:absolute;top:0;right:0;bottom:0;width:14px;
+  cursor:col-resize;z-index:920;
+  background:transparent;
+  border-right: 1px dashed transparent;
+  transition:all .2s
+}
+#panel-resize:hover,#panel-resize.dragging{
+  background:rgba(0,200,255,.05);
+  border-right: 1px dashed rgba(0,200,255,.4);
 }
 #panel.off{transform:translateX(-100%)}
-
+#panel::-webkit-scrollbar{width:3px}
+#panel::-webkit-scrollbar-thumb{background:rgba(0,200,255,.2);border-radius:3px}
 .psec{padding:13px 15px 9px;border-bottom:1px solid rgba(0,200,255,.07)}
 .psec-t{font-family:var(--mono);font-size:9px;color:rgba(0,200,255,.55);letter-spacing:2px;margin-bottom:9px}
 
-/* LAYER ROWS */
-.lrow{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .2s;margin-bottom:2px;user-select:none}
-.lrow:hover{background:rgba(0,200,255,.07)}
+/* Layer rows */
+.lrow{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .2s,transform .15s;margin-bottom:2px;user-select:none}
+.lrow:hover{background:rgba(0,200,255,.07);transform:translateX(2px)}
 .lswatch{width:26px;height:5px;border-radius:3px;flex-shrink:0}
 .lswatch.dot{width:11px;height:11px;border-radius:50%;border:2px solid}
+.lrow.off .lswatch{opacity:.18;filter:grayscale(1)}
 .lname{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--text);flex:1}
-.tog{width:30px;height:17px;border-radius:9px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);position:relative;transition:0.25s}
-.tog::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.35);transition:transform .25s var(--ease)}
+.lrow.off .lname{color:rgba(176,204,224,.3)}
+.lcnt{font-family:var(--mono);font-size:9px;color:var(--live);background:rgba(0,200,255,.1);padding:2px 6px;border-radius:9px}
+.lrow.off .lcnt{background:rgba(255,255,255,.04);color:rgba(176,204,224,.2)}
+.tog{width:30px;height:17px;border-radius:9px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);position:relative;flex-shrink:0;transition:background .25s}
+.tog::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.35);transition:transform .25s var(--ease),background .25s}
 .lrow:not(.off) .tog{background:rgba(0,200,255,.28);border-color:var(--live)}
 .lrow:not(.off) .tog::after{transform:translateX(13px);background:var(--live)}
+.ftog-row { display:flex;align-items:center;gap:7px;padding:4px 6px;border-radius:6px;cursor:pointer;transition:background .2s }
+.ftog-row:hover { background:rgba(0,200,255,.07) }
+.ftog-row .tog.off { background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.12) }
+.ftog-row .tog.off::after { transform:translateX(0);background:rgba(255,255,255,.35) }
+.ftog-row .tog { background:rgba(0,200,255,.28);border-color:var(--live) }
+.ftog-row .tog::after { transform:translateX(13px);background:var(--live) }
 
-/* FEEDER STATUS BADGES */
-.fi-btn-grp { display:flex;gap:3px;padding-left:16px;margin-top:3px;width:100% }
-.fi-btn { flex:1;padding:2px 4px;border-radius:4px;border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.05);color:rgba(176,204,224,.6); font-family:var(--mono);font-size:8px;letter-spacing:.5px; cursor:pointer;transition:all .18s }
-.fi-live.active { background:rgba(0,200,83,.25);color:#00c853;border-color:#00c853 }
-.fi-breakdown.active { background:rgba(255,23,68,.25);color:#ff1744;border-color:#ff1744; animation:sos-blink 0.8s infinite }
+/* FOCUS HIGHLIGHT HOVER EFFECT */
+.focus-txt { transition: 0.2s; }
+.focus-txt:hover { color: #fff !important; font-weight: bold; padding-left: 3px; }
 
-/* ANIMATIONS */
-@keyframes energy-flow-overlay { to { stroke-dashoffset: -24; } }
-.feeder-flow-overlay { stroke-dasharray: 4 20; stroke-linecap: round; animation: energy-flow-overlay 0.8s linear infinite; pointer-events: none; }
-@keyframes sos-blink { 0%,100% { opacity: 1; filter: drop-shadow(0 0 12px #ff1744); } 50% { opacity: 0.2; } }
-.feeder-breakdown { animation: sos-blink 0.8s ease-in-out infinite !important; }
+/* Basemap */
+.bmgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:2px}
+.bmbtn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:7px 5px;cursor:pointer;text-align:center;font-family:var(--sans);font-size:11px;color:var(--text);transition:all .2s}
+.bmbtn:hover{background:rgba(0,200,255,.08);border-color:var(--live);transform:scale(1.02)}
+.bmbtn.active{background:rgba(0,200,255,.15);border-color:var(--live);color:var(--live);font-weight:600}
 
-/* SS SYMBOLS */
-@keyframes ss33-ring-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.ss33-wrap { position:relative; width:36px;height:36px; display:flex;align-items:center;justify-content:center; }
-.ss33-ring { position:absolute;inset:0; border-radius:50%; border:2px dashed rgba(0,180,255,0.9); animation: ss33-ring-spin 4s linear infinite; }
-.ss33-core { width:22px;height:22px;border-radius:50%; background:radial-gradient(circle, #1e88e5 0%, #0d47a1 100%); border:2px solid #fff; display:flex;align-items:center;justify-content:center; z-index:1; color:white; font-size:11px; }
+/* Pills */
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.pill{font-family:var(--mono);font-size:9px;letter-spacing:1px;padding:4px 9px;border-radius:13px;cursor:pointer;border:1px solid;transition:all .2s;user-select:none}
+.pill:hover{transform:scale(1.06)}
+.pill.active{font-weight:700}
 
-#botbar{position:fixed;bottom:0;left:0;right:0;z-index:900;height:38px;background:rgba(9,22,37,.9);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 14px;color:rgba(176,204,224,.35);font-family:var(--mono);font-size:10px;}
+/* Stats */
+.strow{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+.stlbl{font-family:var(--sans);font-size:11px;color:rgba(176,204,224,.45)}
+.stval{font-family:var(--mono);font-size:11px;color:var(--live)}
+
+/* Panel tab */
+#ptab{
+  position:fixed;top:62px;left:258px;z-index:910;width:20px;height:44px;
+  background:var(--panel);border:1px solid var(--border);border-left:none;
+  border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--live);font-size:11px;
+  transition:left .32s var(--ease),background .2s;box-shadow:3px 0 10px rgba(0,0,0,.3)
+}
+#ptab:hover{background:rgba(0,200,255,.15)}
+#ptab.off{left:0 !important;}
+
+/* SEARCH RADAR PING ANIMATION */
+.radar-ping {
+  width: 40px; height: 40px;
+  background: rgba(255, 23, 68, 0.6);
+  border-radius: 50%;
+  animation: ping-anim 1.5s ease-out infinite;
+  pointer-events: none;
+  margin-left: -20px; margin-top: -20px;
+}
+@keyframes ping-anim {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* CLEAN WHITE POPUP */
+.leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  color: #333333 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.4) !important;
+  padding: 0 !important;
+}
+.leaflet-popup-tip-container { display: none; }
+.leaflet-popup-content { margin: 14px 16px !important; min-width: 250px; }
+.leaflet-popup-close-button { color: #888 !important; font-size: 18px !important; top: 8px !important; right: 8px !important; }
+.leaflet-popup-close-button:hover { color: #000 !important; }
+
+.pc-header-id { font-family: Arial, sans-serif; font-size: 13px; color: #555; margin-bottom: 10px; }
+.popup-table { width: 100%; border-collapse: collapse; }
+.popup-table th, .popup-table td { padding: 2px 0; vertical-align: top; font-family: Arial, sans-serif; font-size: 11px; color: #222; line-height: 1.4; }
+.popup-table th { font-weight: 700; width: 50%; padding-right: 10px; text-align: left; }
+.popup-table td { text-align: left; word-break: break-word; }
+
+/* MAP LABELS - ensure they never block clicks */
+.pole-label {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+  font-family: 'Arial', sans-serif !important;
+  font-weight: bold !important;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Bottom bar & Legend */
+#botbar{
+  position:fixed;bottom:0;left:0;right:0;z-index:900;height:38px;
+  background:rgba(9,22,37,.9);backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);display:flex;align-items:center;
+  padding:0 14px;gap:18px;font-family:var(--mono);font-size:10px;
+  color:rgba(176,204,224,.35);letter-spacing:.5px
+}
 #coords{color:var(--live)}
+#legend{
+  position:fixed;bottom:46px;left:268px;z-index:800;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(12px);
+  border:1px solid #ccc;border-radius:10px;
+  padding:9px 13px;display:flex;gap:12px;flex-wrap:wrap;
+  font-family:var(--sans);font-size:11px;font-weight:bold;letter-spacing:.5px;
+  transition:left .32s var(--ease);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+#legend.shift{left:10px !important;}
+.leg{display:flex;align-items:center;gap:5px;color:#333}
+.leg-l{width:20px;height:3px;border-radius:2px}
+.leg-d{width:8px;height:8px;border-radius:50%}
+
+/* Loading & Toasts */
+#loader{
+  position:fixed;inset:0;z-index:2000;background:var(--navy);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  transition:opacity .5s var(--ease)
+}
+#loader.gone{opacity:0;pointer-events:none}
+.ld-logo{font-family:var(--mono);font-size:22px;color:var(--live);letter-spacing:4px}
+.ld-sub{font-family:var(--sans);font-size:12px;color:rgba(176,204,224,.35);letter-spacing:2px}
+.ld-bar{width:200px;height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+.ld-fill{height:100%;width:0;background:linear-gradient(90deg,var(--live),#0077ff);border-radius:2px;transition:width .4s var(--ease);box-shadow:0 0 8px var(--live)}
+
+#toast{
+  position:fixed;top:62px;left:50%;z-index:1500;
+  transform:translateX(-50%) translateY(-14px);
+  background:rgba(13,27,42,.95);border:1px solid var(--border);
+  border-radius:10px;padding:9px 17px;font-family:var(--sans);
+  font-size:12px;font-weight:500;color:var(--text);
+  backdrop-filter:blur(16px);opacity:0;pointer-events:none;
+  transition:all .28s var(--ease);white-space:nowrap
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+
+/* ── ANIMATED 33/11KV SS SYMBOL ── */
+@keyframes ss33-ring-spin { from { transform: rotate(0deg); } to   { transform: rotate(360deg); } }
+@keyframes ss33-core-pulse { 0%,100% { transform: scale(1); opacity:1; } 50% { transform: scale(1.15); opacity:.85; } }
+@keyframes eht-ring-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,100,0,0.7), 0 0 8px rgba(255,100,0,0.5); } 60% { box-shadow: 0 0 0 8px rgba(255,100,0,0), 0 0 20px rgba(255,100,0,0.8); } }
+
+.ss33-wrap { position:relative; width:36px;height:36px; display:flex;align-items:center;justify-content:center; cursor:pointer; }
+.ss33-ring { position:absolute;inset:0; border-radius:50%; border:2px dashed rgba(0,180,255,0.9); animation: ss33-ring-spin 4s linear infinite; box-shadow: 0 0 8px rgba(0,180,255,0.5), inset 0 0 8px rgba(0,180,255,0.15); }
+.ss33-core { width:22px;height:22px;border-radius:50%; background:radial-gradient(circle, #1e88e5 0%, #0d47a1 100%); border:2px solid rgba(255,255,255,0.9); display:flex;align-items:center;justify-content:center; box-shadow:0 0 10px rgba(33,150,243,0.8); animation: ss33-core-pulse 2s ease-in-out infinite; z-index:1; }
+.ss33-bolt { font-size:11px;line-height:1;color:#fff; text-shadow:0 0 4px #fff; margin-top:-1px; }
+
+.eht-wrap { position:relative; width:40px;height:28px; display:flex;align-items:center;justify-content:center; cursor:pointer; }
+.eht-rect { position:absolute;inset:0; border:2px solid rgba(255,120,0,0.95); border-radius:4px; animation: eht-ring-pulse 1.8s ease-in-out infinite; background:rgba(30,10,0,0.75); }
+.eht-core { z-index:1; display:flex;align-items:center;justify-content:center; gap:3px; }
+.eht-power { font-size:16px;line-height:1; filter: drop-shadow(0 0 4px #ff6600); }
+.eht-kv { font-family:var(--mono);font-size:7px;color:rgba(255,160,60,0.9); line-height:1;letter-spacing:.5px; }
+
+
+/* ── 1. NORMAL/LIVE (OVERLAY FLOW DOTS) ── */
+@keyframes energy-flow-overlay { to { stroke-dashoffset: -24; } }
+
+.feeder-flow-overlay {
+  stroke-dasharray: 4 20 !important;
+  stroke-linecap: round !important;
+  animation: energy-flow-overlay 0.8s linear infinite !important;
+  pointer-events: none !important;
+}
+/* Leaflet puts the className on the <path> element directly in SVG mode */
+path.feeder-flow-overlay {
+  stroke-dasharray: 4 20 !important;
+  stroke-linecap: round !important;
+  animation: energy-flow-overlay 0.8s linear infinite !important;
+  pointer-events: none !important;
+}
+
+/* ── 2. BREAKDOWN (SOS URGENT BLINK) ── */
+@keyframes sos-blink {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 12px #ff1744); }
+  50%      { opacity: 0.2; filter: none; }
+}
+.feeder-breakdown { 
+  animation: sos-blink 0.8s ease-in-out infinite !important; 
+}
+
+/* Helper to vanish flowing dots completely */
+.hidden-flow { display: none !important; }
+
+
+.fs-status-bar { display:flex;gap:5px;margin-top:8px;padding-top:8px;border-top:1px solid #eee; }
+.fs-status-btn { flex:1;padding:5px 3px;border-radius:5px;border:1px solid #ccc; font-size:10px;font-weight:700;cursor:pointer;text-align:center; font-family:Arial,sans-serif;transition:all 0.2s; }
+.fs-status-btn.active-live       { background:#00c853;color:#fff;border-color:#00c853; }
+.fs-status-btn.active-breakdown  { background:#ff1744;color:#fff;border-color:#ff1744; }
+.fs-status-btn.active-idle       { background:#9e9e9e;color:#fff;border-color:#9e9e9e; }
+.fs-status-btn:not([class*=active]):hover { background:#f0f0f0; }
+
+.f-badge { font-size:8px;font-weight:700;padding:1px 5px;border-radius:8px; font-family:var(--mono);letter-spacing:.5px;flex-shrink:0; }
+.f-badge-live      { background:rgba(0,200,83,.2);color:#00c853;border:1px solid #00c853; }
+.f-badge-breakdown { background:rgba(255,23,68,.2);color:#ff1744;border:1px solid #ff1744;animation:sos-blink 0.8s infinite; }
+.f-badge-idle      { background:rgba(158,158,158,.2);color:#9e9e9e;border:1px solid #9e9e9e; }
+
+.status-legend {
+  position:fixed;bottom:46px;right:58px;z-index:800;
+  background:rgba(13,27,42,.92);backdrop-filter:blur(10px);
+  border:1px solid var(--border);border-radius:10px;
+  padding:8px 12px;font-family:var(--mono);font-size:9px;
+  display:flex;flex-direction:column;gap:5px;
+}
+.sl-row{display:flex;align-items:center;gap:6px;color:var(--text)}
+.sl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* RIGHT SIDE BASEMAP TABS */
+#bm-tabs { position:fixed; top:50%; right:0; transform:translateY(-50%); z-index:950; display:flex; flex-direction:column; gap:2px; }
+.bm-tab { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); background: linear-gradient(180deg,#0a1828f0,#0d1f33f0); border: 1px solid var(--border); border-right: none; border-radius: 8px 0 0 8px; padding: 14px 7px; font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; color: var(--text); cursor: pointer; transition: all 0.2s var(--ease); white-space: nowrap; backdrop-filter: blur(12px); box-shadow: -3px 0 12px rgba(0,0,0,0.3); user-select: none; }
+.bm-tab:hover { background: rgba(0,200,255,0.15); color: var(--live); border-color: var(--live); padding-right: 11px; }
+.bm-tab.active { background: rgba(0,200,255,0.2); color: var(--live); border-color: var(--live); font-weight: 700; box-shadow: -3px 0 16px rgba(0,200,255,0.25); }
+
+/* RIGHT CONTROL PANEL */
+#rpanel { position:fixed;top:52px;right:50px;bottom:38px;z-index:890; width:230px; display:flex;flex-direction:column;gap:6px; pointer-events:none; overflow-y:auto;overflow-x:hidden;padding:8px 4px; }
+#rpanel::-webkit-scrollbar{width:3px}
+#rpanel::-webkit-scrollbar-thumb{background:rgba(0,200,255,.2);border-radius:3px}
+
+.rcard { pointer-events:all; background:linear-gradient(135deg,#0a1828f4,#0d1f33f4); backdrop-filter:blur(18px); border:1px solid var(--border); border-radius:10px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.35); transition:box-shadow .2s; }
+.rcard:hover { box-shadow:0 4px 24px rgba(0,200,255,.12); }
+.rcard-hd { display:flex;align-items:center;justify-content:space-between; padding:8px 12px;cursor:pointer;user-select:none; border-bottom:1px solid transparent; transition:border-color .2s; }
+.rcard-hd:hover { border-bottom-color:rgba(0,200,255,.15); }
+.rcard-title { font-family:var(--mono);font-size:9px;letter-spacing:2px; color:rgba(0,200,255,.65); }
+.rcard-arrow { font-size:10px;color:rgba(0,200,255,.45); transition:transform .25s var(--ease); }
+.rcard.collapsed .rcard-arrow { transform:rotate(-90deg); }
+.rcard-body { padding:8px 10px 10px; border-top:1px solid rgba(0,200,255,.07); }
+.rcard.collapsed .rcard-body { display:none; }
+
+.fi-btn { flex:1;padding:2px 4px;border-radius:4px;border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.05);color:rgba(176,204,224,.6); font-family:var(--mono);font-size:8px;letter-spacing:.5px; cursor:pointer;transition:all .18s;white-space:nowrap; }
+.fi-btn:hover { filter:brightness(1.4); }
+.fi-live.fi-active      { background:rgba(0,200,83,.25);color:#00c853;border-color:#00c853; }
+.fi-breakdown.fi-active { background:rgba(255,23,68,.25);color:#ff1744;border-color:#ff1744; animation:sos-blink 0.8s infinite; }
+.fi-idle.fi-active      { background:rgba(158,158,158,.25);color:#aaa;border-color:#aaa; }
+
+/* Custom Map Labels */
+.ss-label{ background:rgba(9,22,37,.88)!important; border:1px solid rgba(0,200,255,.35)!important; border-radius:4px!important; color:#00c8ff!important; font-family:'Share Tech Mono',monospace!important; font-weight:normal; font-size:9px!important; letter-spacing:.3px!important; padding:2px 5px!important; white-space:nowrap!important; box-shadow:0 2px 6px rgba(0,0,0,.4)!important; opacity:0.9!important; max-width:120px!important; overflow:hidden!important; text-overflow:ellipsis!important; pointer-events: none !important;}
+.ss-label.leaflet-tooltip-top::before{border-top-color:rgba(0,200,255,.35)!important}
 </style>
 </head>
 <body>
 
+<div id="loader">
+  <div class="ld-logo">TGSPDCL</div>
+  <div class="ld-sub">JAMES STREET SECTION · 33KV</div>
+  <div class="ld-bar"><div class="ld-fill" id="ldfill"></div></div>
+</div>
+
 <div id="topbar">
   <div class="tb-logo">TGSPDCL</div>
   <div class="tb-sep"></div>
-  <div class="tb-title">NIMS Circle — 33KV Distribution GIS Network</div>
+  <div class="tb-title">NIMS / Jubilee Hills / Road No.13 Section</div>
   <div id="srchWrap">
-    <input id="srchInput" placeholder="Search pole, cable, feeder..."/>
+    <input id="srchInput" placeholder="Search pole no., feeder, cable point…" autocomplete="off"/>
     <span class="srch-ic">⌕</span>
   </div>
-  <div style="font-family:var(--mono);font-size:10px;color:var(--ok);border:1px solid rgba(0,230,118,.3);padding:4px 12px;border-radius:20px">● SYSTEM LIVE</div>
+  <div class="fs-btn" onclick="toggleFullscreen()" title="Fullscreen Mode">⛶</div>
+  <div class="chip chip-live" id="chipStatus">● LIVE</div>
 </div>
+
+<div id="ptab" onclick="togglePanel()">◀</div>
 
 <div id="panel">
   <div class="psec">
-    <div class="psec-t" style="display:flex;justify-content:space-between">FEEDER NETWORK <span onclick="toggleAll(true)" style="cursor:pointer;color:var(--live)">ALL ON</span></div>
-    <div id="feederList"></div>
+    <div class="psec-t" style="display:flex;justify-content:space-between;align-items:center">
+      // FEEDERS (Click Name to Focus)
+      <div>
+        <span style="font-family:var(--sans);font-size:10px;color:rgba(0,200,255,.6);cursor:pointer;font-weight:600" onclick="toggleAllFeeders(true)">ALL</span>
+        <span style="font-family:var(--sans);font-size:10px;color:rgba(0,200,255,.6);cursor:pointer;margin-left:6px;font-weight:600" onclick="toggleAllFeeders(false)">NONE</span>
+      </div>
+    </div>
+    <div id="feederChecks" style="display:flex;flex-direction:column;gap:2px;margin-top:4px"></div>
   </div>
-  <div class="psec">
-    <div class="psec-t">SYSTEM LAYERS</div>
-    <div class="lrow" id="lyr-ug-lines" onclick="toggleLyr('ug-lines')"><div class="lswatch" style="background:#2196f3"></div><div class="lname">UG Main Lines</div><div class="tog"></div></div>
-    <div class="lrow" id="lyr-points" onclick="toggleLyr('points')"><div class="lswatch dot" style="border-color:#00c8ff"></div><div class="lname">NIMS Points</div><div class="tog"></div></div>
-    <div class="lrow" id="lyr-ss33" onclick="toggleLyr('ss33')"><div class="lswatch dot" style="background:#0d47a1"></div><div class="lname">33/11KV Substations</div><div class="tog"></div></div>
+</div><div id="map"></div>
+
+<div id="botbar">
+  <span>LAT/LNG: <span id="coords">17.4364, 78.4776</span></span>
+  <span>ZOOM: <span id="zoomLvl">18</span></span>
+  <span style="margin-left:auto;opacity:.4">JAMES STREET · 33KV · TGSPDCL SCADA SECTION</span>
+</div>
+
+<div id="legend">
+  <div class="leg"><div class="leg-l" style="background:#2196f3;box-shadow:0 0 4px #2196f3"></div>UG</div>
+  <div class="leg"><div class="leg-l" style="background:#f44336;box-shadow:0 0 4px #f44336"></div>OH</div>
+  <div class="leg"><div class="leg-l" style="background:#9c27b0;box-shadow:0 0 4px #9c27b0"></div>TRANS</div>
+  <div class="leg"><div class="leg-d" style="background:white;border:2px solid #2196f3"></div>POINT</div>
+  <div class="leg"><div class="leg-d" style="background:yellow;border:2px solid black"></div>DP</div>
+  <div class="leg"><div class="leg-d" style="background:yellow;border:2px solid black"></div>AB SW</div>
+  <div class="leg"><div class="leg-d" style="background:white;border:2px solid black"></div>CUT</div>
+</div>
+
+<div id="toast"></div>
+
+<div class="status-legend">
+  <div style="font-family:var(--mono);font-size:8px;color:rgba(0,200,255,.6);letter-spacing:1.5px;margin-bottom:2px">// FEEDER STATUS</div>
+  <div class="sl-row"><div class="sl-dot" style="background:#00c853"></div>Live</div>
+  <div class="sl-row"><div class="sl-dot" style="background:#ff1744;animation:sos-blink 0.8s infinite"></div>Breakdown</div>
+  <div class="sl-row"><div class="sl-dot" style="background:#9e9e9e"></div>Idle</div>
+  <div class="sl-row" style="margin-top:4px">
+    <div style="width:12px;height:12px;border-radius:50%;border:2px dashed rgba(0,180,255,0.9);display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;animation:ss33-ring-spin 4s linear infinite;flex-shrink:0">⚡</div>
+    33/11KV SS
+  </div>
+  <div class="sl-row">
+    <div style="width:14px;height:10px;border:2px solid rgba(255,120,0,0.95);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:7px;flex-shrink:0">⚡</div>
+    EHT SS
   </div>
 </div>
 
-<div id="map"></div>
+<div id="bm-tabs">
+  <div class="bm-tab active" id="bm-dark" onclick="setBM('dark')">🌑 DARK</div>
+  <div class="bm-tab"        id="bm-satellite" onclick="setBM('satellite')">🛰 SATELLITE</div>
+  <div class="bm-tab"        id="bm-street"   onclick="setBM('street')">🗺 STREET</div>
+  <div class="bm-tab"        id="bm-google"   onclick="setBM('google')">📍 GOOGLE</div>
+</div>
 
-<div id="botbar">
-  <span>COORD: <span id="coords">17.4200, 78.4500</span></span>
-  <span style="margin-left:auto;opacity:0.4">NIMS SECTION · 33KV GIS · TGSPDCL SCADA SECTION</span>
+<div id="rpanel">
+  <div class="rcard" id="rc-layers">
+    <div class="rcard-hd" onclick="toggleRcard('rc-layers')"><span class="rcard-title">// LAYER TYPES</span><span class="rcard-arrow">▾</span></div>
+    <div class="rcard-body">
+      <div class="lrow" id="lyr-ug-lines" onclick="toggleLyr('ug-lines')"><div class="lswatch" style="background:#2196f3;box-shadow:0 0 5px #2196f3"></div><div class="lname">UG Lines</div><div class="lcnt" id="cnt-ug-lines">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-oh-lines" onclick="toggleLyr('oh-lines')"><div class="lswatch" style="background:#f44336;box-shadow:0 0 5px #f44336"></div><div class="lname">OH Lines</div><div class="lcnt" id="cnt-oh-lines">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-points" onclick="toggleLyr('points')"><div class="lswatch dot" style="background:#0d1b2a;border-color:#00c8ff"></div><div class="lname">Cable Points</div><div class="lcnt" id="cnt-points">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-dp" onclick="toggleLyr('dp')"><div class="lswatch dot" style="background:#1a0033;border-color:#9c27b0"></div><div class="lname">DP Structures</div><div class="lcnt" id="cnt-dp">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-ab" onclick="toggleLyr('ab')"><div class="lswatch dot" style="background:#1a0a00;border-color:#ff9800"></div><div class="lname">AB Switches</div><div class="lcnt" id="cnt-ab">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-cut" onclick="toggleLyr('cut')"><div class="lswatch dot" style="background:#0d1b2a;border-color:#78909c"></div><div class="lname">Cut Points</div><div class="lcnt" id="cnt-cut">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-ss33" onclick="toggleLyr('ss33')"><div class="lswatch dot" style="background:#2196f3;border-color:#fff;border-radius:50%"></div><div class="lname">33/11KV SS</div><div class="lcnt" id="cnt-ss33">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-ehts" onclick="toggleLyr('ehts')"><div class="lswatch dot" style="background:#800080;border-color:#fff"></div><div class="lname">EHT SS</div><div class="lcnt" id="cnt-ehts">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-fsegs" onclick="toggleLyr('fsegs')"><div class="lswatch" style="background:#e8718d;height:2px"></div><div class="lname">Feeder Segments</div><div class="lcnt" id="cnt-fsegs">—</div><div class="tog"></div></div>
+    </div>
+  </div>
+
+  <div class="rcard" id="rc-cable">
+    <div class="rcard-hd" onclick="toggleRcard('rc-cable')"><span class="rcard-title">// CABLE TYPE</span><span class="rcard-arrow">▾</span></div>
+    <div class="rcard-body">
+      <div class="pills">
+        <div class="pill active" id="fp-all" style="color:#00c8ff;border-color:rgba(0,200,255,.35);background:rgba(0,200,255,.1)" onclick="setCableFilter('all')">ALL</div>
+        <div class="pill" id="fp-ug" style="color:#2196f3;border-color:rgba(33,150,243,.3)" onclick="setCableFilter('ug')">UG ONLY</div>
+        <div class="pill" id="fp-oh" style="color:#f44336;border-color:rgba(244,67,54,.3)" onclick="setCableFilter('oh')">OH ONLY</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rcard" id="rc-stats">
+    <div class="rcard-hd" onclick="toggleRcard('rc-stats')"><span class="rcard-title">// SECTION STATS</span><span class="rcard-arrow">▾</span></div>
+    <div class="rcard-body">
+      <div class="strow"><span class="stlbl">Total Features</span><span class="stval" id="st-total">—</span></div>
+      <div class="strow"><span class="stlbl">Visible Features</span><span class="stval" id="st-visible">—</span></div>
+    </div>
+  </div>
 </div>
 
 <script>
-// ── 1. MAP CORE & Z-INDEX PANES ──
+// ══════════════════════════════════════════════════
+// MAP CORE & Z-INDEX PANES
+// ══════════════════════════════════════════════════
 const map = L.map('map',{
-  center:[17.4200, 78.4500], zoom:16, zoomControl:false, preferCanvas:true
+  center:[17.4437,78.4785], zoom:16, zoomControl:false, preferCanvas:false,
+  zoomAnimation:true, fadeAnimation:true, markerZoomAnimation:true
 });
-map.createPane('pointsPane').style.zIndex = 650;
-map.createPane('flowPane').style.zIndex = 401;
+
+// CRITICAL FIX: Custom Z-index pane guarantees poles/points float physically above lines
+map.createPane('pointsPane');
+map.getPane('pointsPane').style.zIndex = 650; 
+
+L.control.zoom({position:'bottomright'}).addTo(map);
+L.control.scale({position:'bottomright',imperial:false}).addTo(map);
+window.addEventListener('resize', () => map.invalidateSize());
+
+// Dedicated pane for flow dot overlays — pointer-events:none at container level
+// This is the definitive fix so flow dots NEVER intercept clicks
+map.createPane('flowPane');
 map.getPane('flowPane').style.pointerEvents = 'none';
+map.getPane('flowPane').style.zIndex = 401; // Above overlayPane(400) so dots show on top of lines
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
+function safelyManageClass(layer, className, add) {
+    if(!layer) return;
+    const el = layer.getElement ? layer.getElement() : layer._path;
+    if(el) {
+        if(add) el.classList.add(className);
+        else el.classList.remove(className);
+    }
+}
 
-// ── 2. DATA REGISTRY (FULLY MAPPED FOR NIMS) ──
+function toggleRcard(id) { const card = document.getElementById(id); if(card) card.classList.toggle('collapsed'); }
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(err => toast(`Fullscreen error: ${err.message}`));
+  else if (document.exitFullscreen) document.exitFullscreen();
+}
+
+const _bmDefs = {
+  dark:      ['https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:22,subdomains:'abcd'}],
+  satellite: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:22}],
+  street:    ['https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:22}],
+  hybrid:    ['https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',{maxZoom:22}],
+  google:    ['https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{maxZoom:22}],
+};
+const BM = {};
+function getBM(name){ if(!BM[name]) BM[name]=L.tileLayer(_bmDefs[name][0],_bmDefs[name][1]); return BM[name]; }
+let curBM='dark'; getBM('dark').addTo(map);
+
+function setBM(name){
+  if(!_bmDefs[name]) return;
+  map.removeLayer(getBM(curBM)); getBM(name).addTo(map); getBM(name).bringToBack();
+  curBM=name;
+  document.querySelectorAll('.bmbtn,.bm-tab').forEach(b=>b.classList.remove('active'));
+  const el = document.getElementById('bm-'+name); if(el) el.classList.add('active');
+  toast(name.charAt(0).toUpperCase()+name.slice(1)+' basemap');
+}
+
+// ══════════════════════════════════════════════════
+// SMART FEEDER MAPPING ENGINE
+// ══════════════════════════════════════════════════
+const allLayers = []; 
+const feederNames = new Set();
+const feederState = {}; 
+const feederStatus = {}; 
+const feederLayerMap = {}; 
+
+const LGstate = { 'ug-lines':true, 'oh-lines':true, points:true, dp:true, ab:true, cut:true, ss33:true, ehts:true, fsegs:true };
+let cableFilter = 'all';
+let globalFeederFallback = true; 
+
+// Clean a raw string to strip out 33KV, SS, dashes, etc so segments match master names perfectly
+function cleanName(str) {
+    if (!str) return '';
+    let s = String(str).toUpperCase();
+    s = s.replace(/132\s*KV|33\s*\/\s*11\s*KV|33\s*KV|11\s*KV|SS|FEEDER|LINE|UNDERGROUND|OVERHEAD|UG|OH/g, ' ');
+    return s.replace(/[^A-Z0-9]/g, ''); 
+}
+
+function mapFeederName(raw) {
+    if(!raw) return null;
+    let rawClean = cleanName(raw);
+    if(!rawClean || rawClean.length < 5) return null;
+
+    // Direct Match
+    for(let std of feederNames) {
+        if(cleanName(std) === rawClean) return std;
+    }
+    // Subset Match
+    for(let std of feederNames) {
+        let stdClean = cleanName(std);
+        if(stdClean.length > 4 && rawClean.length > 4) {
+            if (stdClean.includes(rawClean) || rawClean.includes(stdClean)) return std;
+        }
+    }
+    return null;
+}
+
+// Aggressive attribute checking to bind any orphaned segment to its parent feeder
+function extractFeeder(props, fallback) {
+    if (!props) return fallback;
+    const keys = ['Feeder Name', 'Feeder_Name', 'Name of the Feeder', 'feeder', 'FEEDER', 'Name', 'NAME', 'Text', 'Layer'];
+    for(let k of keys) {
+        if(props[k]) {
+            let mapped = mapFeederName(props[k]);
+            if(mapped) return mapped;
+        }
+    }
+    for(let key in props) {
+        if(typeof props[key] === 'string') {
+            let mapped = mapFeederName(props[key]);
+            if(mapped) return mapped;
+        }
+    }
+    return fallback;
+}
+
 const DATA_REGISTRY = [
-  { varName:'json_33KVGunnrockNIMS_5', type:'lines', feeder:'GUNROCK → NIMS', cable:'UG' },
-  { varName:'json_33KVNIMSPunjagutta_10', type:'lines', feeder:'NIMS → PUNJAGUTTA', cable:'UG' },
-  { varName:'json_33KVAnandnagarErramanjil_15', type:'lines', feeder:'ANANDNAGAR → ERRAMANJIL', cable:'UG' },
-  { varName:'json_132KVERRAGADDA33KVNIMS_20', type:'lines', feeder:'ERRAGADDA → NIMS', cable:'UG' },
-  { varName:'json_132KVGUNROCK33KVNIMS_25', type:'lines', feeder:'GUNROCK → NIMS 2', cable:'UG' },
-  { varName:'json_132KVGUNROCK33KVERRAMANJIL_30', type:'lines', feeder:'GUNROCK → ERRAMANJIL', cable:'UG' },
-  { varName:'json_132KVASIFNAGAR33KVNIMS_35', type:'lines', feeder:'ASIFNAGAR → NIMS', cable:'UG' },
-  { varName:'json_132KVASIFNAGAR33KVPUNJAGUTTA_40', type:'lines', feeder:'ASIFNAGAR → PUNJAGUTTA', cable:'UG' },
-  { varName:'json_132KVASIFNAGAR33KVANANDNAGAR_45', type:'lines', feeder:'ASIFNAGAR → ANANDNAGAR', cable:'UG' },
-  { varName:'json_33KVGunnrockNIMS_1', type:'points', feeder:'NIMS NETWORK', cable:'UG' },
-  { varName:'json_3311KVSSCOORDINATESWITHDATA20_76', type:'ss33', feeder:'33/11KV SS', cable:'-' }
+  { varName:'json_33KVNIMSRoadNo13BHILLS_1', type:'points', feeder:'33KV NIMS → ROAD NO.13 / B HILLS', cable:'-' },
+  { varName:'json_33KVNIMSRoadNo13BHILLS_AB_Switch_2', type:'ab', feeder:'33KVNIMSRoadNo13BHILLS', cable:'-' },
+  { varName:'json_33KVNIMSRoadNo13BHILLS_Double_Pole_Structure_3', type:'dp', feeder:'33KVNIMSRoadNo13BHILLS', cable:'-' },
+  { varName:'json_33KVNIMSRoadNo13BHILLS_Cut_Points_4', type:'cut', feeder:'33KVNIMSRoadNo13BHILLS', cable:'-' },
+  { varName:'json_33KVNIMSRoadNo13BHILLS_Feeder_Lines_5', type:'lines', feeder:'33KVNIMSRoadNo13BHILLS', cable:'-' },
+  { varName:'json_132KVNIMS33KVROADNO13_6', type:'points', feeder:'132KV NIMS → 33KV ROAD NO.13', cable:'-' },
+  { varName:'json_132KVNIMS33KVROADNO13_AB_Switch_7', type:'ab', feeder:'132KVNIMS33KVROADNO13', cable:'-' },
+  { varName:'json_132KVNIMS33KVROADNO13_Double_Pole_Structure_8', type:'dp', feeder:'132KVNIMS33KVROADNO13', cable:'-' },
+  { varName:'json_132KVNIMS33KVROADNO13_Cut_Points_9', type:'cut', feeder:'132KVNIMS33KVROADNO13', cable:'-' },
+  { varName:'json_132KVNIMS33KVROADNO13_Feeder_Lines_10', type:'lines', feeder:'132KVNIMS33KVROADNO13', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSOLD_11', type:'points', feeder:'132KV NIMS → 33KV NIMS OLD', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSOLD_AB_Switch_12', type:'ab', feeder:'132KVNIMS33KVNIMSOLD', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSOLD_Double_Pole_Structure_13', type:'dp', feeder:'132KVNIMS33KVNIMSOLD', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSOLD_Cut_Points_14', type:'cut', feeder:'132KVNIMS33KVNIMSOLD', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSOLD_Feeder_Lines_15', type:'lines', feeder:'132KVNIMS33KVNIMSOLD', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSNEW_16', type:'points', feeder:'132KV NIMS → 33KV NIMS NEW', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSNEW_AB_Switch_17', type:'ab', feeder:'132KVNIMS33KVNIMSNEW', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSNEW_Double_Pole_Structure_18', type:'dp', feeder:'132KVNIMS33KVNIMSNEW', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSNEW_Cut_Points_19', type:'cut', feeder:'132KVNIMS33KVNIMSNEW', cable:'-' },
+  { varName:'json_132KVNIMS33KVNIMSNEW_Feeder_Lines_20', type:'lines', feeder:'132KVNIMS33KVNIMSNEW', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_21', type:'points', feeder:'132KV JUBILEE HILLS → 33KV ROAD NO.13B', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_AB_Switch_22', type:'ab', feeder:'132KVJUBILEEHILLS33KVROADNO13B', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_Double_Pole_Structure_23', type:'dp', feeder:'132KVJUBILEEHILLS33KVROADNO13B', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_Cut_Points_24', type:'cut', feeder:'132KVJUBILEEHILLS33KVROADNO13B', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_Feeder_Lines_25', type:'lines', feeder:'132KVJUBILEEHILLS33KVROADNO13B', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_26', type:'points', feeder:'132KV JUBILEE HILLS → 33KV ROAD NO.13A', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_AB_Switch_27', type:'ab', feeder:'132KVJUBILEEHILLS33KVROADNO13A', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_Double_Pole_Structure_28', type:'dp', feeder:'132KVJUBILEEHILLS33KVROADNO13A', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_Cut_Points_29', type:'cut', feeder:'132KVJUBILEEHILLS33KVROADNO13A', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_Feeder_Lines_30', type:'lines', feeder:'132KVJUBILEEHILLS33KVROADNO13A', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_31', type:'points', feeder:'132KV JUBILEE HILLS → 33KV PRASHASAN NAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_AB_Switch_32', type:'ab', feeder:'132KVJUBILEEHILLS33KVPRASHASANNAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_Double_Pole_Structure_33', type:'dp', feeder:'132KVJUBILEEHILLS33KVPRASHASANNAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_Cut_Points_34', type:'cut', feeder:'132KVJUBILEEHILLS33KVPRASHASANNAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_Feeder_Lines_35', type:'lines', feeder:'132KVJUBILEEHILLS33KVPRASHASANNAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_36', type:'points', feeder:'132KV JUBILEE HILLS → POLICE COMMAND CONTROL ROOM', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_AB_Switch_37', type:'ab', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_Double_Pole_Structure_38', type:'dp', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_Cut_Points_39', type:'cut', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_Feeder_Lines_40', type:'lines', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_41', type:'points', feeder:'132KV JUBILEE HILLS → POLICE COMMAND CONTROL CENTRE', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_AB_Switch_42', type:'ab', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_Double_Pole_Structure_43', type:'dp', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_Cut_Points_44', type:'cut', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_Feeder_Lines_45', type:'lines', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVNIMS_46', type:'points', feeder:'132KV JUBILEE HILLS → 33KV NIMS', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVNIMS_AB_Switch_47', type:'ab', feeder:'132KVJUBILEEHILLS33KVNIMS', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVNIMS_Double_Pole_Structure_48', type:'dp', feeder:'132KVJUBILEEHILLS33KVNIMS', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVNIMS_Cut_Points_49', type:'cut', feeder:'132KVJUBILEEHILLS33KVNIMS', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVNIMS_Feeder_Lines_50', type:'lines', feeder:'132KVJUBILEEHILLS33KVNIMS', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_51', type:'points', feeder:'132KV JUBILEE HILLS → 33KV MLA COLONY', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_AB_Switch_52', type:'ab', feeder:'132KVJUBILEEHILLS33KVMLACOLONY', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_Double_Pole_Structure_53', type:'dp', feeder:'132KVJUBILEEHILLS33KVMLACOLONY', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_Cut_Points_54', type:'cut', feeder:'132KVJUBILEEHILLS33KVMLACOLONY', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_Feeder_Lines_55', type:'lines', feeder:'132KVJUBILEEHILLS33KVMLACOLONY', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMPL_56', type:'points', feeder:'132KV JUBILEE HILLS → 33KV MPL', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMPL_AB_Switch_57', type:'ab', feeder:'132KVJUBILEEHILLS33KVMPL', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMPL_Double_Pole_Structure_58', type:'dp', feeder:'132KVJUBILEEHILLS33KVMPL', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMPL_Cut_Points_59', type:'cut', feeder:'132KVJUBILEEHILLS33KVMPL', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVMPL_Feeder_Lines_60', type:'lines', feeder:'132KVJUBILEEHILLS33KVMPL', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_61', type:'points', feeder:'132KV JUBILEE HILLS → 33KV FILM NAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_AB_Switch_62', type:'ab', feeder:'132KVJUBILEEHILLS33KVFILMNAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_Double_Pole_Structure_63', type:'dp', feeder:'132KVJUBILEEHILLS33KVFILMNAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_Cut_Points_64', type:'cut', feeder:'132KVJUBILEEHILLS33KVFILMNAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_Feeder_Lines_65', type:'lines', feeder:'132KVJUBILEEHILLS33KVFILMNAGAR', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_66', type:'points', feeder:'132KV JUBILEE HILLS → 33KV BANJARA HILLS ROAD NO.12', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_AB_Switch_67', type:'ab', feeder:'132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_Double_Pole_Structure_68', type:'dp', feeder:'132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_Cut_Points_69', type:'cut', feeder:'132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12', cable:'-' },
+  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_Feeder_Lines_70', type:'lines', feeder:'132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12', cable:'-' },
+  { varName:'json_Feeder_Segments_71', type:'fsegs', feeder:'Feeder Segments', cable:'-' },
+  { varName:'json_Feeder_Segments_WEB_DISPLAY_72', type:'fsegd', feeder:'Feeder Segments Display', cable:'-' },
+  { varName:'json_Feeder_Segments_WEB_INTERACT_73', type:'fsegi', feeder:'Feeder Segments Interactive', cable:'-' },
+  { varName:'json_FeederPoles_74', type:'fpoles', feeder:'Feeder Poles', cable:'-' },
+  { varName:'json_3311KVSSCOORDINATESWITHDATA20_75', type:'ss33', feeder:'33/11KV SS', cable:'-' },
+  { varName:'json_SS_WEB_INTERACT_76', type:'ss33i', feeder:'33/11KV SS (Interactive)', cable:'-' },
+  { varName:'json_EHTSSCOORDINATESWITHDATA_77', type:'ehts', feeder:'EHT SS', cable:'-' },
+  { varName:'json_SS_WEB_INTERACT_78', type:'ehtsi', feeder:'EHT SS (Interactive)', cable:'-' },
 ];
 
-const allLayers = [];
-const feederNames = new Set();
-const feederState = {};
-const feederMode = {}; // 'live' or 'breakdown'
+// ══════════════════════════════════════════════════
+// DATA PROCESSING
+// ══════════════════════════════════════════════════
 
-// ── 3. GIS RENDER ENGINE ──
-function initGIS() {
-  DATA_REGISTRY.forEach(reg => {
+// Pass 1: Build the authoritative Master Feeder List purely from base lines
+DATA_REGISTRY.forEach(reg => {
+  try {
     const data = window[reg.varName];
     if(!data || !data.features) return;
-
     data.features.forEach(feat => {
       const props = feat.properties || {};
       const fName = props['Feeder Name'] || reg.feeder;
-      feederNames.add(fName);
-      if(!feederMode[fName]) { feederState[fName] = true; feederMode[fName] = 'live'; }
+      if (!reg.type.startsWith('ss') && !reg.type.startsWith('eht') && !reg.type.startsWith('fseg') && fName !== 'Feeder Segments') {
+          feederNames.add(fName.trim());
+      }
+    });
+  } catch(e){}
+});
 
-      let layer;
-      if(feat.geometry.type.includes('Line')){
-        const coords = feat.geometry.coordinates.map(c => [c[1], c[0]]);
-        layer = L.polyline(coords, {color:'#2196f3', weight:6, opacity:0.9, smoothFactor:1.5});
-        layer.flow = L.polyline(coords, {color:'#ffffff', weight:3, className:'feeder-flow-overlay', pane:'flowPane'});
-      } else {
-        const coords = feat.geometry.coordinates;
-        const ll = [coords[1], coords[0]];
-        if(reg.type === 'ss33'){
-          const ssHtml = `<div class="ss33-wrap"><div class="ss33-ring"></div><div class="ss33-core">⚡</div></div>`;
-          layer = L.marker(ll, {icon:L.divIcon({className:'', html:ssHtml, iconSize:[36,36]})});
-        } else {
-          layer = L.circleMarker(ll, {radius:4, fillColor:'#fff', color:'#00c8ff', weight:2, pane:'pointsPane', fillOpacity:1});
-        }
+// Pass 2: Physically render and smartly bind all elements
+DATA_REGISTRY.forEach(reg => {
+  try {
+  const data = window[reg.varName];
+  if(!data || !data.features) return;
+
+  data.features.forEach(feat => {
+    try {
+    const props = feat.properties || {};
+    
+    let cableType = String(props['Type of Feeder'] || props['Feeder_Type'] || props['Feeder Type'] || reg.cable || '').trim().toUpperCase();
+    const isOH = (cableType === 'OH' || cableType === 'OVERHEAD');
+    cableType = isOH ? 'OH' : 'UG';
+
+    const rawFeederName = props['Feeder Name'] || reg.feeder;
+    const feederName = extractFeeder(props, rawFeederName); // Smart Bind
+
+    let layer;
+    let poleNoStr = null;
+
+    if(reg.type==='lines' || reg.type.startsWith('fseg')){
+      if(feat.geometry.type==='LineString'||feat.geometry.type==='MultiLineString'){
+        const coords = feat.geometry.type==='LineString'
+          ? feat.geometry.coordinates.map(c=>[c[1],c[0]])
+          : feat.geometry.coordinates.map(ls=>ls.map(c=>[c[1],c[0]]));
+          
+        let color = isOH ? '#f44336' : '#2196f3'; 
+        let cStatus = feederStatus[feederName] || 'live';
+        
+        let customClass = cStatus === 'breakdown' ? 'feeder-breakdown' : '';
+        layer = L.polyline(feat.geometry.type==='LineString'?coords:coords[0],
+          {color: color, weight: 6, opacity: 0.9, smoothFactor:1.5, className: customClass});
+          
+        let flowClass = 'feeder-flow-overlay' + (cStatus !== 'live' ? ' hidden-flow' : '');
+        layer.flowLayer = L.polyline(feat.geometry.type==='LineString'?coords:coords[0], {
+            color: '#ffffff', weight: 3, className: flowClass,
+            interactive: false, bubblingMouseEvents: false, pane: 'flowPane'
+        });
+
+        layer.bindPopup(popup(feat, reg), {maxWidth:340, minWidth:260});
+        layer.on('popupopen', function(e) { e.popup.setContent(popup(feat, reg)); });
+        layer.on('click', function(e) { L.DomEvent.stopPropagation(e); layer.openPopup(e.latlng); });
+
+        layer.on('mouseover', e => {
+            e.target.setStyle({weight:8, opacity:1});
+            if(e.target.flowLayer) e.target.flowLayer.setStyle({weight: 4});
+        });
+        layer.on('mouseout', e => {
+            const isFocused = focusedFeeder && focusedFeeder !== feederName;
+            e.target.setStyle({weight:6, opacity: isFocused ? 0.15 : 0.9});
+            if(e.target.flowLayer) e.target.flowLayer.setStyle({weight: 3});
+        });
+      }
+    }
+    else if(feat.geometry && (feat.geometry.type==='Point' || feat.geometry.type==='MultiPoint')){
+      const coords = feat.geometry.type==='Point' ? feat.geometry.coordinates : feat.geometry.coordinates[0];
+      const ll = [coords[1],coords[0]];
+      
+      // CRITICAL FIX: pane: 'pointsPane' forces ALL points/poles safely ABOVE lines
+      if(reg.type==='points' || reg.type==='fpoles'){
+        layer = L.circleMarker(ll, {radius: 4, fillColor: '#ffffff', fillOpacity: 1, color: '#2196f3', weight: 2, pane: 'pointsPane'});
+      } else if(reg.type==='cut'){
+        layer = L.circleMarker(ll, {radius: 4, fillColor: '#ffffff', fillOpacity: 1, color: '#000000', weight: 2, pane: 'pointsPane'});
+      } 
+      else if(reg.type==='ab' || reg.type==='dp'){
+        layer=L.marker(ll,{icon:mkIcon('#ffff00','#000000','square'), pane: 'pointsPane'}); 
+      } else if (reg.type.startsWith('ss33')) {
+        const ss33Html = `<div class="ss33-wrap"><div class="ss33-ring"></div><div class="ss33-core"><span class="ss33-bolt">⚡</span></div></div>`;
+        layer=L.marker(ll,{ zIndexOffset: 1000, icon:L.divIcon({className:'', html:ss33Html, iconSize:[36,36], iconAnchor:[18,18]})});
+      } else if (reg.type.startsWith('eht')) {
+        const ehtHtml = `<div class="eht-wrap"><div class="eht-rect"></div><div class="eht-core"><span class="eht-power">⚡</span><span class="eht-kv">EHT</span></div></div>`;
+        layer=L.marker(ll,{ zIndexOffset: 1000, icon:L.divIcon({className:'', html:ehtHtml, iconSize:[40,28], iconAnchor:[20,14]})});
       }
 
       if(layer){
-        layer.bindPopup(buildTable(props, fName));
-        allLayers.push({layer, fName, type:reg.type});
-        layer.addTo(map);
-        if(layer.flow) layer.flow.addTo(map);
+        layer.bindPopup(popup(feat, reg), {maxWidth:340, minWidth:260});
+        layer.on('click', function(e) { L.DomEvent.stopPropagation(e); layer.openPopup(e.latlng || layer.getLatLng()); });
+        let poleNo = props['Pole Number'] || props['Pole_No'] || props['Name'] || props['NAME'] || props['id'] || props['ID'];
+        if(poleNo !== undefined && poleNo !== null && String(poleNo).trim() !== '' && String(poleNo).length < 10) {
+            if(!reg.type.startsWith('ss') && !reg.type.startsWith('eht')) {
+                poleNoStr = String(poleNo).trim();
+            } else {
+                const ssName = String(poleNo).replace('33/11KV ','').replace('33/11KV','').replace('132 KV ','').replace('132KV ','').trim();
+                layer.bindTooltip(ssName, {permanent:true, direction:'top', offset:[0,-16], className:'ss-label'});
+            }
+        }
       }
-    });
+    }
+
+    if(layer) {
+      allLayers.push({layer, reg, feederName, cable:cableType, poleNo: poleNoStr});
+      if(!feederLayerMap[feederName]) feederLayerMap[feederName] = [];
+      feederLayerMap[feederName].push({layer, reg, cable:cableType});
+    }
+    } catch(e){}
   });
-  buildUI();
+  } catch(e){}
+});
+
+function updateVisibility() {
+  let visibleCount = 0;
+  allLayers.forEach(item => {
+    let t = item.reg.type;
+    if (t === 'lines') t = item.cable === 'UG' ? 'ug-lines' : 'oh-lines';
+    if (t.startsWith('ss33')) t = 'ss33';
+    if (t.startsWith('eht')) t = 'ehts';
+    if (t.startsWith('fseg')) t = 'fsegs';
+    if (t === 'fpoles') t = 'points';
+
+    const typeIsOn = LGstate[t] !== false;
+    const isSubstation = (t === 'ss33' || t === 'ehts');
+    
+    // Check perfectly bound name
+    const fState = feederState[item.feederName];
+    let feederIsOn = (fState !== undefined) ? (fState !== false) : globalFeederFallback;
+    if (isSubstation) feederIsOn = true;
+
+    let cableIsOn = true;
+    if(!isSubstation) {
+      if(cableFilter === 'ug' && item.cable !== 'UG' && item.cable !== '-') cableIsOn = false;
+      if(cableFilter === 'oh' && item.cable !== 'OH' && item.cable !== '-') cableIsOn = false;
+    }
+
+    const shouldShow = typeIsOn && feederIsOn && cableIsOn;
+
+    if (shouldShow) {
+      if (!map.hasLayer(item.layer)) map.addLayer(item.layer);
+      if (item.layer.flowLayer && !map.hasLayer(item.layer.flowLayer)) map.addLayer(item.layer.flowLayer);
+      visibleCount++;
+    } else {
+      if (map.hasLayer(item.layer)) map.removeLayer(item.layer);
+      if (item.layer.flowLayer && map.hasLayer(item.layer.flowLayer)) map.removeLayer(item.layer.flowLayer);
+    }
+  });
+  document.getElementById('st-visible').textContent = visibleCount;
+  syncLabels();
 }
 
-function buildTable(p, fn){
-  let h = `<b>${fn}</b><table style="width:100%;margin-top:8px;font-size:11px">`;
-  Object.keys(p).forEach(k => { h += `<tr><th align="left">${k}</th><td>${p[k]}</td></tr>`; });
-  return h + `</table>`;
+function popup(feat, regEntry){
+  const p = feat.properties || {};
+  let rows = '';
+  const hideKeys = ['id', 'layer', 'path', 'fid'];
+
+  if (regEntry && (regEntry.type === 'lines' || (regEntry.type && regEntry.type.startsWith('fseg')))) hideKeys.push('popup');
+
+  let headerId = '';
+  if (p['id'] || p['fid'] || p['ID'] || p['Pole Number']) headerId = `<div class="pc-header-id">${p['id'] || p['fid'] || p['ID'] || p['Pole Number']}</div>`;
+
+  Object.keys(p).forEach(k => {
+    if(p[k] !== null && p[k] !== '' && !hideKeys.includes(k.toLowerCase())) {
+        let val = p[k];
+        if (k.toLowerCase() === 'popup') {
+            rows += `<tr><td colspan="2" style="white-space:pre-wrap; padding-top:8px; padding-bottom:8px; border-top: 1px solid #eee;"><strong>Notes:</strong><br>${val}</td></tr>`;
+            return; 
+        }
+        if(!isNaN(val) && val.toString().indexOf('.') !== -1 && !isNaN(parseFloat(val))) val = parseFloat(val).toFixed(3);
+        if(k.toLowerCase().includes('length') || k.toLowerCase().includes('transitions')) val += ' km';
+        if(k.toLowerCase().includes('total no.')) val += ' Nos';
+        rows += `<tr><th>${k}</th><td>${val}</td></tr>`;
+    }
+  });
+
+  const rawFn = p['Feeder Name'] || (regEntry && regEntry.feeder) || '';
+  const fn = extractFeeder(p, rawFn); 
+  
+  let statusBar = '';
+  if(fn && (regEntry.type === 'lines' || (regEntry.type && regEntry.type.startsWith('fseg')))) {
+    const cur = feederStatus[fn] || 'live';
+    statusBar = `<div class="fs-status-bar">
+      <div class="fs-status-btn${cur==='live'?' active-live':''}" onclick="setFeederStatus('${fn.replace(/'/g,"\\'")}','live',this)">⚡ LIVE</div>
+      <div class="fs-status-btn${cur==='breakdown'?' active-breakdown':''}" onclick="setFeederStatus('${fn.replace(/'/g,"\\'")}','breakdown',this)">🔴 DOWN</div>
+      <div class="fs-status-btn${cur==='idle'?' active-idle':''}" onclick="setFeederStatus('${fn.replace(/'/g,"\\'")}','idle',this)">⏸ IDLE</div>
+    </div>`;
+  }
+  if(!rows && !headerId) {
+    rows = '<tr><td colspan="2" style="color:#999;font-style:italic;padding:4px">No attributes available</td></tr>';
+  }
+  return `${headerId}<table class="popup-table">${rows}</table>${statusBar}`;
 }
 
-// ── 4. UI BUILDER & LOGIC ──
-function buildUI() {
-  const list = document.getElementById('feederList');
-  [...feederNames].sort().forEach((fn, i) => {
+function updateCounts() {
+  document.getElementById('st-total').textContent = allLayers.length;
+  document.getElementById('cnt-ug-lines').textContent = allLayers.filter(i => (i.reg.type === 'lines' && i.cable === 'UG')).length;
+  document.getElementById('cnt-oh-lines').textContent = allLayers.filter(i => (i.reg.type === 'lines' && i.cable === 'OH')).length;
+  document.getElementById('cnt-points').textContent = allLayers.filter(i => i.reg.type === 'points').length;
+  document.getElementById('cnt-dp').textContent = allLayers.filter(i => i.reg.type === 'dp').length;
+  document.getElementById('cnt-ab').textContent = allLayers.filter(i => i.reg.type === 'ab').length;
+  document.getElementById('cnt-cut').textContent = allLayers.filter(i => i.reg.type === 'cut').length;
+  document.getElementById('cnt-ss33').textContent = allLayers.filter(i => i.reg.type.startsWith('ss33')).length;
+  document.getElementById('cnt-ehts').textContent = allLayers.filter(i => i.reg.type.startsWith('eht')).length;
+  document.getElementById('cnt-fsegs').textContent = allLayers.filter(i => i.reg.type.startsWith('fseg')).length;
+}
+
+const allCoords = [];
+allLayers.forEach(i => { if (i.reg.type === 'lines' && i.layer.getLatLngs) { const ll = i.layer.getLatLngs(); if(ll.length) allCoords.push(...ll.flat()); } });
+if(allCoords.length > 0){ try{ map.fitBounds(L.latLngBounds(allCoords),{padding:[60,60],maxZoom:17,animate:true}); }catch(e){} }
+
+let focusedFeeder = null;
+
+// ── CORE LOGIC: THE 3 VISUAL STATES ──
+function setFeederStatus(fn, status, btnEl) {
+  feederStatus[fn] = status;
+
+  if(btnEl) {
+    const bar = btnEl.closest('.fs-status-bar');
+    if(bar) {
+      bar.querySelectorAll('.fs-status-btn').forEach(b => b.classList.remove('active-live','active-breakdown','active-idle'));
+      btnEl.classList.add('active-' + status);
+    }
+  }
+
+  const layers = feederLayerMap[fn] || [];
+  layers.forEach(item => {
+    if(!item.layer.setStyle) return;
+    const isLine = item.reg.type === 'lines' || (item.reg.type && item.reg.type.startsWith('fseg'));
+    if(!isLine) return;
+    
+    const baseColor = item.cable === 'OH' ? '#f44336' : '#2196f3';
+    
+    if(status === 'live') {
+      item.layer.setStyle({color: baseColor, weight:6, opacity:0.9});
+      safelyManageClass(item.layer, 'feeder-breakdown', false);
+      if(item.layer.flowLayer) {
+          item.layer.flowLayer.options.className = 'feeder-flow-overlay';
+          safelyManageClass(item.layer.flowLayer, 'hidden-flow', false);
+      }
+    } else if(status === 'breakdown') {
+      item.layer.setStyle({color:'#ff1744', weight:7, opacity:1});
+      safelyManageClass(item.layer, 'feeder-breakdown', true);
+      if(item.layer.flowLayer) {
+          item.layer.flowLayer.options.className = 'feeder-flow-overlay hidden-flow';
+          safelyManageClass(item.layer.flowLayer, 'hidden-flow', true);
+      }
+    } else if(status === 'idle') {
+      item.layer.setStyle({color:'#9e9e9e', weight:5, opacity:0.6});
+      safelyManageClass(item.layer, 'feeder-breakdown', false);
+      if(item.layer.flowLayer) {
+          item.layer.flowLayer.options.className = 'feeder-flow-overlay hidden-flow';
+          safelyManageClass(item.layer.flowLayer, 'hidden-flow', true);
+      }
+    }
+  });
+
+  document.querySelectorAll(`.fi-btn[data-feeder="${fn}"]`).forEach(btn => {
+    btn.classList.remove('fi-active');
+    if(btn.classList.contains('fi-' + status)) btn.classList.add('fi-active');
+  });
+  updateFeederBadges();
+  const statusLabel = status === 'live' ? 'LIVE' : status === 'breakdown' ? 'BREAKDOWN' : 'IDLE';
+  toast(`${fn.split('→')[1]?.trim() || fn}: ${statusLabel}`);
+}
+
+function updateFeederBadges() {
+  document.querySelectorAll('.f-badge').forEach(el => {
+    const fn = el.dataset.feeder;
+    if(!fn) return;
+    const s = feederStatus[fn] || 'live';
+    el.className = 'f-badge f-badge-' + s;
+    el.textContent = s === 'live' ? '⚡ LIVE' : s === 'breakdown' ? '🔴 DOWN' : '⏸ IDLE';
+  });
+}
+
+function focusFeeder(fn) {
+  if(focusedFeeder === fn) {
+    focusedFeeder = null;
+    allLayers.forEach(i => {
+        if(i.layer.setStyle && (i.reg.type === 'lines' || i.reg.type === 'fsegs')) {
+            i.layer.setStyle({opacity: 0.9});
+            let cStatus = feederStatus[i.feederName] || 'live';
+            if(i.layer.flowLayer && cStatus === 'live') safelyManageClass(i.layer.flowLayer, 'hidden-flow', false);
+        }
+        else if (i.layer.setOpacity) i.layer.setOpacity(1);
+    });
+    toast("Focus cleared");
+    return;
+  }
+  
+  focusedFeeder = fn;
+  const coords = [];
+  
+  allLayers.forEach(i => {
+    const isTarget = i.feederName === fn || i.reg.type.startsWith('ss') || i.reg.type.startsWith('eht');
+    if(i.layer.setStyle && (i.reg.type === 'lines' || i.reg.type === 'fsegs')) {
+        i.layer.setStyle({opacity: isTarget ? 1.0 : 0.15});
+        if(i.layer.flowLayer) {
+            let cStatus = feederStatus[i.feederName] || 'live';
+            if (isTarget && cStatus === 'live') safelyManageClass(i.layer.flowLayer, 'hidden-flow', false);
+            else safelyManageClass(i.layer.flowLayer, 'hidden-flow', true);
+        }
+    } else if (i.layer.setOpacity) {
+        i.layer.setOpacity(isTarget ? 1 : 0.2);
+    }
+    
+    if(i.feederName === fn && i.layer.getLatLngs) {
+      const ll = i.layer.getLatLngs();
+      if(ll.length) coords.push(...ll.flat());
+    }
+  });
+  
+  if(coords.length > 0) map.flyToBounds(L.latLngBounds(coords), {padding:[50,50], animate:true, duration: 1.0});
+  toast(`Focused on: ${fn.split('→')[1]?.trim() || fn}`);
+}
+
+function toggleSingleFeeder(fn, idx, e) {
+  e.stopPropagation(); 
+  feederState[fn] = !feederState[fn];
+  document.getElementById('ftog-'+idx).classList.toggle('off', !feederState[fn]);
+  updateVisibility();
+  toast((feederState[fn] ? 'Showing ' : 'Hidden ') + fn.substring(0,15));
+}
+
+function buildFeederChecks(){
+  const container = document.getElementById('feederChecks');
+  if(!container) return;
+  container.innerHTML = '';
+  const FCOLORS = ['#00c8ff','#ff9800','#00e676','#9c27b0','#2196f3','#f44336','#ffeb3b','#e91e63'];
+  
+  [...feederNames].sort().forEach((fn,i)=>{
+    feederState[fn] = true; 
+    const color = FCOLORS[i % FCOLORS.length];
+    const short = fn.replace('→','→').substring(0,25); 
+    
     const row = document.createElement('div');
     row.className = 'ftog-row';
-    row.innerHTML = `
-      <div class="lrow" id="tog-${i}" onclick="toggleFeeder('${fn}', ${i})">
-        <div class="lname" onclick="focusFeeder('${fn}', event)">${fn}</div>
-        <div class="tog"></div>
+    row.style.cssText = 'flex-wrap:wrap;gap:3px;padding:5px 6px;';
+    const fnEsc = fn.replace(/'/g, "\\'");
+    row.innerHTML=`
+      <div style="display:flex;align-items:center;gap:6px;width:100%">
+        <div style="width:10px;height:10px;border-radius:2px;background:${color};flex-shrink:0;border:1px solid rgba(255,255,255,.2)"></div>
+        <span class="focus-txt" style="font-family:var(--sans);font-size:11px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;min-width:0" title="Click to Focus" onclick="focusFeeder('${fnEsc}')">${short}</span>
+        <div class="tog" id="ftog-${i}" style="flex-shrink:0" title="Toggle visibility" onclick="toggleSingleFeeder('${fnEsc}', ${i}, event)"></div>
       </div>
-      <div class="fi-btn-grp">
-        <button class="fi-btn fi-live active" id="lv-${i}" onclick="setMode('${fn}', 'live', ${i})">LIVE</button>
-        <button class="fi-btn fi-breakdown" id="brk-${i}" onclick="setMode('${fn}', 'breakdown', ${i})">DOWN</button>
-      </div>
-    `;
-    list.appendChild(row);
+      <div style="display:flex;gap:3px;padding-left:16px;margin-top:3px;width:100%">
+        <button class="fi-btn fi-live" data-feeder="${fnEsc}" onclick="setFeederStatus('${fnEsc}','live',this)">⚡ Live</button>
+        <button class="fi-btn fi-breakdown" data-feeder="${fnEsc}" onclick="setFeederStatus('${fnEsc}','breakdown',this)">🔴 Down</button>
+        <button class="fi-btn fi-idle" data-feeder="${fnEsc}" onclick="setFeederStatus('${fnEsc}','idle',this)">⏸ Idle</button>
+      </div>`;
+    container.appendChild(row);
   });
 }
 
-function setMode(fn, mode, i) {
-  feederMode[fn] = mode;
-  document.getElementById(`lv-${i}`).classList.toggle('active', mode==='live');
-  document.getElementById(`brk-${i}`).classList.toggle('active', mode==='breakdown');
+function toggleAllFeeders(show){
+  globalFeederFallback = show; 
+  [...feederNames].forEach((fn,i)=>{
+    feederState[fn] = show;
+    const tog = document.getElementById('ftog-'+i);
+    if(tog) tog.classList.toggle('off', !show);
+  });
+  updateVisibility();
+  toast(show ? 'All feeders shown' : 'All feeders hidden');
+}
+
+function setCableFilter(f){
+  cableFilter=f;
+  document.querySelectorAll('#fp-all,#fp-ug,#fp-oh').forEach(p=>{
+    p.classList.remove('active'); p.style.background='transparent'; p.style.fontWeight='400';
+  });
+  document.getElementById('fp-'+f).classList.add('active');
+  document.getElementById('fp-'+f).style.background='rgba(0,200,255,.1)';
+  updateVisibility();
+  toast(f.toUpperCase()+' filter applied');
+}
+
+function toggleLyr(id){
+  LGstate[id] = !LGstate[id];
+  document.getElementById('lyr-'+id).classList.toggle('off', !LGstate[id]);
+  updateVisibility();
+  toast(id.toUpperCase()+' layer '+(LGstate[id]?'ON':'OFF'));
+}
+
+let panelOpen=true;
+function togglePanel(){
+  panelOpen=!panelOpen;
+  document.getElementById('panel').classList.toggle('off',!panelOpen);
+  document.getElementById('ptab').classList.toggle('off',!panelOpen);
+  document.getElementById('ptab').textContent=panelOpen?'◀':'▶';
+  document.getElementById('legend').classList.toggle('shift',!panelOpen);
+  setTimeout(function(){ map.invalidateSize(); }, 350);
+}
+
+(function(){
+  const panel = document.getElementById('panel');
+  const ptab  = document.getElementById('ptab');
+  const legend= document.getElementById('legend');
+  const handle = document.createElement('div');
+  handle.id = 'panel-resize';
+  panel.appendChild(handle);
+
+  let dragging=false, startX=0, startW=0;
+  handle.addEventListener('mousedown',e=>{
+    dragging=true; startX=e.clientX; startW=panel.offsetWidth;
+    handle.classList.add('dragging'); document.body.style.cursor='col-resize'; document.body.style.userSelect='none'; e.preventDefault();
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!dragging) return;
+    const w = Math.min(800, Math.max(200, startW + e.clientX - startX));
+    panel.style.width = w+'px'; ptab.style.left = w+'px'; legend.style.left = (w+10)+'px'; map.invalidateSize();
+  });
+  document.addEventListener('mouseup',()=>{
+    if(!dragging) return;
+    dragging=false; handle.classList.remove('dragging'); document.body.style.cursor=''; document.body.style.userSelect='';
+  });
+})();
+
+document.getElementById('srchInput').addEventListener('input', function(e){
+  const q=e.target.value.toLowerCase().trim();
+  if(!q||q.length<2) return;
+  const found = allLayers.find(i => {
+    const p = i.layer.feature?.properties || i.layer.options || {};
+    return JSON.stringify(p).toLowerCase().includes(q);
+  });
   
-  allLayers.forEach(item => {
-    if(item.fName === fn && item.layer.setStyle) {
-      if(mode === 'breakdown') {
-        item.layer.setStyle({color:'#ff1744', weight:8});
-        if(item.layer.getElement()) item.layer.getElement().classList.add('feeder-breakdown');
-        if(item.layer.flow) map.removeLayer(item.layer.flow);
-      } else {
-        item.layer.setStyle({color:'#2196f3', weight:6});
-        if(item.layer.getElement()) item.layer.getElement().classList.remove('feeder-breakdown');
-        if(item.layer.flow) map.addLayer(item.layer.flow);
-      }
-    }
-  });
-}
-
-function toggleFeeder(fn, i) {
-  feederState[fn] = !feederState[fn];
-  document.getElementById(`tog-${i}`).classList.toggle('off', !feederState[fn]);
-  allLayers.forEach(item => {
-    if(item.fName === fn) {
-      feederState[fn] ? map.addLayer(item.layer) : map.removeLayer(item.layer);
-      if(item.layer.flow && feederMode[fn]==='live') feederState[fn] ? map.addLayer(item.layer.flow) : map.removeLayer(item.layer.flow);
-    }
-  });
-}
-
-function focusFeeder(fn, e) {
-  e.stopPropagation();
-  const group = allLayers.filter(i => i.fName === fn && i.layer.getLatLngs);
-  if(group.length) {
-    const b = L.latLngBounds(group.map(i => i.layer.getLatLngs()).flat());
-    map.flyToBounds(b, {padding:[50,50]});
-  }
-}
-
-// ── 5. SEARCH & RADAR ──
-document.getElementById('srchInput').addEventListener('input', e => {
-  const q = e.target.value.toLowerCase();
-  if(q.length < 2) return;
-  const f = allLayers.find(i => JSON.stringify(i.layer.feature?.properties || {}).toLowerCase().includes(q));
-  if(f && f.layer.getLatLng) {
-    const ll = f.layer.getLatLng();
-    map.flyTo(ll, 19);
-    L.marker(ll, {icon:L.divIcon({className:'radar-ping'})}).addTo(map);
+  if (found && found.layer.getLatLng) {
+    const ll = found.layer.getLatLng();
+    map.flyTo(ll, 19, {animate:true});
+    if (found.layer.getPopup && found.layer.getPopup()) found.layer.openPopup();
+    
+    const pingIcon = L.divIcon({className: 'radar-ping', iconSize: [0,0]});
+    const pingMarker = L.marker(ll, {icon: pingIcon, zIndexOffset: 2000}).addTo(map);
+    setTimeout(() => map.removeLayer(pingMarker), 5000);
   }
 });
 
-map.on('mousemove', e => { document.getElementById('coords').textContent = e.latlng.lat.toFixed(5)+', '+e.latlng.lng.toFixed(5); });
+map.on('mousemove',e=>{ document.getElementById('coords').textContent= e.latlng.lat.toFixed(5)+', '+e.latlng.lng.toFixed(5); });
 
-initGIS();
+let _tt;
+function toast(msg,dur=2200){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),dur);
+}
+
+const fill=document.getElementById('ldfill'); let pct=0;
+const iv=setInterval(()=>{ pct+=Math.random()*15+7; if(pct>=100){pct=100;clearInterval(iv);} fill.style.width=pct+'%'; },80);
+
+function dismissLoader(){
+  const ov=document.getElementById('loader');
+  if(ov){ ov.classList.add('gone'); setTimeout(()=>ov.remove(),500); }
+  map.invalidateSize();
+  
+  // ── DEFERRED SCRIPT (Mapped smartly) ──
+  setTimeout(()=>{
+    const s=document.createElement('script');
+    s.src='data/Feeder_Segments_81.js';
+    s.onload=()=>{
+      try{
+        if(typeof json_Feeder_Segments_81!=='undefined' && json_Feeder_Segments_81.features){
+          json_Feeder_Segments_81.features.forEach(feat=>{
+            try {
+              if(!feat.geometry) return;
+              const p = feat.properties || {};
+              
+              let pairType = String(p['Pair_Type'] || p['Type of Feeder'] || p['Feeder_Type'] || p['Feeder Type'] || '').trim().toUpperCase();
+              let isOH = (pairType === 'OH' || pairType === 'OVERHEAD');
+              let isTRANS = (pairType === 'TRANS');
+              
+              let color = isOH ? '#f44336' : '#2196f3'; 
+              if (isTRANS) color = '#9c27b0'; 
+              let segCable = isOH ? 'OH' : (isTRANS ? '-' : 'UG');
+              
+              if(feat.geometry.type==='LineString'||feat.geometry.type==='MultiLineString'){
+                const coords=feat.geometry.type==='LineString' ? feat.geometry.coordinates.map(c=>[c[1],c[0]]) : feat.geometry.coordinates[0].map(c=>[c[1],c[0]]);
+                
+                // Mapped Feeder Name guarantees the segment hides/highlights correctly!
+                let rawFName = p['Feeder_Name'] || p['Name of the Feeder'] || 'Feeder Segments';
+                let fName = extractFeeder(p, rawFName);
+                
+                let cStatus = feederStatus[fName] || 'live';
+                let customClass = cStatus === 'breakdown' ? 'feeder-breakdown' : '';
+                
+                const layer = L.polyline(coords,{color: color, weight: 6, opacity: 0.9, className: customClass});
+                
+                let flowClass = 'feeder-flow-overlay' + (cStatus !== 'live' ? ' hidden-flow' : '');
+                layer.flowLayer = L.polyline(coords, {
+                    color: '#ffffff', weight: 3, className: flowClass,
+                    interactive: false, bubblingMouseEvents: false, pane: 'flowPane'
+                });
+
+                const regData = {type:'fsegs', feeder:'Feeder Segments', cable:'-'};
+                
+                layer.bindPopup(popup(feat, regData));
+                layer.on('popupopen', function(e) { e.popup.setContent(popup(feat, regData)); });
+
+                layer.on('mouseover',e=>{
+                    e.target.setStyle({weight:8,opacity:1});
+                    if(e.target.flowLayer) e.target.flowLayer.setStyle({weight: 4});
+                });
+                layer.on('mouseout',e=>{
+                    const isFocused = focusedFeeder && focusedFeeder !== fName;
+                    e.target.setStyle({weight:6, opacity: isFocused ? 0.15 : 0.9});
+                    if(e.target.flowLayer) e.target.flowLayer.setStyle({weight: 3});
+                });
+                
+                allLayers.push({layer, reg: regData, feederName: fName, cable: segCable, poleNo: null});
+                if(!feederLayerMap[fName]) feederLayerMap[fName] = [];
+                feederLayerMap[fName].push({layer, reg: regData, cable: segCable});
+              }
+            } catch(e){}
+          });
+          updateCounts();
+          updateVisibility();
+          toast('Detailed Feeder Segments Loaded',1500);
+        }
+      }catch(e){}
+    };
+    document.head.appendChild(s);
+  }, 1000);
+}
+
+setTimeout(()=>{
+  dismissLoader();
+  buildFeederChecks();
+  updateCounts();
+  (window.requestIdleCallback || setTimeout)(()=>{
+    updateVisibility();
+    syncLabels();
+  }, {timeout:500});
+  toast('NIMS / Jubilee Hills / Road No.13 section loaded — '+allLayers.length+' features', 3000);
+}, 600);
+setTimeout(()=>dismissLoader(), 5000);
+
+function syncLabels() {
+  const z = map.getZoom();
+  const showPoleLabels = z >= 17; 
+  const showSSLabels = z >= 13;
+
+  allLayers.forEach(item => {
+    if(item.reg.type.startsWith('ss') || item.reg.type.startsWith('eht')) {
+        if(item.layer.getTooltip) {
+            const tip = item.layer.getTooltip();
+            if(tip) {
+                if(showSSLabels && map.hasLayer(item.layer)) item.layer.openTooltip && item.layer.openTooltip();
+                else item.layer.closeTooltip && item.layer.closeTooltip();
+            }
+        }
+    }
+    if(item.poleNo) {
+        if(showPoleLabels && map.hasLayer(item.layer)) {
+            if(!item.layer.getTooltip()) {
+                item.layer.bindTooltip(item.poleNo, {permanent: true, direction: 'right', className: 'pole-label', offset: [6, 0]});
+            }
+        } else {
+            if(item.layer.getTooltip()) {
+                item.layer.unbindTooltip();
+            }
+        }
+    }
+  });
+  
+  document.getElementById('zoomLvl').textContent = z;
+}
+map.on('zoomend', syncLabels);
+
+document.getElementById('loader').addEventListener('click', dismissLoader);
 </script>
 </body>
 </html>
