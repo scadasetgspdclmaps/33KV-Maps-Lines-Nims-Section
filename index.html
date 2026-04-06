@@ -7,7 +7,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 
 <script src="data/33KVGunnrockNIMS_1.js"></script>
@@ -64,19 +63,17 @@
 <script src="data/SS_WEB_INTERACT_83.js"></script>
 
 <style>
-/* ── FULL REPLICATED CSS TOOLKIT ── */
+/* CSS: EXACT JAMES STREET REPLICATION */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --navy:#0d1b2a;--panel:#0f2236ee;--live:#00c8ff;--ug:#2196f3;--oh:#f44336;
-  --ab:#ff9800;--dp:#9c27b0;--cut:#78909c;--fault:#ff1744;--ok:#00e676;
-  --border:rgba(0,200,255,0.18);--text:#b0cce0;
-  --mono:'Share Tech Mono',monospace;--sans:'Arial',sans-serif;
+  --ab:#ff9800;--dp:#9c27b0;--cut:#78909c;--ok:#00e676;--border:rgba(0,200,255,0.18);
+  --text:#b0cce0;--mono:'Share Tech Mono',monospace;--sans:'Arial',sans-serif;
   --ease:cubic-bezier(.4,0,.2,1);
 }
 html,body{width:100%;height:100%;overflow:hidden;background:var(--navy)}
 
-#map{position:fixed;inset:52px 0 38px 0;z-index:1;cursor:grab}
-#map:active{cursor:grabbing}
+#map{position:fixed;inset:52px 0 38px 0;z-index:1;background:var(--navy)}
 
 /* TOP BAR */
 #topbar{
@@ -84,57 +81,56 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--navy)}
   background:linear-gradient(135deg,#0a1520f0,#0f2236f0);
   backdrop-filter:blur(18px);border-bottom:1px solid var(--border);
   display:flex;align-items:center;padding:0 14px;gap:12px;
-  box-shadow:0 2px 20px rgba(0,0,0,.4)
 }
 .tb-logo{font-family:var(--mono);font-size:13px;color:var(--live);letter-spacing:2px}
-.tb-title{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tb-title{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* SEARCH & RADAR */
 #srchWrap{position:relative}
-#srchInput{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:20px;padding:6px 14px 6px 34px;color:var(--text);font-family:var(--sans);font-size:13px;width:190px;outline:none;transition:0.3s}
-#srchInput:focus{width:250px;border-color:var(--live);background:rgba(0,200,255,.08)}
-.srch-ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:rgba(176,204,224,.35);font-size:14px}
+#srchInput{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:20px;padding:6px 14px 6px 34px;color:var(--text);font-family:var(--sans);font-size:13px;width:190px;outline:none;transition:all .3s}
+#srchInput:focus{width:250px;background:rgba(0,200,255,.08);border-color:var(--live)}
 
-.radar-ping { width:40px;height:40px;background:rgba(255,23,68,0.6);border-radius:50%;animation:ping-anim 1.5s ease-out infinite;pointer-events:none;margin-left:-20px;margin-top:-20px }
-@keyframes ping-anim { 0%{transform:scale(0);opacity:1} 100%{transform:scale(2.5);opacity:0} }
-
-/* SIDE PANEL */
+/* PANEL & RESIZER */
 #panel{
   position:fixed;top:52px;left:0;bottom:38px;z-index:900;width:258px;
   background:linear-gradient(180deg,#0a1828f8,#0d1f33f8);
   backdrop-filter:blur(22px);border-right:1px solid var(--border);
   display:flex;flex-direction:column;transition:transform .32s var(--ease);
-  overflow-y:auto;box-shadow:4px 0 28px rgba(0,0,0,.4);
+  overflow-y:auto;overflow-x:hidden;
 }
 #panel.off{transform:translateX(-100%)}
+
 .psec{padding:13px 15px 9px;border-bottom:1px solid rgba(0,200,255,.07)}
 .psec-t{font-family:var(--mono);font-size:9px;color:rgba(0,200,255,.55);letter-spacing:2px;margin-bottom:9px}
 
-/* FEEDER LIST */
-.ftog-row { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.03) }
-.lrow{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:8px;cursor:pointer;transition:0.2s}
+/* Feeder Rows */
+.ftog-row { display:flex;flex-direction:column;gap:4px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03) }
+.lrow{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none}
 .lname{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tog{width:30px;height:17px;border-radius:9px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);position:relative;transition:0.25s}
-.tog::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,0.4);transition:0.25s}
+.tog::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,0.3);transition:0.25s}
 .lrow:not(.off) .tog{background:rgba(0,200,255,.28);border-color:var(--live)}
 .lrow:not(.off) .tog::after{transform:translateX(13px);background:var(--live)}
 
-/* STATUS BUTTONS */
-.fi-btn { flex:1;padding:3px;border-radius:4px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:rgba(176,204,224,.5);font-family:var(--mono);font-size:8px;cursor:pointer;transition:0.2s }
-.fi-live.fi-active { background:rgba(0,200,83,.2);color:#00c853;border-color:#00c853 }
-.fi-breakdown.fi-active { background:rgba(255,23,68,.2);color:#ff1744;border-color:#ff1744;animation:sos-blink 0.8s infinite }
+.fi-btn-grp { display:flex;gap:4px;padding-left:2px }
+.fi-btn { flex:1;padding:3px;border-radius:4px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,0.05);color:rgba(176,204,224,0.4);font-family:var(--mono);font-size:8px;cursor:pointer;transition:0.2s }
+.fi-live.active { background:rgba(0,200,83,.2);color:#00c853;border-color:#00c853 }
+.fi-down.active { background:rgba(255,23,68,.2);color:#ff1744;border-color:#ff1744;animation:sos-blink 0.8s infinite }
 
-/* ANIMATIONS */
+/* Map Animations */
 @keyframes energy-flow-overlay { to { stroke-dashoffset: -24; } }
 .feeder-flow-overlay { stroke-dasharray: 4 20; stroke-linecap: round; animation: energy-flow-overlay 0.8s linear infinite; pointer-events: none; }
-@keyframes sos-blink { 0%,100% { opacity: 1; filter: drop-shadow(0 0 12px #ff1744); } 50% { opacity: 0.2; } }
+@keyframes sos-blink { 0%, 100% { opacity: 1; filter: drop-shadow(0 0 12px #ff1744); } 50% { opacity: 0.2; } }
 .feeder-breakdown { animation: sos-blink 0.8s ease-in-out infinite !important; }
 
-/* SUBSTATION SYMBOLS */
+/* Radar Ping */
+.radar-ping { width:40px;height:40px;background:rgba(255,23,68,0.6);border-radius:50%;animation:ping-anim 1.5s ease-out infinite;pointer-events:none;margin-left:-20px;margin-top:-20px }
+@keyframes ping-anim { 0%{transform:scale(0);opacity:1} 100%{transform:scale(2.5);opacity:0} }
+
+/* Substation DivIcons */
 @keyframes ss33-ring-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .ss33-wrap { position:relative; width:36px;height:36px; display:flex;align-items:center;justify-content:center; }
 .ss33-ring { position:absolute;inset:0; border-radius:50%; border:2px dashed rgba(0,180,255,0.9); animation: ss33-ring-spin 4s linear infinite; }
-.ss33-core { width:22px;height:22px;border-radius:50%; background:radial-gradient(circle, #1e88e5 0%, #0d47a1 100%); border:2px solid #fff; display:flex;align-items:center;justify-content:center; z-index:1; }
+.ss33-core { width:22px;height:22px;border-radius:50%; background:radial-gradient(circle, #1e88e5 0%, #0d47a1 100%); border:2px solid #fff; display:flex;align-items:center;justify-content:center; z-index:1; color:white; font-size:10px; }
 
 #botbar{position:fixed;bottom:0;left:0;right:0;z-index:900;height:38px;background:rgba(9,22,37,.9);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 14px;color:rgba(176,204,224,.35);font-family:var(--mono);font-size:10px;}
 </style>
@@ -143,46 +139,37 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--navy)}
 
 <div id="topbar">
   <div class="tb-logo">TGSPDCL</div>
-  <div class="tb-title">NIMS Circle — 33KV Distribution GIS</div>
+  <div class="tb-title">NIMS Section — 33KV GIS Network</div>
   <div id="srchWrap">
     <input id="srchInput" placeholder="Search pole, cable, SS..."/>
-    <span class="srch-ic">⌕</span>
   </div>
-  <div style="font-family:var(--mono);font-size:10px;color:var(--ok);padding:4px 12px;border-radius:20px;border:1px solid rgba(0,230,118,.3)">● LIVE</div>
 </div>
 
 <div id="panel">
   <div class="psec">
-    <div class="psec-t" style="display:flex;justify-content:space-between">// NIMS FEEDER NETWORK <span onclick="toggleAllFeeders(true)" style="cursor:pointer;color:var(--live)">ALL</span></div>
-    <div id="feederChecks"></div>
-  </div>
-  <div class="psec">
-    <div class="psec-t">// SYSTEM LAYERS</div>
-    <div class="lrow" id="lyr-ug-lines" onclick="toggleLyr('ug-lines')"><div class="lname">UG Main Lines</div><div class="tog"></div></div>
-    <div class="lrow" id="lyr-points" onclick="toggleLyr('points')"><div class="lname">NIMS Pole Points</div><div class="tog"></div></div>
-    <div class="lrow" id="lyr-ss33" onclick="toggleLyr('ss33')"><div class="lname">33/11KV Substations</div><div class="tog"></div></div>
+    <div class="psec-t" style="display:flex;justify-content:space-between">FEEDER STATUS <span onclick="toggleAll(true)" style="cursor:pointer;color:var(--live)">ALL ON</span></div>
+    <div id="feederList"></div>
   </div>
 </div>
 
 <div id="map"></div>
 
 <div id="botbar">
-  <span>LAT/LNG: <span id="coords" style="color:var(--live)">17.4200, 78.4500</span></span>
-  <span style="margin-left:auto">NIMS SECTION · 33KV GIS · TGSPDCL SCADA SECTION</span>
+  <span>COORD: <span id="coords" style="color:var(--live)">17.4200, 78.4500</span></span>
+  <span style="margin-left:auto">NIMS SECTION · 33KV SCADA · 2026</span>
 </div>
 
 <script>
-// ── 1. MAP CORE & Z-INDEX MANAGEMENT ──
+// 1. GIS ENGINE CORE
 const map = L.map('map',{ center:[17.4200, 78.4500], zoom:16, zoomControl:false });
-map.createPane('pointsPane').style.zIndex = 650; 
-map.createPane('flowPane').style.zIndex = 401; 
+map.createPane('pointsPane').style.zIndex = 650;
+map.createPane('flowPane').style.zIndex = 401;
 map.getPane('flowPane').style.pointerEvents = 'none';
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-// ── 2. SMART DATA REGISTRY (NIMS) ──
-const DATA_REGISTRY = [
-  // Feeders
+// 2. NIMS DATA REGISTRY
+const REGISTRY = [
   { varName:'json_33KVGunnrockNIMS_5', type:'lines', feeder:'GUNROCK → NIMS', cable:'UG' },
   { varName:'json_33KVNIMSPunjagutta_10', type:'lines', feeder:'NIMS → PUNJAGUTTA', cable:'UG' },
   { varName:'json_33KVAnandnagarErramanjil_15', type:'lines', feeder:'ANANDNAGAR → ERRAMANJIL', cable:'UG' },
@@ -192,125 +179,118 @@ const DATA_REGISTRY = [
   { varName:'json_132KVASIFNAGAR33KVNIMS_35', type:'lines', feeder:'ASIFNAGAR → NIMS', cable:'UG' },
   { varName:'json_132KVASIFNAGAR33KVPUNJAGUTTA_40', type:'lines', feeder:'ASIFNAGAR → PUNJAGUTTA', cable:'UG' },
   { varName:'json_132KVASIFNAGAR33KVANANDNAGAR_45', type:'lines', feeder:'ASIFNAGAR → ANANDNAGAR', cable:'UG' },
-  // Points & Structures
   { varName:'json_33KVGunnrockNIMS_1', type:'points', feeder:'NIMS NETWORK', cable:'UG' },
-  { varName:'json_3311KVSSCOORDINATESWITHDATA20_76', type:'ss33', feeder:'33/11KV SS', cable:'-' },
-  { varName:'json_EHTSSCOORDINATESWITHDATA_82', type:'ehts', feeder:'EHT SS', cable:'-' }
+  { varName:'json_3311KVSSCOORDINATESWITHDATA20_76', type:'ss33', feeder:'33/11KV SS', cable:'-' }
 ];
 
-const allLayers = [];
-const feederNames = new Set();
-const feederStatus = {};
-const feederState = {};
-const LGstate = { 'ug-lines':true, 'points':true, 'ss33':true };
+const allFeatures = [];
+const feederStates = {};
+const feederModes = {}; // live, down
 
-// ── 3. GIS RENDER ENGINE ──
-function initGIS() {
-  DATA_REGISTRY.forEach(reg => {
+// 3. RENDER ENGINE
+function renderGIS() {
+  REGISTRY.forEach(reg => {
     const data = window[reg.varName];
     if(!data || !data.features) return;
 
     data.features.forEach(feat => {
       const props = feat.properties || {};
       const fName = props['Feeder Name'] || reg.feeder;
-      feederNames.add(fName);
+      if(!feederStates[fName]) { feederStates[fName] = true; feederModes[fName] = 'live'; }
 
       let layer;
       if(feat.geometry.type.includes('Line')){
         const coords = feat.geometry.coordinates.map(c => [c[1], c[0]]);
-        layer = L.polyline(coords, {color:'#2196f3', weight:6, opacity:0.9, smoothFactor:1.5});
-        
-        layer.flowLayer = L.polyline(coords, {
-          color:'#ffffff', weight:3, className:'feeder-flow-overlay', pane:'flowPane'
-        });
+        layer = L.polyline(coords, {color:'#2196f3', weight:6, opacity:0.9});
+        layer.flow = L.polyline(coords, {color:'#ffffff', weight:3, className:'feeder-flow-overlay', pane:'flowPane'});
       } else {
         const coords = feat.geometry.coordinates;
         const ll = [coords[1], coords[0]];
-        
         if(reg.type === 'ss33'){
-          const ssHtml = `<div class="ss33-wrap"><div class="ss33-ring"></div><div class="ss33-core">⚡</div></div>`;
-          layer = L.marker(ll, {icon:L.divIcon({className:'', html:ssHtml, iconSize:[36,36]})});
+          layer = L.marker(ll, {icon:L.divIcon({className:'', html:`<div class="ss33-wrap"><div class="ss33-ring"></div><div class="ss33-core">⚡</div></div>`, iconSize:[36,36]})});
         } else {
-          layer = L.circleMarker(ll, {radius:4, fillColor:'#ffffff', color:'#00c8ff', weight:2, pane:'pointsPane'});
+          layer = L.circleMarker(ll, {radius:4, color:'#00c8ff', fillColor:'#fff', fillOpacity:1, pane:'pointsPane'});
         }
       }
 
       if(layer){
-        layer.bindPopup(buildPopup(props, fName));
-        allLayers.push({layer, fName, type:reg.type});
+        layer.bindPopup(`<b>${fName}</b><br>NIMS Section GIS`);
+        allFeatures.push({ layer, fName, type: reg.type });
         layer.addTo(map);
-        if(layer.flowLayer) layer.flowLayer.addTo(map);
+        if(layer.flow) layer.flow.addTo(map);
       }
     });
   });
-  buildFeederUI();
+  buildUI();
 }
 
-function buildPopup(p, fName){
-  let rows = '';
-  Object.keys(p).forEach(k => { rows += `<tr><th style="text-align:left;font-size:10px">${k}</th><td style="font-size:10px;padding-left:10px">${p[k]}</td></tr>`; });
-  return `<div style="font-family:sans-serif"><b>${fName}</b><table style="width:100%;margin-top:8px">${rows}</table></div>`;
-}
-
-// ── 4. UI & INTERACTION ──
-function buildFeederUI() {
-  const cont = document.getElementById('feederChecks');
-  [...feederNames].sort().forEach((fn, i) => {
-    feederState[fn] = true;
-    const row = document.createElement('div');
-    row.className = 'ftog-row';
-    row.innerHTML = `
-      <div class="lrow" id="tog-${i}" onclick="toggleFeeder('${fn}', ${i})">
-        <div class="lname">${fn}</div><div class="tog"></div>
+// 4. UI BUILDER & LOGIC
+function buildUI() {
+  const cont = document.getElementById('feederList');
+  Object.keys(feederStates).sort().forEach((fn, i) => {
+    const div = document.createElement('div');
+    div.className = 'ftog-row';
+    div.innerHTML = `
+      <div class="lrow" id="row-${i}" onclick="toggleFeeder('${fn}', ${i})">
+        <div class="lname" onclick="focusFeeder('${fn}', event)">${fn}</div>
+        <div class="tog"></div>
       </div>
-      <div style="display:flex;gap:4px;padding:0 8px;margin-top:4px">
-        <button class="fi-btn fi-live fi-active" onclick="setStatus('${fn}','live',this)">LIVE</button>
-        <button class="fi-btn fi-breakdown" onclick="setStatus('${fn}','breakdown',this)">DOWN</button>
+      <div class="fi-btn-grp">
+        <button class="fi-btn fi-live active" id="live-${i}" onclick="setFeederMode('${fn}', 'live', ${i})">LIVE</button>
+        <button class="fi-btn fi-down" id="down-${i}" onclick="setFeederMode('${fn}', 'down', ${i})">DOWN</button>
       </div>
     `;
-    cont.appendChild(row);
+    cont.appendChild(div);
   });
 }
 
-function setStatus(fn, status, btn) {
-  feederStatus[fn] = status;
-  const bar = btn.parentElement;
-  bar.querySelectorAll('button').forEach(b => b.classList.remove('fi-active'));
-  btn.classList.add('fi-active');
+function setFeederMode(fn, mode, i) {
+  feederModes[fn] = mode;
+  document.getElementById(`live-${i}`).classList.toggle('active', mode === 'live');
+  document.getElementById(`down-${i}`).classList.toggle('active', mode === 'down');
 
-  allLayers.forEach(item => {
+  allFeatures.forEach(item => {
     if(item.fName === fn && item.layer.setStyle) {
-      if(status === 'breakdown') {
+      if(mode === 'down') {
         item.layer.setStyle({color:'#ff1744', weight:8});
         if(item.layer.getElement()) item.layer.getElement().classList.add('feeder-breakdown');
-        if(item.layer.flowLayer) map.removeLayer(item.layer.flowLayer);
+        if(item.layer.flow) map.removeLayer(item.layer.flow);
       } else {
         item.layer.setStyle({color:'#2196f3', weight:6});
         if(item.layer.getElement()) item.layer.getElement().classList.remove('feeder-breakdown');
-        if(item.layer.flowLayer) map.addLayer(item.layer.flowLayer);
+        if(item.layer.flow) map.addLayer(item.layer.flow);
       }
     }
   });
 }
 
 function toggleFeeder(fn, i) {
-  feederState[fn] = !feederState[fn];
-  document.getElementById('tog-'+i).classList.toggle('off', !feederState[fn]);
-  allLayers.forEach(item => {
+  feederStates[fn] = !feederStates[fn];
+  document.getElementById(`row-${i}`).classList.toggle('off', !feederStates[fn]);
+  allFeatures.forEach(item => {
     if(item.fName === fn) {
-      feederState[fn] ? map.addLayer(item.layer) : map.removeLayer(item.layer);
-      if(item.layer.flowLayer) feederState[fn] ? map.addLayer(item.layer.flowLayer) : map.removeLayer(item.layer.flowLayer);
+      feederStates[fn] ? map.addLayer(item.layer) : map.removeLayer(item.layer);
+      if(item.layer.flow && feederModes[fn] === 'live') feederStates[fn] ? map.addLayer(item.layer.flow) : map.removeLayer(item.layer.flow);
     }
   });
 }
 
-// ── 5. SEARCH & TRACKING ──
+function focusFeeder(fn, e) {
+  e.stopPropagation();
+  const group = allFeatures.filter(i => i.fName === fn && i.layer.getLatLngs);
+  if(group.length) {
+    const bounds = L.latLngBounds(group.map(i => i.layer.getLatLngs()).flat());
+    map.flyToBounds(bounds, {padding:[50,50]});
+  }
+}
+
+// 5. SEARCH & INTERACTION
 document.getElementById('srchInput').addEventListener('input', e => {
   const q = e.target.value.toLowerCase();
   if(q.length < 2) return;
-  const found = allLayers.find(i => JSON.stringify(i.layer.feature?.properties || {}).toLowerCase().includes(q));
-  if(found && found.layer.getLatLng) {
-    const ll = found.layer.getLatLng();
+  const f = allFeatures.find(i => JSON.stringify(i.layer.feature?.properties || {}).toLowerCase().includes(q));
+  if(f && f.layer.getLatLng) {
+    const ll = f.layer.getLatLng();
     map.flyTo(ll, 19);
     L.marker(ll, {icon:L.divIcon({className:'radar-ping'})}).addTo(map);
   }
@@ -318,7 +298,7 @@ document.getElementById('srchInput').addEventListener('input', e => {
 
 map.on('mousemove', e => { document.getElementById('coords').textContent = e.latlng.lat.toFixed(5) + ', ' + e.latlng.lng.toFixed(5); });
 
-initGIS();
+renderGIS();
 </script>
 </body>
 </html>
