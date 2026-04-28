@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
 <title>TGSPDCL — 33KV NIMS Section GIS</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 
-
+<!-- ══ NIMS SECTION DATA FILES ══ -->
 <script src="data/33KVNIMSRoadNo13BHILLS_1.js"></script>
 <script src="data/33KVNIMSRoadNo13BHILLS_AB_Switch_2.js"></script>
 <script src="data/33KVNIMSRoadNo13BHILLS_Double_Pole_Structure_3.js"></script>
@@ -101,24 +102,28 @@
 }
 html,body{width:100%;height:100%;overflow:hidden;background:var(--navy)}
 
-/* MAP */
-#map{position:fixed;inset:52px 0 38px 0;z-index:1}
-.leaflet-tile{transition:opacity .35s ease!important}
+/* MAP — GPU composited */
+#map{position:fixed;inset:52px 0 38px 0;z-index:1;
+  will-change:transform;transform:translateZ(0);
+  cursor:grab;touch-action:none}
+#map:active{cursor:grabbing}
+.leaflet-map-pane{will-change:transform;transform:translateZ(0)}
+.leaflet-overlay-pane,.leaflet-marker-pane,.leaflet-shadow-pane{will-change:transform;transform:translateZ(0)}
+.leaflet-tile{transition:opacity .15s linear!important;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+
+.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform 0.22s cubic-bezier(0.25,0.46,0.45,0.94)!important}
 .leaflet-control-zoom{border:none!important;border-radius:10px!important;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.5)!important}
-.leaflet-control-zoom a{background:var(--panel)!important;color:var(--live)!important;border:none!important;width:34px!important;height:34px!important;line-height:34px!important;font-size:17px!important}
-.leaflet-control-zoom a:hover{background:rgba(0,200,255,.2)!important}
+.leaflet-control-zoom a{background:var(--panel)!important;color:var(--live)!important;border:none!important;
+  width:36px!important;height:36px!important;line-height:36px!important;font-size:18px!important;transition:background .15s!important}
+.leaflet-control-zoom a:hover{background:rgba(0,200,255,.25)!important}
 .leaflet-control-attribution{display:none}
 .leaflet-control-scale-line{background:rgba(13,27,42,.9)!important;border-color:rgba(0,200,255,.4)!important;color:var(--live)!important;font-family:var(--mono)!important;font-size:10px!important;padding:2px 7px!important;border-radius:4px!important}
-#map{cursor:grab}#map:active{cursor:grabbing}
 
 /* TOP BAR */
-#topbar{
-  position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;
+#topbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;
   background:linear-gradient(135deg,#0a1520f0,#0f2236f0);
   backdrop-filter:blur(18px);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;padding:0 14px;gap:12px;
-  box-shadow:0 2px 20px rgba(0,0,0,.4)
-}
+  display:flex;align-items:center;padding:0 14px;gap:12px;box-shadow:0 2px 20px rgba(0,0,0,.4)}
 .tb-logo{font-family:var(--mono);font-size:13px;color:var(--live);letter-spacing:2px;white-space:nowrap}
 .tb-sep{width:1px;height:28px;background:var(--border);flex-shrink:0}
 .tb-title{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -127,44 +132,25 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--navy)}
 #srchInput:focus{width:250px;background:rgba(0,200,255,.08);border-color:var(--live)}
 #srchInput::placeholder{color:rgba(176,204,224,.35)}
 .srch-ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:rgba(176,204,224,.35);font-size:14px;pointer-events:none}
-
-/* FULLSCREEN BUTTON */
-.fs-btn{
-  color:var(--text);font-size:18px;cursor:pointer;padding:4px 8px;border-radius:5px;transition:0.2s;
-  display:flex;align-items:center;justify-content:center;
-}
-.fs-btn:hover{color:var(--live);background:rgba(0,200,255,0.1);transform:scale(1.05);}
-
+.fs-btn{color:var(--text);font-size:18px;cursor:pointer;padding:4px 8px;border-radius:5px;transition:0.2s;display:flex;align-items:center;justify-content:center}
+.fs-btn:hover{color:var(--live);background:rgba(0,200,255,0.1);transform:scale(1.05)}
 .chip{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;padding:4px 12px;border-radius:20px;border:1px solid;white-space:nowrap;flex-shrink:0;transition:all .3s}
 .chip-live{color:var(--ok);border-color:rgba(0,230,118,.35);background:rgba(0,230,118,.08)}
 
-/* LEFT PANEL & RESIZER */
-#panel{
-  position:fixed;top:52px;left:0;bottom:38px;z-index:900;width:258px;
+/* LEFT PANEL */
+#panel{position:fixed;top:52px;left:0;bottom:38px;z-index:900;width:258px;
   background:linear-gradient(180deg,#0a1828f8,#0d1f33f8);
   backdrop-filter:blur(22px);border-right:1px solid var(--border);
   display:flex;flex-direction:column;transform:translateX(0);
   transition:transform .32s var(--ease);box-shadow:4px 0 28px rgba(0,0,0,.4);
-  overflow-y:auto;overflow-x:hidden;min-width:200px;max-width:800px;
-}
-#panel-resize{
-  position:absolute;top:0;right:0;bottom:0;width:14px;
-  cursor:col-resize;z-index:920;
-  background:transparent;
-  border-right: 1px dashed transparent;
-  transition:all .2s
-}
-#panel-resize:hover,#panel-resize.dragging{
-  background:rgba(0,200,255,.05);
-  border-right: 1px dashed rgba(0,200,255,.4);
-}
+  overflow-y:auto;overflow-x:hidden;min-width:200px;max-width:800px}
+#panel-resize{position:absolute;top:0;right:0;bottom:0;width:14px;cursor:col-resize;z-index:920;background:transparent;border-right:1px dashed transparent;transition:all .2s}
+#panel-resize:hover,#panel-resize.dragging{background:rgba(0,200,255,.05);border-right:1px dashed rgba(0,200,255,.4)}
 #panel.off{transform:translateX(-100%)}
 #panel::-webkit-scrollbar{width:3px}
 #panel::-webkit-scrollbar-thumb{background:rgba(0,200,255,.2);border-radius:3px}
 .psec{padding:13px 15px 9px;border-bottom:1px solid rgba(0,200,255,.07)}
 .psec-t{font-family:var(--mono);font-size:9px;color:rgba(0,200,255,.55);letter-spacing:2px;margin-bottom:9px}
-
-/* Layer rows */
 .lrow{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .2s,transform .15s;margin-bottom:2px;user-select:none}
 .lrow:hover{background:rgba(0,200,255,.07);transform:translateX(2px)}
 .lswatch{width:26px;height:5px;border-radius:3px;flex-shrink:0}
@@ -178,263 +164,309 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--navy)}
 .tog::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.35);transition:transform .25s var(--ease),background .25s}
 .lrow:not(.off) .tog{background:rgba(0,200,255,.28);border-color:var(--live)}
 .lrow:not(.off) .tog::after{transform:translateX(13px);background:var(--live)}
-.ftog-row { display:flex;align-items:center;gap:7px;padding:4px 6px;border-radius:6px;cursor:pointer;transition:background .2s }
-.ftog-row:hover { background:rgba(0,200,255,.07) }
-.ftog-row .tog.off { background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.12) }
-.ftog-row .tog.off::after { transform:translateX(0);background:rgba(255,255,255,.35) }
-.ftog-row .tog { background:rgba(0,200,255,.28);border-color:var(--live) }
-.ftog-row .tog::after { transform:translateX(13px);background:var(--live) }
-
-/* FOCUS HIGHLIGHT HOVER EFFECT */
-.focus-txt { transition: 0.2s; }
-.focus-txt:hover { color: #fff !important; font-weight: bold; padding-left: 3px; }
-
-/* Basemap */
-.bmgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:2px}
-.bmbtn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:7px 5px;cursor:pointer;text-align:center;font-family:var(--sans);font-size:11px;color:var(--text);transition:all .2s}
-.bmbtn:hover{background:rgba(0,200,255,.08);border-color:var(--live);transform:scale(1.02)}
-.bmbtn.active{background:rgba(0,200,255,.15);border-color:var(--live);color:var(--live);font-weight:600}
-
-/* Pills */
+.ftog-row{display:flex;align-items:center;gap:7px;padding:4px 6px;border-radius:6px;cursor:pointer;transition:background .2s}
+.ftog-row:hover{background:rgba(0,200,255,.07)}
+.ftog-row .tog.off{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.12)}
+.ftog-row .tog.off::after{transform:translateX(0);background:rgba(255,255,255,.35)}
+.ftog-row .tog{background:rgba(0,200,255,.28);border-color:var(--live)}
+.ftog-row .tog::after{transform:translateX(13px);background:var(--live)}
+.focus-txt{transition:0.2s}
+.focus-txt:hover{color:#fff!important;font-weight:bold;padding-left:3px}
 .pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
 .pill{font-family:var(--mono);font-size:9px;letter-spacing:1px;padding:4px 9px;border-radius:13px;cursor:pointer;border:1px solid;transition:all .2s;user-select:none}
 .pill:hover{transform:scale(1.06)}
 .pill.active{font-weight:700}
-
-/* Stats */
 .strow{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
 .stlbl{font-family:var(--sans);font-size:11px;color:rgba(176,204,224,.45)}
 .stval{font-family:var(--mono);font-size:11px;color:var(--live)}
 
-/* Panel tab */
-#ptab{
-  position:fixed;top:62px;left:258px;z-index:910;width:20px;height:44px;
+/* PANEL TAB */
+#ptab{position:fixed;top:62px;left:258px;z-index:910;width:20px;height:44px;
   background:var(--panel);border:1px solid var(--border);border-left:none;
   border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:center;
   cursor:pointer;color:var(--live);font-size:11px;
-  transition:left .32s var(--ease),background .2s;box-shadow:3px 0 10px rgba(0,0,0,.3)
-}
+  transition:left .32s var(--ease),background .2s;box-shadow:3px 0 10px rgba(0,0,0,.3)}
 #ptab:hover{background:rgba(0,200,255,.15)}
-#ptab.off{left:0 !important;}
+#ptab.off{left:0!important}
 
-/* SEARCH RADAR PING ANIMATION */
-.radar-ping {
-  width: 40px; height: 40px;
-  background: rgba(255, 23, 68, 0.6);
-  border-radius: 50%;
-  animation: ping-anim 1.5s ease-out infinite;
-  pointer-events: none;
-  margin-left: -20px; margin-top: -20px;
-}
-@keyframes ping-anim {
-  0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(2.5); opacity: 0; }
-}
+/* RADAR PING */
+.radar-ping{width:40px;height:40px;background:rgba(255,23,68,.6);border-radius:50%;
+  animation:ping-anim 1.5s ease-out infinite;pointer-events:none;margin-left:-20px;margin-top:-20px}
+@keyframes ping-anim{0%{transform:scale(0);opacity:1}100%{transform:scale(2.5);opacity:0}}
 
-/* CLEAN WHITE POPUP */
-.leaflet-popup-content-wrapper {
-  background: #ffffff !important;
-  color: #333333 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 3px 14px rgba(0,0,0,0.4) !important;
-  padding: 0 !important;
-}
-.leaflet-popup-tip-container { display: none; }
-.leaflet-popup-content { margin: 14px 16px !important; min-width: 250px; }
-.leaflet-popup-close-button { color: #888 !important; font-size: 18px !important; top: 8px !important; right: 8px !important; }
-.leaflet-popup-close-button:hover { color: #000 !important; }
+/* POPUP */
+.leaflet-popup-content-wrapper{background:#ffffff!important;color:#333333!important;border-radius:8px!important;box-shadow:0 3px 14px rgba(0,0,0,.4)!important;padding:0!important}
+.leaflet-popup-tip-container{display:none}
+.leaflet-popup-content{margin:14px 16px!important;min-width:250px}
+.leaflet-popup-close-button{color:#888!important;font-size:18px!important;top:8px!important;right:8px!important}
+.leaflet-popup-close-button:hover{color:#000!important}
+.pc-header-id{font-family:Arial,sans-serif;font-size:13px;color:#555;margin-bottom:10px}
+.popup-table{width:100%;border-collapse:collapse}
+.popup-table th,.popup-table td{padding:2px 0;vertical-align:top;font-family:Arial,sans-serif;font-size:11px;color:#222;line-height:1.4}
+.popup-table th{font-weight:700;width:50%;padding-right:10px;text-align:left}
+.popup-table td{text-align:left;word-break:break-word}
 
-.pc-header-id { font-family: Arial, sans-serif; font-size: 13px; color: #555; margin-bottom: 10px; }
-.popup-table { width: 100%; border-collapse: collapse; }
-.popup-table th, .popup-table td { padding: 2px 0; vertical-align: top; font-family: Arial, sans-serif; font-size: 11px; color: #222; line-height: 1.4; }
-.popup-table th { font-weight: 700; width: 50%; padding-right: 10px; text-align: left; }
-.popup-table td { text-align: left; word-break: break-word; }
+/* POLE LABELS */
+.pole-label{background:transparent!important;border:none!important;box-shadow:none!important;
+  color:#ffffff!important;font-size:11px!important;font-family:'Arial',sans-serif!important;
+  font-weight:bold!important;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000!important;
+  padding:0!important;pointer-events:none!important}
 
-/* MAP LABELS - ensure they never block clicks */
-.pole-label {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: #ffffff !important;
-  font-size: 11px !important;
-  font-family: 'Arial', sans-serif !important;
-  font-weight: bold !important;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000 !important;
-  padding: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Bottom bar & Legend */
-#botbar{
-  position:fixed;bottom:0;left:0;right:0;z-index:900;height:38px;
+/* BOTTOM BAR */
+#botbar{position:fixed;bottom:0;left:0;right:0;z-index:900;height:38px;
   background:rgba(9,22,37,.9);backdrop-filter:blur(12px);
   border-top:1px solid var(--border);display:flex;align-items:center;
-  padding:0 14px;gap:18px;font-family:var(--mono);font-size:10px;
-  color:rgba(176,204,224,.35);letter-spacing:.5px
-}
+  padding:0 14px;gap:18px;font-family:var(--mono);font-size:10px;color:rgba(176,204,224,.35);letter-spacing:.5px}
 #coords{color:var(--live)}
-#legend{
-  position:fixed;bottom:46px;left:268px;z-index:800;
-  background:rgba(255,255,255,.9);backdrop-filter:blur(12px);
-  border:1px solid #ccc;border-radius:10px;
+
+/* LEGEND */
+#legend{position:fixed;bottom:46px;left:268px;z-index:800;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border:1px solid #ccc;border-radius:10px;
   padding:9px 13px;display:flex;gap:12px;flex-wrap:wrap;
   font-family:var(--sans);font-size:11px;font-weight:bold;letter-spacing:.5px;
-  transition:left .32s var(--ease);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-#legend.shift{left:10px !important;}
+  transition:left .32s var(--ease);box-shadow:0 2px 10px rgba(0,0,0,.1)}
+#legend.shift{left:10px!important}
 .leg{display:flex;align-items:center;gap:5px;color:#333}
 .leg-l{width:20px;height:3px;border-radius:2px}
 .leg-d{width:8px;height:8px;border-radius:50%}
 
-/* Loading & Toasts */
-#loader{
-  position:fixed;inset:0;z-index:2000;background:var(--navy);
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:2000;background:var(--navy);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
-  transition:opacity .5s var(--ease)
-}
+  transition:opacity .5s var(--ease)}
 #loader.gone{opacity:0;pointer-events:none}
 .ld-logo{font-family:var(--mono);font-size:22px;color:var(--live);letter-spacing:4px}
 .ld-sub{font-family:var(--sans);font-size:12px;color:rgba(176,204,224,.35);letter-spacing:2px}
 .ld-bar{width:200px;height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
 .ld-fill{height:100%;width:0;background:linear-gradient(90deg,var(--live),#0077ff);border-radius:2px;transition:width .4s var(--ease);box-shadow:0 0 8px var(--live)}
 
-#toast{
-  position:fixed;top:62px;left:50%;z-index:1500;
+/* TOAST */
+#toast{position:fixed;top:62px;left:50%;z-index:1500;
   transform:translateX(-50%) translateY(-14px);
   background:rgba(13,27,42,.95);border:1px solid var(--border);
   border-radius:10px;padding:9px 17px;font-family:var(--sans);
   font-size:12px;font-weight:500;color:var(--text);
   backdrop-filter:blur(16px);opacity:0;pointer-events:none;
-  transition:all .28s var(--ease);white-space:nowrap
-}
+  transition:all .28s var(--ease);white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* SS ANIMATIONS */
+@keyframes ss33-ring-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes ss33-core-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.85}}
+@keyframes eht-ring-pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,100,0,.7),0 0 8px rgba(255,100,0,.5)}60%{box-shadow:0 0 0 8px rgba(255,100,0,0),0 0 20px rgba(255,100,0,.8)}}
+.ss33-wrap{position:relative;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:all}
+.ss33-ring{position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(0,180,255,.9);animation:ss33-ring-spin 4s linear infinite;box-shadow:0 0 8px rgba(0,180,255,.5),inset 0 0 8px rgba(0,180,255,.15);pointer-events:none}
+.ss33-core{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle,#1e88e5 0%,#0d47a1 100%);border:2px solid rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px rgba(33,150,243,.8);animation:ss33-core-pulse 2s ease-in-out infinite;z-index:1;pointer-events:none}
+.ss33-bolt{font-size:11px;line-height:1;color:#fff;text-shadow:0 0 4px #fff;margin-top:-1px;pointer-events:none}
+.eht-wrap{position:relative;width:40px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:all}
+.eht-rect{position:absolute;inset:0;border:2px solid rgba(255,120,0,.95);border-radius:4px;animation:eht-ring-pulse 1.8s ease-in-out infinite;background:rgba(30,10,0,.75);pointer-events:none}
+.eht-core{z-index:1;display:flex;align-items:center;justify-content:center;gap:3px;pointer-events:none}
+.eht-power{font-size:16px;line-height:1;filter:drop-shadow(0 0 4px #ff6600);pointer-events:none}
+.eht-kv{font-family:var(--mono);font-size:7px;color:rgba(255,160,60,.9);line-height:1;letter-spacing:.5px;pointer-events:none}
 
-/* ── ANIMATED 33/11KV SS SYMBOL ── */
-@keyframes ss33-ring-spin { from { transform: rotate(0deg); } to   { transform: rotate(360deg); } }
-@keyframes ss33-core-pulse { 0%,100% { transform: scale(1); opacity:1; } 50% { transform: scale(1.15); opacity:.85; } }
-@keyframes eht-ring-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,100,0,0.7), 0 0 8px rgba(255,100,0,0.5); } 60% { box-shadow: 0 0 0 8px rgba(255,100,0,0), 0 0 20px rgba(255,100,0,0.8); } }
+/* FLOW ANIMATION */
+@keyframes energy-flow-overlay{to{stroke-dashoffset:-24}}
+.feeder-flow-overlay{stroke-dasharray:4 20!important;stroke-linecap:round!important;
+  animation:energy-flow-overlay .8s linear infinite!important;pointer-events:none!important;
+  will-change:stroke-dashoffset}
+path.feeder-flow-overlay{stroke-dasharray:4 20!important;stroke-linecap:round!important;
+  animation:energy-flow-overlay .8s linear infinite!important;pointer-events:none!important}
+@keyframes sos-blink{0%,100%{opacity:1;filter:drop-shadow(0 0 12px #ff1744)}50%{opacity:.2;filter:none}}
+.feeder-breakdown{animation:sos-blink .8s ease-in-out infinite!important}
+.hidden-flow{opacity:0!important;pointer-events:none!important}
 
-.ss33-wrap { position:relative; width:36px;height:36px; display:flex;align-items:center;justify-content:center; cursor:pointer; }
-.ss33-ring { position:absolute;inset:0; border-radius:50%; border:2px dashed rgba(0,180,255,0.9); animation: ss33-ring-spin 4s linear infinite; box-shadow: 0 0 8px rgba(0,180,255,0.5), inset 0 0 8px rgba(0,180,255,0.15); }
-.ss33-core { width:22px;height:22px;border-radius:50%; background:radial-gradient(circle, #1e88e5 0%, #0d47a1 100%); border:2px solid rgba(255,255,255,0.9); display:flex;align-items:center;justify-content:center; box-shadow:0 0 10px rgba(33,150,243,0.8); animation: ss33-core-pulse 2s ease-in-out infinite; z-index:1; }
-.ss33-bolt { font-size:11px;line-height:1;color:#fff; text-shadow:0 0 4px #fff; margin-top:-1px; }
+/* FEEDER STATUS */
+.fs-status-bar{display:flex;gap:5px;margin-top:8px;padding-top:8px;border-top:1px solid #eee}
+.fs-status-btn{flex:1;padding:5px 3px;border-radius:5px;border:1px solid #ccc;font-size:10px;font-weight:700;cursor:pointer;text-align:center;font-family:Arial,sans-serif;transition:all .2s}
+.fs-status-btn.active-live{background:#00c853;color:#fff;border-color:#00c853}
+.fs-status-btn.active-breakdown{background:#ff1744;color:#fff;border-color:#ff1744}
+.fs-status-btn.active-idle{background:#9e9e9e;color:#fff;border-color:#9e9e9e}
+.fs-status-btn:not([class*=active]):hover{background:#f0f0f0}
+.f-badge{font-size:8px;font-weight:700;padding:1px 5px;border-radius:8px;font-family:var(--mono);letter-spacing:.5px;flex-shrink:0}
+.f-badge-live{background:rgba(0,200,83,.2);color:#00c853;border:1px solid #00c853}
+.f-badge-breakdown{background:rgba(255,23,68,.2);color:#ff1744;border:1px solid #ff1744;animation:sos-blink .8s infinite}
+.f-badge-idle{background:rgba(158,158,158,.2);color:#9e9e9e;border:1px solid #9e9e9e}
 
-.eht-wrap { position:relative; width:40px;height:28px; display:flex;align-items:center;justify-content:center; cursor:pointer; }
-.eht-rect { position:absolute;inset:0; border:2px solid rgba(255,120,0,0.95); border-radius:4px; animation: eht-ring-pulse 1.8s ease-in-out infinite; background:rgba(30,10,0,0.75); }
-.eht-core { z-index:1; display:flex;align-items:center;justify-content:center; gap:3px; }
-.eht-power { font-size:16px;line-height:1; filter: drop-shadow(0 0 4px #ff6600); }
-.eht-kv { font-family:var(--mono);font-size:7px;color:rgba(255,160,60,0.9); line-height:1;letter-spacing:.5px; }
-
-
-/* ── 1. NORMAL/LIVE (OVERLAY FLOW DOTS) ── */
-@keyframes energy-flow-overlay { to { stroke-dashoffset: -24; } }
-
-.feeder-flow-overlay {
-  stroke-dasharray: 4 20 !important;
-  stroke-linecap: round !important;
-  animation: energy-flow-overlay 0.8s linear infinite !important;
-  pointer-events: none !important;
-}
-/* Leaflet puts the className on the <path> element directly in SVG mode */
-path.feeder-flow-overlay {
-  stroke-dasharray: 4 20 !important;
-  stroke-linecap: round !important;
-  animation: energy-flow-overlay 0.8s linear infinite !important;
-  pointer-events: none !important;
-}
-
-/* ── 2. BREAKDOWN (SOS URGENT BLINK) ── */
-@keyframes sos-blink {
-  0%, 100% { opacity: 1; filter: drop-shadow(0 0 12px #ff1744); }
-  50%      { opacity: 0.2; filter: none; }
-}
-.feeder-breakdown { 
-  animation: sos-blink 0.8s ease-in-out infinite !important; 
-}
-
-/* Helper to vanish flowing dots completely */
-.hidden-flow { display: none !important; }
-
-
-.fs-status-bar { display:flex;gap:5px;margin-top:8px;padding-top:8px;border-top:1px solid #eee; }
-.fs-status-btn { flex:1;padding:5px 3px;border-radius:5px;border:1px solid #ccc; font-size:10px;font-weight:700;cursor:pointer;text-align:center; font-family:Arial,sans-serif;transition:all 0.2s; }
-.fs-status-btn.active-live       { background:#00c853;color:#fff;border-color:#00c853; }
-.fs-status-btn.active-breakdown  { background:#ff1744;color:#fff;border-color:#ff1744; }
-.fs-status-btn.active-idle       { background:#9e9e9e;color:#fff;border-color:#9e9e9e; }
-.fs-status-btn:not([class*=active]):hover { background:#f0f0f0; }
-
-.f-badge { font-size:8px;font-weight:700;padding:1px 5px;border-radius:8px; font-family:var(--mono);letter-spacing:.5px;flex-shrink:0; }
-.f-badge-live      { background:rgba(0,200,83,.2);color:#00c853;border:1px solid #00c853; }
-.f-badge-breakdown { background:rgba(255,23,68,.2);color:#ff1744;border:1px solid #ff1744;animation:sos-blink 0.8s infinite; }
-.f-badge-idle      { background:rgba(158,158,158,.2);color:#9e9e9e;border:1px solid #9e9e9e; }
-
-.status-legend {
-  position:fixed;bottom:46px;right:58px;z-index:800;
+/* STATUS LEGEND */
+.status-legend{position:fixed;bottom:46px;right:58px;z-index:800;
   background:rgba(13,27,42,.92);backdrop-filter:blur(10px);
   border:1px solid var(--border);border-radius:10px;
   padding:8px 12px;font-family:var(--mono);font-size:9px;
-  display:flex;flex-direction:column;gap:5px;
-}
+  display:flex;flex-direction:column;gap:5px}
 .sl-row{display:flex;align-items:center;gap:6px;color:var(--text)}
 .sl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 
-/* RIGHT SIDE BASEMAP TABS */
-#bm-tabs { position:fixed; top:50%; right:0; transform:translateY(-50%); z-index:950; display:flex; flex-direction:column; gap:2px; }
-.bm-tab { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); background: linear-gradient(180deg,#0a1828f0,#0d1f33f0); border: 1px solid var(--border); border-right: none; border-radius: 8px 0 0 8px; padding: 14px 7px; font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; color: var(--text); cursor: pointer; transition: all 0.2s var(--ease); white-space: nowrap; backdrop-filter: blur(12px); box-shadow: -3px 0 12px rgba(0,0,0,0.3); user-select: none; }
-.bm-tab:hover { background: rgba(0,200,255,0.15); color: var(--live); border-color: var(--live); padding-right: 11px; }
-.bm-tab.active { background: rgba(0,200,255,0.2); color: var(--live); border-color: var(--live); font-weight: 700; box-shadow: -3px 0 16px rgba(0,200,255,0.25); }
+/* BASEMAP TABS */
+#bm-tabs{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:950;display:flex;flex-direction:column;gap:2px}
+.bm-tab{writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);background:linear-gradient(180deg,#0a1828f0,#0d1f33f0);border:1px solid var(--border);border-right:none;border-radius:8px 0 0 8px;padding:14px 7px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--text);cursor:pointer;transition:all .2s var(--ease);white-space:nowrap;backdrop-filter:blur(12px);box-shadow:-3px 0 12px rgba(0,0,0,.3);user-select:none}
+.bm-tab:hover{background:rgba(0,200,255,.15);color:var(--live);border-color:var(--live);padding-right:11px}
+.bm-tab.active{background:rgba(0,200,255,.2);color:var(--live);border-color:var(--live);font-weight:700;box-shadow:-3px 0 16px rgba(0,200,255,.25)}
 
-/* RIGHT CONTROL PANEL */
-#rpanel { position:fixed;top:52px;right:50px;bottom:38px;z-index:890; width:230px; display:flex;flex-direction:column;gap:6px; pointer-events:none; overflow-y:auto;overflow-x:hidden;padding:8px 4px; }
+/* RIGHT PANEL */
+#rpanel{position:fixed;top:52px;right:50px;bottom:38px;z-index:890;width:230px;
+  display:flex;flex-direction:column;gap:6px;pointer-events:none;
+  overflow-y:auto;overflow-x:hidden;padding:8px 4px}
 #rpanel::-webkit-scrollbar{width:3px}
 #rpanel::-webkit-scrollbar-thumb{background:rgba(0,200,255,.2);border-radius:3px}
-
-.rcard { pointer-events:all; background:linear-gradient(135deg,#0a1828f4,#0d1f33f4); backdrop-filter:blur(18px); border:1px solid var(--border); border-radius:10px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.35); transition:box-shadow .2s; }
-.rcard:hover { box-shadow:0 4px 24px rgba(0,200,255,.12); }
-.rcard-hd { display:flex;align-items:center;justify-content:space-between; padding:8px 12px;cursor:pointer;user-select:none; border-bottom:1px solid transparent; transition:border-color .2s; }
-.rcard-hd:hover { border-bottom-color:rgba(0,200,255,.15); }
-.rcard-title { font-family:var(--mono);font-size:9px;letter-spacing:2px; color:rgba(0,200,255,.65); }
-.rcard-arrow { font-size:10px;color:rgba(0,200,255,.45); transition:transform .25s var(--ease); }
-.rcard.collapsed .rcard-arrow { transform:rotate(-90deg); }
-.rcard-body { padding:8px 10px 10px; border-top:1px solid rgba(0,200,255,.07); }
-.rcard.collapsed .rcard-body { display:none; }
-
-.fi-btn { flex:1;padding:2px 4px;border-radius:4px;border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.05);color:rgba(176,204,224,.6); font-family:var(--mono);font-size:8px;letter-spacing:.5px; cursor:pointer;transition:all .18s;white-space:nowrap; }
-.fi-btn:hover { filter:brightness(1.4); }
-.fi-live.fi-active      { background:rgba(0,200,83,.25);color:#00c853;border-color:#00c853; }
-.fi-breakdown.fi-active { background:rgba(255,23,68,.25);color:#ff1744;border-color:#ff1744; animation:sos-blink 0.8s infinite; }
-.fi-idle.fi-active      { background:rgba(158,158,158,.25);color:#aaa;border-color:#aaa; }
-
-/* Custom Map Labels */
-.ss-label{ background:rgba(9,22,37,.88)!important; border:1px solid rgba(0,200,255,.35)!important; border-radius:4px!important; color:#00c8ff!important; font-family:'Share Tech Mono',monospace!important; font-weight:normal; font-size:9px!important; letter-spacing:.3px!important; padding:2px 5px!important; white-space:nowrap!important; box-shadow:0 2px 6px rgba(0,0,0,.4)!important; opacity:0.9!important; max-width:120px!important; overflow:hidden!important; text-overflow:ellipsis!important; pointer-events: none !important;}
+.rcard{pointer-events:all;background:linear-gradient(135deg,#0a1828f4,#0d1f33f4);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:box-shadow .2s}
+.rcard:hover{box-shadow:0 4px 24px rgba(0,200,255,.12)}
+.rcard-hd{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;cursor:pointer;user-select:none;border-bottom:1px solid transparent;transition:border-color .2s}
+.rcard-hd:hover{border-bottom-color:rgba(0,200,255,.15)}
+.rcard-title{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(0,200,255,.65)}
+.rcard-arrow{font-size:10px;color:rgba(0,200,255,.45);transition:transform .25s var(--ease)}
+.rcard.collapsed .rcard-arrow{transform:rotate(-90deg)}
+.rcard-body{padding:8px 10px 10px;border-top:1px solid rgba(0,200,255,.07)}
+.rcard.collapsed .rcard-body{display:none}
+.fi-btn{flex:1;padding:2px 4px;border-radius:4px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(176,204,224,.6);font-family:var(--mono);font-size:8px;letter-spacing:.5px;cursor:pointer;transition:all .18s;white-space:nowrap}
+.fi-btn:hover{filter:brightness(1.4)}
+.fi-live.fi-active{background:rgba(0,200,83,.25);color:#00c853;border-color:#00c853}
+.fi-breakdown.fi-active{background:rgba(255,23,68,.25);color:#ff1744;border-color:#ff1744;animation:sos-blink .8s infinite}
+.fi-idle.fi-active{background:rgba(158,158,158,.25);color:#aaa;border-color:#aaa}
+.ss-label{background:rgba(9,22,37,.88)!important;border:1px solid rgba(0,200,255,.35)!important;border-radius:4px!important;color:#00c8ff!important;font-family:'Share Tech Mono',monospace!important;font-weight:normal;font-size:9px!important;letter-spacing:.3px!important;padding:2px 5px!important;white-space:nowrap!important;box-shadow:0 2px 6px rgba(0,0,0,.4)!important;opacity:.9!important;max-width:120px!important;overflow:hidden!important;text-overflow:ellipsis!important;pointer-events:none!important}
 .ss-label.leaflet-tooltip-top::before{border-top-color:rgba(0,200,255,.35)!important}
+
+/* ══ FEEDER SEARCH ══ */
+.fsearch-wrap{padding:8px 10px 6px;position:relative;flex-shrink:0}
+.fsearch-input{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);
+  border-radius:16px;padding:5px 10px 5px 28px;color:var(--text);font-family:var(--sans);
+  font-size:11px;outline:none;transition:all .25s}
+.fsearch-input:focus{border-color:var(--live);background:rgba(0,200,255,.06)}
+.fsearch-input::placeholder{color:rgba(176,204,224,.25)}
+.fsearch-ic{position:absolute;left:18px;top:50%;transform:translateY(-50%);
+  color:rgba(176,204,224,.3);font-size:11px;pointer-events:none}
+
+/* ══ FEEDER GROUPS ══ */
+.fgrp{margin-bottom:2px}
+.fgrp-hd{display:flex;align-items:center;gap:6px;padding:6px 8px 4px;cursor:pointer;
+  border-radius:6px;transition:background .2s;user-select:none;margin:2px 4px}
+.fgrp-hd:hover{background:rgba(0,200,255,.07)}
+.fgrp-arrow{font-size:9px;color:rgba(0,200,255,.5);transition:transform .2s;flex-shrink:0}
+.fgrp-hd.collapsed .fgrp-arrow{transform:rotate(-90deg)}
+.fgrp-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.fgrp-label{font-family:var(--mono);font-size:9px;color:rgba(0,200,255,.7);letter-spacing:1.5px;flex:1}
+.fgrp-cnt{font-family:var(--mono);font-size:8px;color:rgba(0,200,255,.4);
+  background:rgba(0,200,255,.08);padding:2px 6px;border-radius:8px}
+.fgrp-body{overflow:hidden;transition:max-height .28s cubic-bezier(.4,0,.2,1)}
+.fgrp-body.collapsed{max-height:0!important;overflow:hidden}
+
+/* ══ EDIT PANEL (right side) ══ */
+#editPanel{position:fixed;top:52px;right:0;bottom:38px;z-index:960;width:300px;
+  background:linear-gradient(180deg,#081422fa,#0c1e30fa);
+  backdrop-filter:blur(22px);border-left:1px solid rgba(0,200,255,.22);
+  transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-4px 0 30px rgba(0,0,0,.5)}
+#editPanel.open{transform:translateX(0)}
+.ep-hd{padding:13px 15px;border-bottom:1px solid rgba(0,200,255,.12);
+  display:flex;align-items:center;gap:10px;flex-shrink:0}
+.ep-title{font-family:var(--mono);font-size:11px;color:var(--live);letter-spacing:1.5px;flex:1}
+.ep-pole-id{font-family:var(--mono);font-size:9px;color:rgba(0,200,255,.45);
+  background:rgba(0,200,255,.08);padding:2px 8px;border-radius:10px}
+.ep-close{cursor:pointer;color:rgba(176,204,224,.4);font-size:16px;
+  width:24px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.ep-close:hover{color:#fff;background:rgba(255,255,255,.1)}
+.ep-body{flex:1;overflow-y:auto;padding:12px 14px}
+.ep-body::-webkit-scrollbar{width:3px}
+.ep-body::-webkit-scrollbar-thumb{background:rgba(0,200,255,.2);border-radius:3px}
+.ep-field{margin-bottom:11px}
+.ep-label{font-family:var(--mono);font-size:8px;color:rgba(0,200,255,.5);
+  letter-spacing:1.5px;margin-bottom:4px;display:block}
+
+/* read-only display */
+.ep-readonly{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+  border-radius:6px;padding:7px 10px;color:rgba(176,204,224,.45);font-family:var(--sans);
+  font-size:12px;min-height:32px;font-style:italic;letter-spacing:.2px}
+
+/* shared input base */
+.ep-input,.ep-select{width:100%;background:rgba(255,255,255,.05);
+  border:1px solid rgba(0,200,255,.15);border-radius:6px;padding:7px 10px;
+  color:var(--text);font-family:var(--sans);font-size:12px;outline:none;
+  transition:border-color .2s,background .2s;box-sizing:border-box}
+.ep-input:focus,.ep-select:focus{border-color:var(--live);background:rgba(0,200,255,.07);color:#fff}
+
+/* dropdown arrow */
+.ep-select{appearance:none;cursor:pointer;padding-right:28px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2300c8ff'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+  background-color:rgba(255,255,255,.05)}
+.ep-select option{background:#0d1b2a;color:#b0cce0}
+
+/* lat/lng geo row */
+.ep-geo-wrap{display:flex;align-items:center;gap:6px}
+.ep-geo-input{flex:1}
+
+/* Pick-on-map button */
+.ep-pick-btn{padding:6px 12px;border-radius:6px;border:1px solid rgba(0,200,255,.3);
+  background:rgba(0,200,255,.1);color:var(--live);font-family:var(--mono);font-size:9px;
+  letter-spacing:.8px;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0;display:block;
+  width:100%;margin-top:6px;margin-bottom:2px;text-align:center}
+.ep-pick-btn:hover{background:rgba(0,200,255,.22);color:#fff}
+.ep-pick-btn.picking{background:rgba(255,171,0,.18);border-color:rgba(255,171,0,.55);
+  color:#ffab00;animation:pickPulse 1s ease-in-out infinite}
+@keyframes pickPulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* Pick mode map banner */
+#pickBanner{position:fixed;top:62px;left:50%;transform:translateX(-50%);z-index:1100;
+  background:rgba(255,171,0,.95);color:#000;font-family:var(--mono);font-size:11px;
+  letter-spacing:1px;padding:8px 22px;border-radius:20px;pointer-events:none;
+  display:none;box-shadow:0 4px 20px rgba(0,0,0,.45)}
+#pickBanner.active{display:block}
+.ep-foot{padding:12px 14px;border-top:1px solid rgba(0,200,255,.1);
+  display:flex;gap:8px;flex-shrink:0}
+.ep-btn{flex:1;padding:9px 6px;border:none;border-radius:7px;cursor:pointer;
+  font-family:var(--mono);font-size:10px;letter-spacing:1px;font-weight:600;transition:all .2s}
+.ep-save{background:rgba(0,200,255,.15);color:var(--live);border:1px solid rgba(0,200,255,.3)}
+.ep-save:hover{background:rgba(0,200,255,.3);color:#fff}
+.ep-del{background:rgba(255,23,68,.1);color:#ff4466;border:1px solid rgba(255,23,68,.25)}
+.ep-del:hover{background:rgba(255,23,68,.25);color:#fff}
+
+/* ══ EDIT TOOLBAR (floating) ══ */
+#editToolbar{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);z-index:955;
+  background:rgba(8,18,30,.96);border:1px solid rgba(0,200,255,.25);border-radius:30px;
+  padding:8px 18px;display:none;align-items:center;gap:10px;
+  backdrop-filter:blur(20px);box-shadow:0 4px 28px rgba(0,0,0,.55),0 0 0 1px rgba(0,200,255,.05)}
+#editToolbar.visible{display:flex}
+.et-label{font-family:var(--mono);font-size:9px;color:rgba(0,200,255,.55);
+  letter-spacing:1.5px;white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis}
+.et-sep{width:1px;height:20px;background:rgba(0,200,255,.15);flex-shrink:0}
+.et-btn{padding:6px 13px;border:none;border-radius:20px;cursor:pointer;
+  font-family:var(--mono);font-size:9px;letter-spacing:1px;font-weight:600;
+  transition:all .2s;white-space:nowrap}
+.et-edit{background:rgba(0,200,255,.15);color:var(--live);border:1px solid rgba(0,200,255,.3)}
+.et-edit:hover{background:rgba(0,200,255,.28)}
+.et-edit.active{background:rgba(0,200,255,.3);color:#fff;box-shadow:0 0 10px rgba(0,200,255,.3)}
+.et-download{background:rgba(0,230,118,.1);color:#00e676;border:1px solid rgba(0,230,118,.25)}
+.et-download:hover{background:rgba(0,230,118,.22)}
+.et-exit{background:rgba(255,255,255,.05);color:rgba(176,204,224,.45);border:1px solid rgba(255,255,255,.1)}
+.et-exit:hover{color:#fff;background:rgba(255,255,255,.1)}
+
+/* ══ EDIT MODE marker highlight ══ */
+.edit-mode-point{filter:drop-shadow(0 0 7px rgba(0,200,255,.9))!important;cursor:crosshair!important;transition:filter .2s}
 </style>
 </head>
 <body>
 
 <div id="loader">
   <div class="ld-logo">TGSPDCL</div>
-  <div class="ld-sub">33KV NIMS  SECTION · 33KV</div>
+  <div class="ld-sub">ALLWYN SECTION · 33KV</div>
   <div class="ld-bar"><div class="ld-fill" id="ldfill"></div></div>
 </div>
 
 <div id="topbar">
   <div class="tb-logo">TGSPDCL</div>
   <div class="tb-sep"></div>
-  <div class="tb-title">NIMS / Jubilee Hills / Road No.13 Section</div>
+  <div class="tb-title">NIMS Section — 33KV Distribution GIS</div>
   <div id="srchWrap">
     <input id="srchInput" placeholder="Search pole no., feeder, cable point…" autocomplete="off"/>
     <span class="srch-ic">⌕</span>
   </div>
-  <div class="fs-btn" onclick="toggleFullscreen()" title="Fullscreen Mode">⛶</div>
-  <div class="chip chip-live" id="chipStatus">● LIVE</div>
+  <div class="fs-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶</div>
+  <div class="chip chip-live">● LIVE</div>
 </div>
 
 <div id="ptab" onclick="togglePanel()">◀</div>
 
 <div id="panel">
+  <div id="panel-resize"></div>
   <div class="psec">
     <div class="psec-t" style="display:flex;justify-content:space-between;align-items:center">
       // FEEDERS (Click Name to Focus)
@@ -443,14 +475,19 @@ path.feeder-flow-overlay {
         <span style="font-family:var(--sans);font-size:10px;color:rgba(0,200,255,.6);cursor:pointer;margin-left:6px;font-weight:600" onclick="toggleAllFeeders(false)">NONE</span>
       </div>
     </div>
-    <div id="feederChecks" style="display:flex;flex-direction:column;gap:2px;margin-top:4px"></div>
+    <div class="fsearch-wrap">
+      <span class="fsearch-ic">⌕</span>
+      <input class="fsearch-input" id="feederSearch" placeholder="Search feeders…" autocomplete="off" oninput="filterFeeders(this.value)"/>
+    </div>
+    <div id="feederChecks" style="display:flex;flex-direction:column;margin-top:2px"></div>
   </div>
-</div><div id="map"></div>
+</div>
+<div id="map"></div>
 
 <div id="botbar">
-  <span>LAT/LNG: <span id="coords">17.4364, 78.4776</span></span>
-  <span>ZOOM: <span id="zoomLvl">18</span></span>
-  <span style="margin-left:auto;opacity:.4">JAMES STREET · 33KV · TGSPDCL SCADA SECTION</span>
+  <span>LAT/LNG: <span id="coords">17.4437, 78.4785</span></span>
+  <span>ZOOM: <span id="zoomLvl">14</span></span>
+  <span style="margin-left:auto;opacity:.4">NIMS · 33KV · TGSPDCL SCADA SECTION</span>
 </div>
 
 <div id="legend">
@@ -458,33 +495,56 @@ path.feeder-flow-overlay {
   <div class="leg"><div class="leg-l" style="background:#f44336;box-shadow:0 0 4px #f44336"></div>OH</div>
   <div class="leg"><div class="leg-l" style="background:#9c27b0;box-shadow:0 0 4px #9c27b0"></div>TRANS</div>
   <div class="leg"><div class="leg-d" style="background:white;border:2px solid #2196f3"></div>POINT</div>
-  <div class="leg"><div class="leg-d" style="background:yellow;border:2px solid black"></div>DP</div>
-  <div class="leg"><div class="leg-d" style="background:yellow;border:2px solid black"></div>AB SW</div>
+  <div class="leg"><div class="leg-d" style="background:yellow;border:2px solid black"></div>DP / AB SW</div>
   <div class="leg"><div class="leg-d" style="background:white;border:2px solid black"></div>CUT</div>
 </div>
 
 <div id="toast"></div>
 
+<!-- ══ PICK ON MAP BANNER ══ -->
+<div id="pickBanner">📍 Click on map to place point — Esc to cancel</div>
+
+<!-- ══ EDIT PANEL (right slide-in) ══ -->
+<div id="editPanel">
+  <div class="ep-hd">
+    <div class="ep-title">// EDIT POINT</div>
+    <span class="ep-pole-id" id="epPoleId"></span>
+    <div class="ep-close" onclick="closeEditPanel()">✕</div>
+  </div>
+  <div class="ep-body" id="editPanelBody"></div>
+  <div class="ep-foot">
+    <button class="ep-btn ep-save" onclick="saveEditPoint()">💾 SAVE</button>
+    <button class="ep-btn ep-del" onclick="deleteEditPoint()">🗑 DELETE</button>
+  </div>
+</div>
+
+<!-- ══ EDIT TOOLBAR (floating, shown when feeder focused) ══ -->
+<div id="editToolbar">
+  <span class="et-label" id="etFeederLabel">—</span>
+  <div class="et-sep"></div>
+  <button class="et-btn et-edit" id="etEditBtn" onclick="toggleEditMode()">✏️ EDIT MODE</button>
+  <button class="et-btn et-download" onclick="downloadFeederCSV()">⬇️ CSV</button>
+  <button class="et-btn et-exit" onclick="exitFocusedFeeder()">✕ EXIT</button>
+</div>
+
 <div class="status-legend">
   <div style="font-family:var(--mono);font-size:8px;color:rgba(0,200,255,.6);letter-spacing:1.5px;margin-bottom:2px">// FEEDER STATUS</div>
   <div class="sl-row"><div class="sl-dot" style="background:#00c853"></div>Live</div>
-  <div class="sl-row"><div class="sl-dot" style="background:#ff1744;animation:sos-blink 0.8s infinite"></div>Breakdown</div>
+  <div class="sl-row"><div class="sl-dot" style="background:#ff1744;animation:sos-blink .8s infinite"></div>Breakdown</div>
   <div class="sl-row"><div class="sl-dot" style="background:#9e9e9e"></div>Idle</div>
   <div class="sl-row" style="margin-top:4px">
-    <div style="width:12px;height:12px;border-radius:50%;border:2px dashed rgba(0,180,255,0.9);display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;animation:ss33-ring-spin 4s linear infinite;flex-shrink:0">⚡</div>
-    33/11KV SS
+    <div style="width:12px;height:12px;border-radius:50%;border:2px dashed rgba(0,180,255,.9);display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;animation:ss33-ring-spin 4s linear infinite;flex-shrink:0">⚡</div>33/11KV SS
   </div>
   <div class="sl-row">
-    <div style="width:14px;height:10px;border:2px solid rgba(255,120,0,0.95);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:7px;flex-shrink:0">⚡</div>
-    EHT SS
+    <div style="width:14px;height:10px;border:2px solid rgba(255,120,0,.95);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:7px;flex-shrink:0">⚡</div>EHT SS
   </div>
 </div>
 
 <div id="bm-tabs">
-  <div class="bm-tab active" id="bm-dark" onclick="setBM('dark')">🌑 DARK</div>
+  <div class="bm-tab active" id="bm-dark"      onclick="setBM('dark')">🌑 DARK</div>
   <div class="bm-tab"        id="bm-satellite" onclick="setBM('satellite')">🛰 SATELLITE</div>
-  <div class="bm-tab"        id="bm-street"   onclick="setBM('street')">🗺 STREET</div>
-  <div class="bm-tab"        id="bm-google"   onclick="setBM('google')">📍 GOOGLE</div>
+  <div class="bm-tab"        id="bm-street"    onclick="setBM('street')">🗺 STREET</div>
+  <div class="bm-tab"        id="bm-google"    onclick="setBM('google')">📍 GOOGLE</div>
 </div>
 
 <div id="rpanel">
@@ -493,16 +553,15 @@ path.feeder-flow-overlay {
     <div class="rcard-body">
       <div class="lrow" id="lyr-ug-lines" onclick="toggleLyr('ug-lines')"><div class="lswatch" style="background:#2196f3;box-shadow:0 0 5px #2196f3"></div><div class="lname">UG Lines</div><div class="lcnt" id="cnt-ug-lines">—</div><div class="tog"></div></div>
       <div class="lrow" id="lyr-oh-lines" onclick="toggleLyr('oh-lines')"><div class="lswatch" style="background:#f44336;box-shadow:0 0 5px #f44336"></div><div class="lname">OH Lines</div><div class="lcnt" id="cnt-oh-lines">—</div><div class="tog"></div></div>
-      <div class="lrow" id="lyr-points" onclick="toggleLyr('points')"><div class="lswatch dot" style="background:#0d1b2a;border-color:#00c8ff"></div><div class="lname">Cable Points</div><div class="lcnt" id="cnt-points">—</div><div class="tog"></div></div>
-      <div class="lrow" id="lyr-dp" onclick="toggleLyr('dp')"><div class="lswatch dot" style="background:#1a0033;border-color:#9c27b0"></div><div class="lname">DP Structures</div><div class="lcnt" id="cnt-dp">—</div><div class="tog"></div></div>
-      <div class="lrow" id="lyr-ab" onclick="toggleLyr('ab')"><div class="lswatch dot" style="background:#1a0a00;border-color:#ff9800"></div><div class="lname">AB Switches</div><div class="lcnt" id="cnt-ab">—</div><div class="tog"></div></div>
-      <div class="lrow" id="lyr-cut" onclick="toggleLyr('cut')"><div class="lswatch dot" style="background:#0d1b2a;border-color:#78909c"></div><div class="lname">Cut Points</div><div class="lcnt" id="cnt-cut">—</div><div class="tog"></div></div>
-      <div class="lrow" id="lyr-ss33" onclick="toggleLyr('ss33')"><div class="lswatch dot" style="background:#2196f3;border-color:#fff;border-radius:50%"></div><div class="lname">33/11KV SS</div><div class="lcnt" id="cnt-ss33">—</div><div class="tog"></div></div>
-      <div class="lrow" id="lyr-ehts" onclick="toggleLyr('ehts')"><div class="lswatch dot" style="background:#800080;border-color:#fff"></div><div class="lname">EHT SS</div><div class="lcnt" id="cnt-ehts">—</div><div class="tog"></div></div>
-      <div class="lrow" id="lyr-fsegs" onclick="toggleLyr('fsegs')"><div class="lswatch" style="background:#e8718d;height:2px"></div><div class="lname">Feeder Segments</div><div class="lcnt" id="cnt-fsegs">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-points"   onclick="toggleLyr('points')"><div class="lswatch dot" style="background:#0d1b2a;border-color:#00c8ff"></div><div class="lname">Cable Points</div><div class="lcnt" id="cnt-points">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-dp"       onclick="toggleLyr('dp')"><div class="lswatch dot" style="background:#1a0033;border-color:#9c27b0"></div><div class="lname">DP Structures</div><div class="lcnt" id="cnt-dp">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-ab"       onclick="toggleLyr('ab')"><div class="lswatch dot" style="background:#1a0a00;border-color:#ff9800"></div><div class="lname">AB Switches</div><div class="lcnt" id="cnt-ab">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-cut"      onclick="toggleLyr('cut')"><div class="lswatch dot" style="background:#0d1b2a;border-color:#78909c"></div><div class="lname">Cut Points</div><div class="lcnt" id="cnt-cut">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-ss33"     onclick="toggleLyr('ss33')"><div class="lswatch dot" style="background:#2196f3;border-color:#fff;border-radius:50%"></div><div class="lname">33/11KV SS</div><div class="lcnt" id="cnt-ss33">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-ehts"     onclick="toggleLyr('ehts')"><div class="lswatch dot" style="background:#800080;border-color:#fff"></div><div class="lname">EHT SS</div><div class="lcnt" id="cnt-ehts">—</div><div class="tog"></div></div>
+      <div class="lrow" id="lyr-fsegs"    onclick="toggleLyr('fsegs')"><div class="lswatch" style="background:#e8718d;height:2px"></div><div class="lname">Feeder Segments</div><div class="lcnt" id="cnt-fsegs">—</div><div class="tog"></div></div>
     </div>
   </div>
-
   <div class="rcard" id="rc-cable">
     <div class="rcard-hd" onclick="toggleRcard('rc-cable')"><span class="rcard-title">// CABLE TYPE</span><span class="rcard-arrow">▾</span></div>
     <div class="rcard-body">
@@ -513,7 +572,6 @@ path.feeder-flow-overlay {
       </div>
     </div>
   </div>
-
   <div class="rcard" id="rc-stats">
     <div class="rcard-hd" onclick="toggleRcard('rc-stats')"><span class="rcard-title">// SECTION STATS</span><span class="rcard-arrow">▾</span></div>
     <div class="rcard-body">
@@ -525,776 +583,1002 @@ path.feeder-flow-overlay {
 
 <script>
 // ══════════════════════════════════════════════════
-// MAP CORE & Z-INDEX PANES
+// MAP — Google Maps-grade smoothness
 // ══════════════════════════════════════════════════
 const map = L.map('map',{
-  center:[17.4437,78.4785], zoom:16, zoomControl:false, preferCanvas:false,
-  zoomAnimation:true, fadeAnimation:true, markerZoomAnimation:true
+  center:[17.4437,78.4785], zoom:14, zoomControl:false,
+  preferCanvas:false,
+  zoomAnimation:true, zoomAnimationThreshold:4,
+  fadeAnimation:true, markerZoomAnimation:true,
+  inertia:true, inertiaDeceleration:2800, inertiaMaxSpeed:Infinity,
+  scrollWheelZoom:true, wheelDebounceTime:20, wheelPxPerZoomLevel:80,
+  zoomSnap:0.1, zoomDelta:0.5,
+  doubleClickZoom:true, keyboard:true, keyboardPanDelta:80,
 });
 
-// CRITICAL FIX: Custom Z-index pane guarantees poles/points float physically above lines
 map.createPane('pointsPane');
-map.getPane('pointsPane').style.zIndex = 650; 
+map.getPane('pointsPane').style.zIndex = 650;
+map.createPane('flowPane');
+map.getPane('flowPane').style.pointerEvents = 'none';
+map.getPane('flowPane').style.zIndex = 401;
 
 L.control.zoom({position:'bottomright'}).addTo(map);
 L.control.scale({position:'bottomright',imperial:false}).addTo(map);
-window.addEventListener('resize', () => map.invalidateSize());
+window.addEventListener('resize',()=>map.invalidateSize());
 
-// Dedicated pane for flow dot overlays — pointer-events:none at container level
-// This is the definitive fix so flow dots NEVER intercept clicks
-map.createPane('flowPane');
-map.getPane('flowPane').style.pointerEvents = 'none';
-map.getPane('flowPane').style.zIndex = 401; // Above overlayPane(400) so dots show on top of lines
-
-function safelyManageClass(layer, className, add) {
-    if(!layer) return;
-    const el = layer.getElement ? layer.getElement() : layer._path;
-    if(el) {
-        if(add) el.classList.add(className);
-        else el.classList.remove(className);
-    }
-}
-
-function toggleRcard(id) { const card = document.getElementById(id); if(card) card.classList.toggle('collapsed'); }
-
-function toggleFullscreen() {
-  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(err => toast(`Fullscreen error: ${err.message}`));
-  else if (document.exitFullscreen) document.exitFullscreen();
-}
-
-const _bmDefs = {
-  dark:      ['https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:22,subdomains:'abcd'}],
-  satellite: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:22}],
-  street:    ['https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:22}],
-  hybrid:    ['https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',{maxZoom:22}],
-  google:    ['https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{maxZoom:22}],
+// ── BASEMAPS ──
+const _tileOpts = {
+  maxZoom:22, maxNativeZoom:19,
+  updateWhenIdle:false, updateWhenZooming:false,
+  keepBuffer:4, tileSize:256, crossOrigin:true,
 };
-const BM = {};
-function getBM(name){ if(!BM[name]) BM[name]=L.tileLayer(_bmDefs[name][0],_bmDefs[name][1]); return BM[name]; }
+const _bmDefs = {
+  dark:      ['https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{..._tileOpts,subdomains:'abcd'}],
+  satellite: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{..._tileOpts}],
+  street:    ['https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{..._tileOpts,subdomains:'abc'}],
+  hybrid:    ['https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',{..._tileOpts}],
+  google:    ['https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{..._tileOpts}],
+};
+const BM={};
+function getBM(n){if(!BM[n])BM[n]=L.tileLayer(_bmDefs[n][0],_bmDefs[n][1]);return BM[n];}
 let curBM='dark'; getBM('dark').addTo(map);
+setTimeout(()=>{getBM('google');getBM('satellite');},2000);
 
 function setBM(name){
-  if(!_bmDefs[name]) return;
-  map.removeLayer(getBM(curBM)); getBM(name).addTo(map); getBM(name).bringToBack();
+  if(!_bmDefs[name])return;
+  map.removeLayer(getBM(curBM));getBM(name).addTo(map);getBM(name).bringToBack();
   curBM=name;
   document.querySelectorAll('.bmbtn,.bm-tab').forEach(b=>b.classList.remove('active'));
-  const el = document.getElementById('bm-'+name); if(el) el.classList.add('active');
+  const el=document.getElementById('bm-'+name);if(el)el.classList.add('active');
   toast(name.charAt(0).toUpperCase()+name.slice(1)+' basemap');
 }
 
+function safelyManageClass(layer,className,add){
+  if(!layer)return;
+  const el=layer.getElement?layer.getElement():layer._path;
+  if(el){if(add)el.classList.add(className);else el.classList.remove(className);}
+}
+function toggleRcard(id){const c=document.getElementById(id);if(c)c.classList.toggle('collapsed');}
+function toggleFullscreen(){
+  if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(e=>toast('Fullscreen: '+e.message));
+  else if(document.exitFullscreen)document.exitFullscreen();
+}
+
 // ══════════════════════════════════════════════════
-// SMART FEEDER MAPPING ENGINE
+// FEEDER ENGINE
 // ══════════════════════════════════════════════════
-const allLayers = []; 
-const feederNames = new Set();
-const feederState = {}; 
-const feederStatus = {}; 
-const feederLayerMap = {}; 
+const allLayers=[];
+const feederNames=new Set();
+const feederState={};
+const feederStatus={};
+const feederLayerMap={};
+const LGstate={'ug-lines':true,'oh-lines':true,points:true,dp:true,ab:true,cut:true,ss33:true,ehts:true,fsegs:true};
+let cableFilter='all';
+let globalFeederFallback=true;
+let focusedFeeder=null;
+let editLayerCounter=0;
 
-const LGstate = { 'ug-lines':true, 'oh-lines':true, points:true, dp:true, ab:true, cut:true, ss33:true, ehts:true, fsegs:true };
-let cableFilter = 'all';
-let globalFeederFallback = true; 
-
-// Clean a raw string to strip out 33KV, SS, dashes, etc so segments match master names perfectly
-function cleanName(str) {
-    if (!str) return '';
-    let s = String(str).toUpperCase();
-    s = s.replace(/132\s*KV|33\s*\/\s*11\s*KV|33\s*KV|11\s*KV|SS|FEEDER|LINE|UNDERGROUND|OVERHEAD|UG|OH/g, ' ');
-    return s.replace(/[^A-Z0-9]/g, ''); 
+function mkIcon(fill,stroke,shape){
+  const s=`<svg xmlns='http://www.w3.org/2000/svg' width='13' height='13'>${shape==='square'?`<rect width='13' height='13' rx='2' fill='${fill}' stroke='${stroke}' stroke-width='2'/>`:`<circle cx='6.5' cy='6.5' r='5.5' fill='${fill}' stroke='${stroke}' stroke-width='2'/>`}</svg>`;
+  return L.divIcon({className:'',html:s,iconSize:[13,13],iconAnchor:[6,6]});
 }
 
-function mapFeederName(raw) {
-    if(!raw) return null;
-    let rawClean = cleanName(raw);
-    if(!rawClean || rawClean.length < 5) return null;
+// ── AUTO-DISCOVERY ENGINE ──────────────────────────────────────
+const FEEDER_NAME_HINTS = {
+  '33KVNIMSROADNO13BHILLS':                       'NIMS (33KV) → ROAD NO.13-B HILLS',
+  '132KVNIMS33KVROADNO13':                         'NIMS → ROAD NO.13',
+  '132KVNIMS33KVNIMSOLD':                          'NIMS → NIMS OLD',
+  '132KVNIMS33KVNIMSNEW':                          'NIMS → NIMS NEW',
+  '132KVJUBILEEHILLS33KVROADNO13B':               'JUBILEE HILLS → ROAD NO.13-B',
+  '132KVJUBILEEHILLS33KVROADNO13A':               'JUBILEE HILLS → ROAD NO.13-A',
+  '132KVJUBILEEHILLS33KVPRASHASANNAGAR':          'JUBILEE HILLS → PRASHASANNAGAR',
+  '132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM':'JUBILEE HILLS → POLICE CMD CONTROL ROOM',
+  '132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE':'JUBILEE HILLS → POLICE CMD CONTROL CENTRE',
+  '132KVJUBILEEHILLS33KVNIMS':                    'JUBILEE HILLS → NIMS',
+  '132KVJUBILEEHILLS33KVMLACOLONY':               'JUBILEE HILLS → MLA COLONY',
+  '132KVJUBILEEHILLS33KVMPL':                     'JUBILEE HILLS → MPL',
+  '132KVJUBILEEHILLS33KVFILMNAGAR':               'JUBILEE HILLS → FILM NAGAR',
+  '132KVJUBILEEHILLS33KVBANJARAHILLSROADN012':    'JUBILEE HILLS → BANJARA HILLS ROAD NO.12',
+  '132KVJUBILEEHILLS33KVBANJARAHILLSROADNO12':    'JUBILEE HILLS → BANJARA HILLS ROAD NO.12',
+};
 
-    // Direct Match
-    for(let std of feederNames) {
-        if(cleanName(std) === rawClean) return std;
-    }
-    // Subset Match
-    for(let std of feederNames) {
-        let stdClean = cleanName(std);
-        if(stdClean.length > 4 && rawClean.length > 4) {
-            if (stdClean.includes(rawClean) || rawClean.includes(stdClean)) return std;
-        }
-    }
-    return null;
-}
+const OH_HINTS = new Set([
+  '33KVNIMSROADNO13BHILLS',
+  '132KVJUBILEEHILLS33KVROADNO13B',
+  '132KVJUBILEEHILLS33KVROADNO13A',
+]);
 
-// Aggressive attribute checking to bind any orphaned segment to its parent feeder
-function extractFeeder(props, fallback) {
-    if (!props) return fallback;
-    const keys = ['Feeder Name', 'Feeder_Name', 'Name of the Feeder', 'feeder', 'FEEDER', 'Name', 'NAME', 'Text', 'Layer'];
-    for(let k of keys) {
-        if(props[k]) {
-            let mapped = mapFeederName(props[k]);
-            if(mapped) return mapped;
-        }
-    }
-    for(let key in props) {
-        if(typeof props[key] === 'string') {
-            let mapped = mapFeederName(props[key]);
-            if(mapped) return mapped;
-        }
-    }
-    return fallback;
-}
-
-const DATA_REGISTRY = [
-  { varName:'json_33KVNIMSRoadNo13BHILLS_1', type:'points', feeder:'33KV NIMS → ROAD NO.13 / B HILLS', cable:'-' },
-  { varName:'json_33KVNIMSRoadNo13BHILLS_AB_Switch_2', type:'ab', feeder:'33KVNIMSRoadNo13BHILLS', cable:'-' },
-  { varName:'json_33KVNIMSRoadNo13BHILLS_Double_Pole_Structure_3', type:'dp', feeder:'33KVNIMSRoadNo13BHILLS', cable:'-' },
-  { varName:'json_33KVNIMSRoadNo13BHILLS_Cut_Points_4', type:'cut', feeder:'33KVNIMSRoadNo13BHILLS', cable:'-' },
-  { varName:'json_33KVNIMSRoadNo13BHILLS_Feeder_Lines_5', type:'lines', feeder:'33KVNIMSRoadNo13BHILLS', cable:'-' },
-  { varName:'json_132KVNIMS33KVROADNO13_6', type:'points', feeder:'132KV NIMS → 33KV ROAD NO.13', cable:'-' },
-  { varName:'json_132KVNIMS33KVROADNO13_AB_Switch_7', type:'ab', feeder:'132KVNIMS33KVROADNO13', cable:'-' },
-  { varName:'json_132KVNIMS33KVROADNO13_Double_Pole_Structure_8', type:'dp', feeder:'132KVNIMS33KVROADNO13', cable:'-' },
-  { varName:'json_132KVNIMS33KVROADNO13_Cut_Points_9', type:'cut', feeder:'132KVNIMS33KVROADNO13', cable:'-' },
-  { varName:'json_132KVNIMS33KVROADNO13_Feeder_Lines_10', type:'lines', feeder:'132KVNIMS33KVROADNO13', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSOLD_11', type:'points', feeder:'132KV NIMS → 33KV NIMS OLD', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSOLD_AB_Switch_12', type:'ab', feeder:'132KVNIMS33KVNIMSOLD', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSOLD_Double_Pole_Structure_13', type:'dp', feeder:'132KVNIMS33KVNIMSOLD', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSOLD_Cut_Points_14', type:'cut', feeder:'132KVNIMS33KVNIMSOLD', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSOLD_Feeder_Lines_15', type:'lines', feeder:'132KVNIMS33KVNIMSOLD', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSNEW_16', type:'points', feeder:'132KV NIMS → 33KV NIMS NEW', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSNEW_AB_Switch_17', type:'ab', feeder:'132KVNIMS33KVNIMSNEW', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSNEW_Double_Pole_Structure_18', type:'dp', feeder:'132KVNIMS33KVNIMSNEW', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSNEW_Cut_Points_19', type:'cut', feeder:'132KVNIMS33KVNIMSNEW', cable:'-' },
-  { varName:'json_132KVNIMS33KVNIMSNEW_Feeder_Lines_20', type:'lines', feeder:'132KVNIMS33KVNIMSNEW', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_21', type:'points', feeder:'132KV JUBILEE HILLS → 33KV ROAD NO.13B', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_AB_Switch_22', type:'ab', feeder:'132KVJUBILEEHILLS33KVROADNO13B', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_Double_Pole_Structure_23', type:'dp', feeder:'132KVJUBILEEHILLS33KVROADNO13B', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_Cut_Points_24', type:'cut', feeder:'132KVJUBILEEHILLS33KVROADNO13B', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13B_Feeder_Lines_25', type:'lines', feeder:'132KVJUBILEEHILLS33KVROADNO13B', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_26', type:'points', feeder:'132KV JUBILEE HILLS → 33KV ROAD NO.13A', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_AB_Switch_27', type:'ab', feeder:'132KVJUBILEEHILLS33KVROADNO13A', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_Double_Pole_Structure_28', type:'dp', feeder:'132KVJUBILEEHILLS33KVROADNO13A', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_Cut_Points_29', type:'cut', feeder:'132KVJUBILEEHILLS33KVROADNO13A', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVROADNO13A_Feeder_Lines_30', type:'lines', feeder:'132KVJUBILEEHILLS33KVROADNO13A', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_31', type:'points', feeder:'132KV JUBILEE HILLS → 33KV PRASHASAN NAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_AB_Switch_32', type:'ab', feeder:'132KVJUBILEEHILLS33KVPRASHASANNAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_Double_Pole_Structure_33', type:'dp', feeder:'132KVJUBILEEHILLS33KVPRASHASANNAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_Cut_Points_34', type:'cut', feeder:'132KVJUBILEEHILLS33KVPRASHASANNAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPRASHASANNAGAR_Feeder_Lines_35', type:'lines', feeder:'132KVJUBILEEHILLS33KVPRASHASANNAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_36', type:'points', feeder:'132KV JUBILEE HILLS → POLICE COMMAND CONTROL ROOM', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_AB_Switch_37', type:'ab', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_Double_Pole_Structure_38', type:'dp', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_Cut_Points_39', type:'cut', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM_Feeder_Lines_40', type:'lines', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLROOM', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_41', type:'points', feeder:'132KV JUBILEE HILLS → POLICE COMMAND CONTROL CENTRE', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_AB_Switch_42', type:'ab', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_Double_Pole_Structure_43', type:'dp', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_Cut_Points_44', type:'cut', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE_Feeder_Lines_45', type:'lines', feeder:'132KVJUBILEEHILLS33KVPOLICECOMMANDCONTROLCENTRE', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVNIMS_46', type:'points', feeder:'132KV JUBILEE HILLS → 33KV NIMS', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVNIMS_AB_Switch_47', type:'ab', feeder:'132KVJUBILEEHILLS33KVNIMS', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVNIMS_Double_Pole_Structure_48', type:'dp', feeder:'132KVJUBILEEHILLS33KVNIMS', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVNIMS_Cut_Points_49', type:'cut', feeder:'132KVJUBILEEHILLS33KVNIMS', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVNIMS_Feeder_Lines_50', type:'lines', feeder:'132KVJUBILEEHILLS33KVNIMS', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_51', type:'points', feeder:'132KV JUBILEE HILLS → 33KV MLA COLONY', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_AB_Switch_52', type:'ab', feeder:'132KVJUBILEEHILLS33KVMLACOLONY', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_Double_Pole_Structure_53', type:'dp', feeder:'132KVJUBILEEHILLS33KVMLACOLONY', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_Cut_Points_54', type:'cut', feeder:'132KVJUBILEEHILLS33KVMLACOLONY', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMLACOLONY_Feeder_Lines_55', type:'lines', feeder:'132KVJUBILEEHILLS33KVMLACOLONY', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMPL_56', type:'points', feeder:'132KV JUBILEE HILLS → 33KV MPL', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMPL_AB_Switch_57', type:'ab', feeder:'132KVJUBILEEHILLS33KVMPL', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMPL_Double_Pole_Structure_58', type:'dp', feeder:'132KVJUBILEEHILLS33KVMPL', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMPL_Cut_Points_59', type:'cut', feeder:'132KVJUBILEEHILLS33KVMPL', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVMPL_Feeder_Lines_60', type:'lines', feeder:'132KVJUBILEEHILLS33KVMPL', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_61', type:'points', feeder:'132KV JUBILEE HILLS → 33KV FILM NAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_AB_Switch_62', type:'ab', feeder:'132KVJUBILEEHILLS33KVFILMNAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_Double_Pole_Structure_63', type:'dp', feeder:'132KVJUBILEEHILLS33KVFILMNAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_Cut_Points_64', type:'cut', feeder:'132KVJUBILEEHILLS33KVFILMNAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVFILMNAGAR_Feeder_Lines_65', type:'lines', feeder:'132KVJUBILEEHILLS33KVFILMNAGAR', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_66', type:'points', feeder:'132KV JUBILEE HILLS → 33KV BANJARA HILLS ROAD NO.12', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_AB_Switch_67', type:'ab', feeder:'132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_Double_Pole_Structure_68', type:'dp', feeder:'132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_Cut_Points_69', type:'cut', feeder:'132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12', cable:'-' },
-  { varName:'json_132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12_Feeder_Lines_70', type:'lines', feeder:'132KVJUBILEEHILLS33KVBANJARAHILLSROADNo12', cable:'-' },
-  { varName:'json_Feeder_Segments_71', type:'fsegs', feeder:'Feeder Segments', cable:'-' },
-  { varName:'json_Feeder_Segments_WEB_DISPLAY_72', type:'fsegd', feeder:'Feeder Segments Display', cable:'-' },
-  { varName:'json_Feeder_Segments_WEB_INTERACT_73', type:'fsegi', feeder:'Feeder Segments Interactive', cable:'-' },
-  { varName:'json_FeederPoles_74', type:'fpoles', feeder:'Feeder Poles', cable:'-' },
-  { varName:'json_3311KVSSCOORDINATESWITHDATA20_75', type:'ss33', feeder:'33/11KV SS', cable:'-' },
-  { varName:'json_SS_WEB_INTERACT_76', type:'ss33i', feeder:'33/11KV SS (Interactive)', cable:'-' },
-  { varName:'json_EHTSSCOORDINATESWITHDATA_77', type:'ehts', feeder:'EHT SS', cable:'-' },
-  { varName:'json_SS_WEB_INTERACT_78', type:'ehtsi', feeder:'EHT SS (Interactive)', cable:'-' },
+const SPECIAL_PATTERNS=[
+  {test:v=>/EHTSS/i.test(v)||/EHTSSCOORDINATES/i.test(v),                              type:'ehts'},
+  {test:v=>/3311KVSS/i.test(v)||(/SSCOORDINATES/i.test(v)&&!/EHT/i.test(v)),           type:'ss33'},
+  {test:v=>/SS_WEB_INTERACT_\d+$/.test(v)&&!/EHT/i.test(v),                            type:'ss33i'},
+  {test:v=>/SS_WEB_INTERACT/.test(v)&&/EHT/i.test(v),                                  type:'ehtsi'},
+  {test:v=>/FeederPoles/i.test(v),                                                      type:'fpoles'},
+  {test:v=>/Feeder_Segments_WEB_DISPLAY/i.test(v),                                     type:'fsegd'},
+  {test:v=>/Feeder_Segments_WEB_INTERACT/i.test(v),                                    type:'fsegi'},
+  {test:v=>/Feeder_Segments/.test(v)&&!/WEB/.test(v)&&!/148/.test(v),                  type:'fsegd'},
 ];
 
-// ══════════════════════════════════════════════════
-// DATA PROCESSING
-// ══════════════════════════════════════════════════
+function inferType(varName){
+  for(const sp of SPECIAL_PATTERNS)if(sp.test(varName))return sp.type;
+  const u=varName.toUpperCase();
+  if(u.includes('_AB_SWITCH_')||u.includes('_ABSWITCH_'))    return 'ab';
+  if(u.includes('_DOUBLE_POLE_')||u.includes('_DOUBLEPOLE_'))return 'dp';
+  if(u.includes('_CUT_POINT')||u.includes('_CUTPOINT'))      return 'cut';
+  if(u.includes('_FEEDER_LINE')||u.includes('_FEEDERLINE'))  return 'lines';
+  return 'points';
+}
 
-// Pass 1: Build the authoritative Master Feeder List purely from base lines
-DATA_REGISTRY.forEach(reg => {
-  try {
-    const data = window[reg.varName];
-    if(!data || !data.features) return;
-    data.features.forEach(feat => {
-      const props = feat.properties || {};
-      const fName = props['Feeder Name'] || reg.feeder;
-      if (!reg.type.startsWith('ss') && !reg.type.startsWith('eht') && !reg.type.startsWith('fseg') && fName !== 'Feeder Segments') {
-          feederNames.add(fName.trim());
-      }
-    });
-  } catch(e){}
+function getBaseKey(varName){
+  let s=varName.replace(/^json_/i,'');
+  s=s.replace(/_AB_Switch_\d+$/i,'')
+     .replace(/_Double_Pole_Structure_\d+$/i,'')
+     .replace(/_Cut_Points_\d+$/i,'')
+     .replace(/_Feeder_Lines_\d+$/i,'')
+     .replace(/_\d+$/,'');
+  return s.toUpperCase().replace(/[^A-Z0-9]/g,'');
+}
+
+function lookupFeederName(baseKey){
+  if(FEEDER_NAME_HINTS[baseKey])return FEEDER_NAME_HINTS[baseKey];
+  for(const k of Object.keys(FEEDER_NAME_HINTS)){
+    if(baseKey.includes(k)||k.includes(baseKey))return FEEDER_NAME_HINTS[k];
+  }
+  return baseKey;
+}
+
+// Build DATA_REGISTRY from live window.json_* vars
+const DATA_REGISTRY=[];
+Object.keys(window).forEach(varName=>{
+  if(!varName.startsWith('json_'))return;
+  const data=window[varName];
+  if(!data||!data.features)return;
+  const type=inferType(varName);
+  const baseKey=getBaseKey(varName);
+  const feeder=(['ss33','ss33i','ehts','ehtsi'].includes(type))
+    ?(type.startsWith('ss')?'33/11KV SS':'EHT SS')
+    :(['fpoles','fsegd','fsegi'].includes(type)?'Feeder Poles / Segments':lookupFeederName(baseKey));
+  const cable=OH_HINTS.has(baseKey)?'OH':'UG';
+  DATA_REGISTRY.push({varName,type,feeder,cable});
+});
+DATA_REGISTRY.sort((a,b)=>{
+  const na=parseInt(a.varName.match(/(\d+)$/)?.[1]||0);
+  const nb=parseInt(b.varName.match(/(\d+)$/)?.[1]||0);
+  return na-nb;
 });
 
-// Pass 2: Physically render and smartly bind all elements
-DATA_REGISTRY.forEach(reg => {
-  try {
-  const data = window[reg.varName];
-  if(!data || !data.features) return;
+// ── PASS 1: Master feeder name list (lines only) ──
+DATA_REGISTRY.forEach(reg=>{
+  if(reg.type!=='lines')return;
+  try{ feederNames.add(reg.feeder.trim()); }catch(e){}
+});
 
-  data.features.forEach(feat => {
-    try {
-    const props = feat.properties || {};
-    
-    let cableType = String(props['Type of Feeder'] || props['Feeder_Type'] || props['Feeder Type'] || reg.cable || '').trim().toUpperCase();
-    const isOH = (cableType === 'OH' || cableType === 'OVERHEAD');
-    cableType = isOH ? 'OH' : 'UG';
+// ── PASS 2: Render everything ──
+DATA_REGISTRY.forEach(reg=>{
+  try{
+  const data=window[reg.varName];
+  if(!data||!data.features)return;
+  data.features.forEach(feat=>{
+    try{
+    const props=feat.properties||{};
+    let cableType=String(props['Type of Feeder']||props['Feeder_Type']||props['Feeder Type']||'').trim().toUpperCase();
+    const isOH=(cableType==='OH'||cableType==='OVERHEAD')||reg.cable==='OH';
+    cableType=isOH?'OH':'UG';
 
-    const rawFeederName = props['Feeder Name'] || reg.feeder;
-    const feederName = extractFeeder(props, rawFeederName); // Smart Bind
+    const rawFeederName=props['Feeder Name']||reg.feeder;
+    const feederName=(reg.type==='lines')?rawFeederName:reg.feeder;
 
-    let layer;
-    let poleNoStr = null;
+    let layer,poleNoStr=null;
 
-    if(reg.type==='lines' || reg.type.startsWith('fseg')){
-      if(feat.geometry.type==='LineString'||feat.geometry.type==='MultiLineString'){
-        const coords = feat.geometry.type==='LineString'
-          ? feat.geometry.coordinates.map(c=>[c[1],c[0]])
-          : feat.geometry.coordinates.map(ls=>ls.map(c=>[c[1],c[0]]));
-          
-        let color = isOH ? '#f44336' : '#2196f3'; 
-        let cStatus = feederStatus[feederName] || 'live';
-        
-        let customClass = cStatus === 'breakdown' ? 'feeder-breakdown' : '';
-        layer = L.polyline(feat.geometry.type==='LineString'?coords:coords[0],
-          {color: color, weight: 6, opacity: 0.9, smoothFactor:1.5, className: customClass});
-          
-        let flowClass = 'feeder-flow-overlay' + (cStatus !== 'live' ? ' hidden-flow' : '');
-        layer.flowLayer = L.polyline(feat.geometry.type==='LineString'?coords:coords[0], {
-            color: '#ffffff', weight: 3, className: flowClass,
-            interactive: false, bubblingMouseEvents: false, pane: 'flowPane'
-        });
-
-        layer.bindPopup(popup(feat, reg), {maxWidth:340, minWidth:260});
-        layer.on('popupopen', function(e) { e.popup.setContent(popup(feat, reg)); });
+    if(reg.type==='lines'||reg.type.startsWith('fseg')){
+      if(feat.geometry&&(feat.geometry.type==='LineString'||feat.geometry.type==='MultiLineString')){
+        const coords=feat.geometry.type==='LineString'
+          ?feat.geometry.coordinates.map(c=>[c[1],c[0]])
+          :feat.geometry.coordinates.map(ls=>ls.map(c=>[c[1],c[0]]));
+        let color=isOH?'#f44336':'#2196f3';
+        let cStatus=feederStatus[feederName]||'live';
+        let customClass=cStatus==='breakdown'?'feeder-breakdown':'';
+        layer=L.polyline(feat.geometry.type==='LineString'?coords:coords[0],
+          {color,weight:5.5,opacity:.92,smoothFactor:1.0,lineCap:'round',lineJoin:'round',className:customClass});
+        let flowClass='feeder-flow-overlay'+(cStatus!=='live'?' hidden-flow':'');
+        layer.flowLayer=L.polyline(feat.geometry.type==='LineString'?coords:coords[0],
+          {color:'#ffffff',weight:3,className:flowClass,interactive:false,bubblingMouseEvents:false,pane:'flowPane'});
+        layer.bindPopup(popup(feat,reg),{maxWidth:340,minWidth:260,autoPanPadding:[30,30]});
+        layer.on('popupopen',function(e){e.popup.setContent(popup(feat,reg));});
         layer.on('click', function(e) { L.DomEvent.stopPropagation(e); layer.openPopup(e.latlng); });
-
-        layer.on('mouseover', e => {
-            e.target.setStyle({weight:8, opacity:1});
-            if(e.target.flowLayer) e.target.flowLayer.setStyle({weight: 4});
-        });
-        layer.on('mouseout', e => {
-            const isFocused = focusedFeeder && focusedFeeder !== feederName;
-            e.target.setStyle({weight:6, opacity: isFocused ? 0.15 : 0.9});
-            if(e.target.flowLayer) e.target.flowLayer.setStyle({weight: 3});
+        layer.on('mouseover',e=>{e.target.setStyle({weight:7.5,opacity:1});if(e.target.flowLayer)e.target.flowLayer.setStyle({weight:4});});
+        layer.on('mouseout',e=>{
+          const isFocused=focusedFeeder&&focusedFeeder!==feederName;
+          e.target.setStyle({weight:5.5,opacity:isFocused?.15:.92});
+          if(e.target.flowLayer)e.target.flowLayer.setStyle({weight:3});
         });
       }
     }
-    else if(feat.geometry && (feat.geometry.type==='Point' || feat.geometry.type==='MultiPoint')){
-      const coords = feat.geometry.type==='Point' ? feat.geometry.coordinates : feat.geometry.coordinates[0];
-      const ll = [coords[1],coords[0]];
-      
-      // CRITICAL FIX: pane: 'pointsPane' forces ALL points/poles safely ABOVE lines
-      if(reg.type==='points' || reg.type==='fpoles'){
-        layer = L.circleMarker(ll, {radius: 4, fillColor: '#ffffff', fillOpacity: 1, color: '#2196f3', weight: 2, pane: 'pointsPane'});
-      } else if(reg.type==='cut'){
-        layer = L.circleMarker(ll, {radius: 4, fillColor: '#ffffff', fillOpacity: 1, color: '#000000', weight: 2, pane: 'pointsPane'});
-      } 
-      else if(reg.type==='ab' || reg.type==='dp'){
-        layer=L.marker(ll,{icon:mkIcon('#ffff00','#000000','square'), pane: 'pointsPane'}); 
-      } else if (reg.type.startsWith('ss33')) {
-        const ss33Html = `<div class="ss33-wrap"><div class="ss33-ring"></div><div class="ss33-core"><span class="ss33-bolt">⚡</span></div></div>`;
-        layer=L.marker(ll,{ zIndexOffset: 1000, icon:L.divIcon({className:'', html:ss33Html, iconSize:[36,36], iconAnchor:[18,18]})});
-      } else if (reg.type.startsWith('eht')) {
-        const ehtHtml = `<div class="eht-wrap"><div class="eht-rect"></div><div class="eht-core"><span class="eht-power">⚡</span><span class="eht-kv">EHT</span></div></div>`;
-        layer=L.marker(ll,{ zIndexOffset: 1000, icon:L.divIcon({className:'', html:ehtHtml, iconSize:[40,28], iconAnchor:[20,14]})});
+    else if(feat.geometry&&(feat.geometry.type==='Point'||feat.geometry.type==='MultiPoint')){
+      const coords=feat.geometry.type==='Point'?feat.geometry.coordinates:feat.geometry.coordinates[0];
+      const ll=[coords[1],coords[0]];
+      if(reg.type==='points'||reg.type==='fpoles'){
+        layer=L.circleMarker(ll,{radius:4,fillColor:'#ffffff',fillOpacity:1,color:'#2196f3',weight:2,pane:'pointsPane'});
+      }else if(reg.type==='cut'){
+        layer=L.circleMarker(ll,{radius:4,fillColor:'#ffffff',fillOpacity:1,color:'#000000',weight:2,pane:'pointsPane'});
+      }else if(reg.type==='ab'||reg.type==='dp'){
+        layer=L.marker(ll,{icon:mkIcon('#ffff00','#000000','square'),pane:'pointsPane'});
+      }else if(reg.type.startsWith('ss33')){
+        const h=`<div class="ss33-wrap"><div class="ss33-ring"></div><div class="ss33-core"><span class="ss33-bolt">⚡</span></div></div>`;
+        layer=L.marker(ll,{zIndexOffset:1000,icon:L.divIcon({className:'',html:h,iconSize:[36,36],iconAnchor:[18,18]})});
+      }else if(reg.type.startsWith('eht')){
+        const h=`<div class="eht-wrap"><div class="eht-rect"></div><div class="eht-core"><span class="eht-power">⚡</span><span class="eht-kv">EHT</span></div></div>`;
+        layer=L.marker(ll,{zIndexOffset:1000,icon:L.divIcon({className:'',html:h,iconSize:[40,28],iconAnchor:[20,14]})});
       }
-
       if(layer){
-        layer.bindPopup(popup(feat, reg), {maxWidth:340, minWidth:260});
+        layer.bindPopup(popup(feat,reg),{maxWidth:340,minWidth:260});
         layer.on('click', function(e) { L.DomEvent.stopPropagation(e); layer.openPopup(e.latlng || layer.getLatLng()); });
-        let poleNo = props['Pole Number'] || props['Pole_No'] || props['Name'] || props['NAME'] || props['id'] || props['ID'];
-        if(poleNo !== undefined && poleNo !== null && String(poleNo).trim() !== '' && String(poleNo).length < 10) {
-            if(!reg.type.startsWith('ss') && !reg.type.startsWith('eht')) {
-                poleNoStr = String(poleNo).trim();
-            } else {
-                const ssName = String(poleNo).replace('33/11KV ','').replace('33/11KV','').replace('132 KV ','').replace('132KV ','').trim();
-                layer.bindTooltip(ssName, {permanent:true, direction:'top', offset:[0,-16], className:'ss-label'});
-            }
+        let poleNo=props['Pole Number']||props['Pole_No']||props['Name']||props['NAME']||props['id']||props['ID'];
+        if(poleNo!==undefined&&poleNo!==null&&String(poleNo).trim()!==''&&String(poleNo).length<10){
+          if(!reg.type.startsWith('ss')&&!reg.type.startsWith('eht')){
+            poleNoStr=String(poleNo).trim();
+          }else{
+            const ssName=String(poleNo).replace(/33\/11KV\s?/g,'').replace(/132\s?KV\s?/g,'').trim();
+            layer.bindTooltip(ssName,{permanent:true,direction:'top',offset:[0,-16],className:'ss-label'});
+          }
         }
       }
     }
 
-    if(layer) {
-      allLayers.push({layer, reg, feederName, cable:cableType, poleNo: poleNoStr});
-      if(!feederLayerMap[feederName]) feederLayerMap[feederName] = [];
-      feederLayerMap[feederName].push({layer, reg, cable:cableType});
+    if(layer){
+      layer._editId=editLayerCounter++;
+      layer.feature=feat;
+      allLayers.push({layer,reg,feederName,cable:cableType,poleNo:poleNoStr});
+      if(!feederLayerMap[feederName])feederLayerMap[feederName]=[];
+      feederLayerMap[feederName].push({layer,reg,cable:cableType});
     }
-    } catch(e){}
+    }catch(e){}
   });
-  } catch(e){}
+  }catch(e){}
 });
 
-function updateVisibility() {
-  let visibleCount = 0;
-  allLayers.forEach(item => {
-    let t = item.reg.type;
-    if (t === 'lines') t = item.cable === 'UG' ? 'ug-lines' : 'oh-lines';
-    if (t.startsWith('ss33')) t = 'ss33';
-    if (t.startsWith('eht')) t = 'ehts';
-    if (t.startsWith('fseg')) t = 'fsegs';
-    if (t === 'fpoles') t = 'points';
+// ── VISIBILITY ──
+let _visRAF=null;
+function requestVisibilityUpdate(){
+  if(_visRAF)return;
+  _visRAF=requestAnimationFrame(()=>{_visRAF=null;updateVisibility();});
+}
 
-    const typeIsOn = LGstate[t] !== false;
-    const isSubstation = (t === 'ss33' || t === 'ehts');
-    
-    // Check perfectly bound name
-    const fState = feederState[item.feederName];
-    let feederIsOn = (fState !== undefined) ? (fState !== false) : globalFeederFallback;
-    if (isSubstation) feederIsOn = true;
-
-    let cableIsOn = true;
-    if(!isSubstation) {
-      if(cableFilter === 'ug' && item.cable !== 'UG' && item.cable !== '-') cableIsOn = false;
-      if(cableFilter === 'oh' && item.cable !== 'OH' && item.cable !== '-') cableIsOn = false;
+function updateVisibility(){
+  let vis=0;
+  allLayers.forEach(item=>{
+    let t=item.reg.type;
+    if(t==='lines')t=item.cable==='UG'?'ug-lines':'oh-lines';
+    if(t.startsWith('ss33'))t='ss33';
+    if(t.startsWith('eht'))t='ehts';
+    if(t.startsWith('fseg'))t='fsegs';
+    if(t==='fpoles')t='points';
+    const typeIsOn=LGstate[t]!==false;
+    const isSS=(t==='ss33'||t==='ehts');
+    const fState=feederState[item.feederName];
+    let feederIsOn=(fState!==undefined)?(fState!==false):globalFeederFallback;
+    if(isSS)feederIsOn=true;
+    let cableIsOn=true;
+    if(!isSS){
+      if(cableFilter==='ug'&&item.cable!=='UG'&&item.cable!=='-')cableIsOn=false;
+      if(cableFilter==='oh'&&item.cable!=='OH'&&item.cable!=='-')cableIsOn=false;
     }
-
-    const shouldShow = typeIsOn && feederIsOn && cableIsOn;
-
-    if (shouldShow) {
-      if (!map.hasLayer(item.layer)) map.addLayer(item.layer);
-      if (item.layer.flowLayer && !map.hasLayer(item.layer.flowLayer)) map.addLayer(item.layer.flowLayer);
-      visibleCount++;
-    } else {
-      if (map.hasLayer(item.layer)) map.removeLayer(item.layer);
-      if (item.layer.flowLayer && map.hasLayer(item.layer.flowLayer)) map.removeLayer(item.layer.flowLayer);
+    const show=typeIsOn&&feederIsOn&&cableIsOn;
+    if(show){
+      if(!map.hasLayer(item.layer))map.addLayer(item.layer);
+      if(item.layer.flowLayer&&!map.hasLayer(item.layer.flowLayer))map.addLayer(item.layer.flowLayer);
+      vis++;
+    }else{
+      if(map.hasLayer(item.layer))map.removeLayer(item.layer);
+      if(item.layer.flowLayer&&map.hasLayer(item.layer.flowLayer))map.removeLayer(item.layer.flowLayer);
     }
   });
-  document.getElementById('st-visible').textContent = visibleCount;
+  document.getElementById('st-visible').textContent=vis;
   syncLabels();
 }
 
-function popup(feat, regEntry){
-  const p = feat.properties || {};
-  let rows = '';
-  const hideKeys = ['id', 'layer', 'path', 'fid'];
-
-  if (regEntry && (regEntry.type === 'lines' || (regEntry.type && regEntry.type.startsWith('fseg')))) hideKeys.push('popup');
-
-  let headerId = '';
-  if (p['id'] || p['fid'] || p['ID'] || p['Pole Number']) headerId = `<div class="pc-header-id">${p['id'] || p['fid'] || p['ID'] || p['Pole Number']}</div>`;
-
-  Object.keys(p).forEach(k => {
-    if(p[k] !== null && p[k] !== '' && !hideKeys.includes(k.toLowerCase())) {
-        let val = p[k];
-        if (k.toLowerCase() === 'popup') {
-            rows += `<tr><td colspan="2" style="white-space:pre-wrap; padding-top:8px; padding-bottom:8px; border-top: 1px solid #eee;"><strong>Notes:</strong><br>${val}</td></tr>`;
-            return; 
-        }
-        if(!isNaN(val) && val.toString().indexOf('.') !== -1 && !isNaN(parseFloat(val))) val = parseFloat(val).toFixed(3);
-        if(k.toLowerCase().includes('length') || k.toLowerCase().includes('transitions')) val += ' km';
-        if(k.toLowerCase().includes('total no.')) val += ' Nos';
-        rows += `<tr><th>${k}</th><td>${val}</td></tr>`;
+// ── POPUP ──
+function popup(feat,regEntry){
+  const p=feat.properties||{};
+  let rows='';
+  const hideKeys=['id','layer','path','fid'];
+  if(regEntry&&(regEntry.type==='lines'||(regEntry.type&&regEntry.type.startsWith('fseg'))))hideKeys.push('popup');
+  let headerId='';
+  if(p['id']||p['fid']||p['ID']||p['Pole Number'])headerId=`<div class="pc-header-id">${p['id']||p['fid']||p['ID']||p['Pole Number']}</div>`;
+  Object.keys(p).forEach(k=>{
+    if(p[k]!==null&&p[k]!==''&&!hideKeys.includes(k.toLowerCase())){
+      let val=p[k];
+      if(k.toLowerCase()==='popup'){rows+=`<tr><td colspan="2" style="white-space:pre-wrap;padding-top:8px;border-top:1px solid #eee"><strong>Notes:</strong><br>${val}</td></tr>`;return;}
+      if(!isNaN(val)&&val.toString().indexOf('.')!==-1&&!isNaN(parseFloat(val)))val=parseFloat(val).toFixed(3);
+      if(k.toLowerCase().includes('length')||k.toLowerCase().includes('transitions'))val+=' km';
+      rows+=`<tr><th>${k}</th><td>${val}</td></tr>`;
     }
   });
-
-  const rawFn = p['Feeder Name'] || (regEntry && regEntry.feeder) || '';
-  const fn = extractFeeder(p, rawFn); 
-  
-  let statusBar = '';
-  if(fn && (regEntry.type === 'lines' || (regEntry.type && regEntry.type.startsWith('fseg')))) {
-    const cur = feederStatus[fn] || 'live';
-    statusBar = `<div class="fs-status-bar">
-      <div class="fs-status-btn${cur==='live'?' active-live':''}" onclick="setFeederStatus('${fn.replace(/'/g,"\\'")}','live',this)">⚡ LIVE</div>
-      <div class="fs-status-btn${cur==='breakdown'?' active-breakdown':''}" onclick="setFeederStatus('${fn.replace(/'/g,"\\'")}','breakdown',this)">🔴 DOWN</div>
-      <div class="fs-status-btn${cur==='idle'?' active-idle':''}" onclick="setFeederStatus('${fn.replace(/'/g,"\\'")}','idle',this)">⏸ IDLE</div>
+  const fn=p['Feeder Name']||(regEntry&&regEntry.feeder)||'';
+  let statusBar='';
+  if(fn&&(regEntry.type==='lines'||(regEntry.type&&regEntry.type.startsWith('fseg')))){
+    const cur=feederStatus[fn]||'live';
+    const fe=fn.replace(/'/g,"\\'");
+    statusBar=`<div class="fs-status-bar">
+      <div class="fs-status-btn${cur==='live'?' active-live':''}" onclick="setFeederStatus('${fe}','live',this)">⚡ LIVE</div>
+      <div class="fs-status-btn${cur==='breakdown'?' active-breakdown':''}" onclick="setFeederStatus('${fe}','breakdown',this)">🔴 DOWN</div>
+      <div class="fs-status-btn${cur==='idle'?' active-idle':''}" onclick="setFeederStatus('${fe}','idle',this)">⏸ IDLE</div>
     </div>`;
   }
-  if(!rows && !headerId) {
-    rows = '<tr><td colspan="2" style="color:#999;font-style:italic;padding:4px">No attributes available</td></tr>';
-  }
+  if(!rows&&!headerId)rows='<tr><td colspan="2" style="color:#999;font-style:italic;padding:4px">No attributes available</td></tr>';
   return `${headerId}<table class="popup-table">${rows}</table>${statusBar}`;
 }
 
-function updateCounts() {
-  document.getElementById('st-total').textContent = allLayers.length;
-  document.getElementById('cnt-ug-lines').textContent = allLayers.filter(i => (i.reg.type === 'lines' && i.cable === 'UG')).length;
-  document.getElementById('cnt-oh-lines').textContent = allLayers.filter(i => (i.reg.type === 'lines' && i.cable === 'OH')).length;
-  document.getElementById('cnt-points').textContent = allLayers.filter(i => i.reg.type === 'points').length;
-  document.getElementById('cnt-dp').textContent = allLayers.filter(i => i.reg.type === 'dp').length;
-  document.getElementById('cnt-ab').textContent = allLayers.filter(i => i.reg.type === 'ab').length;
-  document.getElementById('cnt-cut').textContent = allLayers.filter(i => i.reg.type === 'cut').length;
-  document.getElementById('cnt-ss33').textContent = allLayers.filter(i => i.reg.type.startsWith('ss33')).length;
-  document.getElementById('cnt-ehts').textContent = allLayers.filter(i => i.reg.type.startsWith('eht')).length;
-  document.getElementById('cnt-fsegs').textContent = allLayers.filter(i => i.reg.type.startsWith('fseg')).length;
+function updateCounts(){
+  document.getElementById('st-total').textContent=allLayers.length;
+  document.getElementById('cnt-ug-lines').textContent=allLayers.filter(i=>i.reg.type==='lines'&&i.cable==='UG').length;
+  document.getElementById('cnt-oh-lines').textContent=allLayers.filter(i=>i.reg.type==='lines'&&i.cable==='OH').length;
+  document.getElementById('cnt-points').textContent=allLayers.filter(i=>i.reg.type==='points').length;
+  document.getElementById('cnt-dp').textContent=allLayers.filter(i=>i.reg.type==='dp').length;
+  document.getElementById('cnt-ab').textContent=allLayers.filter(i=>i.reg.type==='ab').length;
+  document.getElementById('cnt-cut').textContent=allLayers.filter(i=>i.reg.type==='cut').length;
+  document.getElementById('cnt-ss33').textContent=allLayers.filter(i=>i.reg.type.startsWith('ss33')).length;
+  document.getElementById('cnt-ehts').textContent=allLayers.filter(i=>i.reg.type.startsWith('eht')).length;
+  document.getElementById('cnt-fsegs').textContent=allLayers.filter(i=>i.reg.type.startsWith('fseg')).length;
 }
 
-const allCoords = [];
-allLayers.forEach(i => { if (i.reg.type === 'lines' && i.layer.getLatLngs) { const ll = i.layer.getLatLngs(); if(ll.length) allCoords.push(...ll.flat()); } });
-if(allCoords.length > 0){ try{ map.fitBounds(L.latLngBounds(allCoords),{padding:[60,60],maxZoom:17,animate:true}); }catch(e){} }
+// Auto-fit bounds
+const allCoords=[];
+allLayers.forEach(i=>{if(i.reg.type==='lines'&&i.layer.getLatLngs){const ll=i.layer.getLatLngs();if(ll.length)allCoords.push(...ll.flat());}});
+if(allCoords.length>0){try{map.fitBounds(L.latLngBounds(allCoords),{padding:[60,60],maxZoom:16,animate:true,duration:.5});}catch(e){}}
 
-let focusedFeeder = null;
-
-// ── CORE LOGIC: THE 3 VISUAL STATES ──
-function setFeederStatus(fn, status, btnEl) {
-  feederStatus[fn] = status;
-
-  if(btnEl) {
-    const bar = btnEl.closest('.fs-status-bar');
-    if(bar) {
-      bar.querySelectorAll('.fs-status-btn').forEach(b => b.classList.remove('active-live','active-breakdown','active-idle'));
-      btnEl.classList.add('active-' + status);
-    }
-  }
-
-  const layers = feederLayerMap[fn] || [];
-  layers.forEach(item => {
-    if(!item.layer.setStyle) return;
-    const isLine = item.reg.type === 'lines' || (item.reg.type && item.reg.type.startsWith('fseg'));
-    if(!isLine) return;
-    
-    const baseColor = item.cable === 'OH' ? '#f44336' : '#2196f3';
-    
-    if(status === 'live') {
-      item.layer.setStyle({color: baseColor, weight:6, opacity:0.9});
-      safelyManageClass(item.layer, 'feeder-breakdown', false);
-      if(item.layer.flowLayer) {
-          item.layer.flowLayer.options.className = 'feeder-flow-overlay';
-          safelyManageClass(item.layer.flowLayer, 'hidden-flow', false);
-      }
-    } else if(status === 'breakdown') {
-      item.layer.setStyle({color:'#ff1744', weight:7, opacity:1});
-      safelyManageClass(item.layer, 'feeder-breakdown', true);
-      if(item.layer.flowLayer) {
-          item.layer.flowLayer.options.className = 'feeder-flow-overlay hidden-flow';
-          safelyManageClass(item.layer.flowLayer, 'hidden-flow', true);
-      }
-    } else if(status === 'idle') {
-      item.layer.setStyle({color:'#9e9e9e', weight:5, opacity:0.6});
-      safelyManageClass(item.layer, 'feeder-breakdown', false);
-      if(item.layer.flowLayer) {
-          item.layer.flowLayer.options.className = 'feeder-flow-overlay hidden-flow';
-          safelyManageClass(item.layer.flowLayer, 'hidden-flow', true);
-      }
-    }
+// ── FEEDER STATUS ──
+function setFeederStatus(fn,status,btnEl){
+  feederStatus[fn]=status;
+  if(btnEl){const bar=btnEl.closest('.fs-status-bar');if(bar){bar.querySelectorAll('.fs-status-btn').forEach(b=>b.classList.remove('active-live','active-breakdown','active-idle'));btnEl.classList.add('active-'+status);}}
+  const layers=feederLayerMap[fn]||[];
+  layers.forEach(item=>{
+    if(!item.layer.setStyle)return;
+    const isLine=item.reg.type==='lines'||(item.reg.type&&item.reg.type.startsWith('fseg'));
+    if(!isLine)return;
+    const baseColor=item.cable==='OH'?'#f44336':'#2196f3';
+    if(status==='live'){item.layer.setStyle({color:baseColor,weight:5.5,opacity:.92});safelyManageClass(item.layer,'feeder-breakdown',false);if(item.layer.flowLayer){item.layer.flowLayer.options.className='feeder-flow-overlay';safelyManageClass(item.layer.flowLayer,'hidden-flow',false);}}
+    else if(status==='breakdown'){item.layer.setStyle({color:'#ff1744',weight:7,opacity:1});safelyManageClass(item.layer,'feeder-breakdown',true);if(item.layer.flowLayer){item.layer.flowLayer.options.className='feeder-flow-overlay hidden-flow';safelyManageClass(item.layer.flowLayer,'hidden-flow',true);}}
+    else if(status==='idle'){item.layer.setStyle({color:'#9e9e9e',weight:5,opacity:.6});safelyManageClass(item.layer,'feeder-breakdown',false);if(item.layer.flowLayer){item.layer.flowLayer.options.className='feeder-flow-overlay hidden-flow';safelyManageClass(item.layer.flowLayer,'hidden-flow',true);}}
   });
-
-  document.querySelectorAll(`.fi-btn[data-feeder="${fn}"]`).forEach(btn => {
-    btn.classList.remove('fi-active');
-    if(btn.classList.contains('fi-' + status)) btn.classList.add('fi-active');
-  });
+  document.querySelectorAll(`.fi-btn[data-feeder="${fn}"]`).forEach(btn=>{btn.classList.remove('fi-active');if(btn.classList.contains('fi-'+status))btn.classList.add('fi-active');});
   updateFeederBadges();
-  const statusLabel = status === 'live' ? 'LIVE' : status === 'breakdown' ? 'BREAKDOWN' : 'IDLE';
-  toast(`${fn.split('→')[1]?.trim() || fn}: ${statusLabel}`);
+  toast(`${fn.split('→')[1]?.trim()||fn}: ${status.toUpperCase()}`);
 }
 
-function updateFeederBadges() {
-  document.querySelectorAll('.f-badge').forEach(el => {
-    const fn = el.dataset.feeder;
-    if(!fn) return;
-    const s = feederStatus[fn] || 'live';
-    el.className = 'f-badge f-badge-' + s;
-    el.textContent = s === 'live' ? '⚡ LIVE' : s === 'breakdown' ? '🔴 DOWN' : '⏸ IDLE';
+function updateFeederBadges(){
+  document.querySelectorAll('.f-badge').forEach(el=>{
+    const fn=el.dataset.feeder;if(!fn)return;
+    const s=feederStatus[fn]||'live';
+    el.className='f-badge f-badge-'+s;
+    el.textContent=s==='live'?'⚡ LIVE':s==='breakdown'?'🔴 DOWN':'⏸ IDLE';
   });
 }
 
-function focusFeeder(fn) {
-  if(focusedFeeder === fn) {
-    focusedFeeder = null;
-    allLayers.forEach(i => {
-        if(i.layer.setStyle && (i.reg.type === 'lines' || i.reg.type === 'fsegs')) {
-            i.layer.setStyle({opacity: 0.9});
-            let cStatus = feederStatus[i.feederName] || 'live';
-            if(i.layer.flowLayer && cStatus === 'live') safelyManageClass(i.layer.flowLayer, 'hidden-flow', false);
-        }
-        else if (i.layer.setOpacity) i.layer.setOpacity(1);
-    });
-    toast("Focus cleared");
-    return;
+function focusFeeder(fn){
+  if(focusedFeeder===fn){
+    exitFocusedFeeder();return;
   }
-  
-  focusedFeeder = fn;
-  const coords = [];
-  
-  allLayers.forEach(i => {
-    const isTarget = i.feederName === fn || i.reg.type.startsWith('ss') || i.reg.type.startsWith('eht');
-    if(i.layer.setStyle && (i.reg.type === 'lines' || i.reg.type === 'fsegs')) {
-        i.layer.setStyle({opacity: isTarget ? 1.0 : 0.15});
-        if(i.layer.flowLayer) {
-            let cStatus = feederStatus[i.feederName] || 'live';
-            if (isTarget && cStatus === 'live') safelyManageClass(i.layer.flowLayer, 'hidden-flow', false);
-            else safelyManageClass(i.layer.flowLayer, 'hidden-flow', true);
-        }
-    } else if (i.layer.setOpacity) {
-        i.layer.setOpacity(isTarget ? 1 : 0.2);
-    }
-    
-    if(i.feederName === fn && i.layer.getLatLngs) {
-      const ll = i.layer.getLatLngs();
-      if(ll.length) coords.push(...ll.flat());
-    }
+  focusedFeeder=fn;const coords=[];
+  allLayers.forEach(i=>{
+    const isTarget=i.feederName===fn||i.reg.type.startsWith('ss')||i.reg.type.startsWith('eht');
+    if(i.layer.setStyle&&(i.reg.type==='lines'||i.reg.type==='fsegs')){
+      i.layer.setStyle({opacity:isTarget?1:.15});
+      if(i.layer.flowLayer){let cs=feederStatus[i.feederName]||'live';if(isTarget&&cs==='live')safelyManageClass(i.layer.flowLayer,'hidden-flow',false);else safelyManageClass(i.layer.flowLayer,'hidden-flow',true);}
+    }else if(i.layer.setOpacity)i.layer.setOpacity(isTarget?1:.2);
+    if(i.feederName===fn&&i.layer.getLatLngs){const ll=i.layer.getLatLngs();if(ll.length)coords.push(...ll.flat());}
   });
-  
-  if(coords.length > 0) map.flyToBounds(L.latLngBounds(coords), {padding:[50,50], animate:true, duration: 1.0});
-  toast(`Focused on: ${fn.split('→')[1]?.trim() || fn}`);
+  if(coords.length>0)map.flyToBounds(L.latLngBounds(coords),{padding:[50,50],animate:true,duration:.7,easeLinearity:.25});
+  // Show edit toolbar
+  const tb=document.getElementById('editToolbar');
+  const lbl=document.getElementById('etFeederLabel');
+  if(lbl)lbl.textContent=fn.split('→')[1]?.trim()||fn;
+  tb.classList.add('visible');
+  toast(`Focused: ${fn.split('→')[1]?.trim()||fn}`);
 }
 
-function toggleSingleFeeder(fn, idx, e) {
-  e.stopPropagation(); 
-  feederState[fn] = !feederState[fn];
-  document.getElementById('ftog-'+idx).classList.toggle('off', !feederState[fn]);
-  updateVisibility();
-  toast((feederState[fn] ? 'Showing ' : 'Hidden ') + fn.substring(0,15));
+function toggleSingleFeeder(fn,idx,e){
+  e.stopPropagation();feederState[fn]=!feederState[fn];
+  document.getElementById('ftog-'+idx).classList.toggle('off',!feederState[fn]);
+  requestVisibilityUpdate();
+  toast((feederState[fn]?'Showing ':'Hidden ')+fn.substring(0,20));
 }
 
 function buildFeederChecks(){
-  const container = document.getElementById('feederChecks');
-  if(!container) return;
-  container.innerHTML = '';
-  const FCOLORS = ['#00c8ff','#ff9800','#00e676','#9c27b0','#2196f3','#f44336','#ffeb3b','#e91e63'];
-  
+  const container=document.getElementById('feederChecks');
+  if(!container)return;container.innerHTML='';
+  const FCOLORS=['#00c8ff','#ff9800','#00e676','#9c27b0','#2196f3','#f44336','#ffeb3b','#e91e63','#4caf50','#ff5722','#00bcd4','#cddc39'];
+
+  // GROUP DEFINITIONS — by EHT SS source
+  const GROUP_ORDER=['NIMS (132KV)','NIMS (33KV)','JUBILEE HILLS','OTHER'];
+  const GROUP_COLORS={
+    'NIMS (132KV)':  '#00c8ff',
+    'NIMS (33KV)':   '#00e676',
+    'JUBILEE HILLS': '#ff9800',
+    'OTHER':         '#78909c',
+  };
+  const groups={};
+  GROUP_ORDER.forEach(g=>{groups[g]=[];});
+
   [...feederNames].sort().forEach((fn,i)=>{
-    feederState[fn] = true; 
-    const color = FCOLORS[i % FCOLORS.length];
-    const short = fn.replace('→','→').substring(0,25); 
-    
-    const row = document.createElement('div');
-    row.className = 'ftog-row';
-    row.style.cssText = 'flex-wrap:wrap;gap:3px;padding:5px 6px;';
-    const fnEsc = fn.replace(/'/g, "\\'");
-    row.innerHTML=`
-      <div style="display:flex;align-items:center;gap:6px;width:100%">
-        <div style="width:10px;height:10px;border-radius:2px;background:${color};flex-shrink:0;border:1px solid rgba(255,255,255,.2)"></div>
-        <span class="focus-txt" style="font-family:var(--sans);font-size:11px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;min-width:0" title="Click to Focus" onclick="focusFeeder('${fnEsc}')">${short}</span>
-        <div class="tog" id="ftog-${i}" style="flex-shrink:0" title="Toggle visibility" onclick="toggleSingleFeeder('${fnEsc}', ${i}, event)"></div>
-      </div>
-      <div style="display:flex;gap:3px;padding-left:16px;margin-top:3px;width:100%">
-        <button class="fi-btn fi-live" data-feeder="${fnEsc}" onclick="setFeederStatus('${fnEsc}','live',this)">⚡ Live</button>
-        <button class="fi-btn fi-breakdown" data-feeder="${fnEsc}" onclick="setFeederStatus('${fnEsc}','breakdown',this)">🔴 Down</button>
-        <button class="fi-btn fi-idle" data-feeder="${fnEsc}" onclick="setFeederStatus('${fnEsc}','idle',this)">⏸ Idle</button>
-      </div>`;
-    container.appendChild(row);
+    feederState[fn]=true;
+    const up=fn.toUpperCase();
+    let grp='OTHER';
+    if(up.includes('JUBILEE HILLS'))             grp='JUBILEE HILLS';
+    else if(up.startsWith('NIMS (33KV)')||up.startsWith('NIMS →')&&up.includes('ROAD NO.13-B HILLS')) grp='NIMS (33KV)';
+    else if(up.includes('NIMS'))                 grp='NIMS (132KV)';
+    groups[grp].push({fn,i,color:FCOLORS[i%FCOLORS.length]});
+  });
+
+  let globalIdx=0;
+  GROUP_ORDER.forEach(grpKey=>{
+    const members=groups[grpKey];
+    if(!members.length)return;
+    const grpDiv=document.createElement('div');
+    grpDiv.className='fgrp';
+    grpDiv.dataset.group=grpKey;
+
+    // Group header
+    const hd=document.createElement('div');
+    hd.className='fgrp-hd';
+    hd.innerHTML=`<span class="fgrp-arrow">▾</span>
+      <div class="fgrp-dot" style="background:${GROUP_COLORS[grpKey]||'#78909c'}"></div>
+      <span class="fgrp-label">${grpKey}</span>
+      <span class="fgrp-cnt">${members.length}</span>`;
+    hd.onclick=()=>{
+      hd.classList.toggle('collapsed');
+      body.classList.toggle('collapsed');
+      if(!body.classList.contains('collapsed'))body.style.maxHeight=body.scrollHeight+'px';
+      else body.style.maxHeight='0';
+    };
+    grpDiv.appendChild(hd);
+
+    // Group body
+    const body=document.createElement('div');
+    body.className='fgrp-body';
+    body.style.maxHeight='2000px';
+
+    members.forEach(({fn,i,color})=>{
+      const fe=fn.replace(/'/g,"\\'");
+      const idx=globalIdx++;
+      const short=fn.length>26?fn.substring(0,24)+'…':fn;
+      const row=document.createElement('div');
+      row.className='ftog-row';
+      row.dataset.fname=fn.toLowerCase();
+      row.style.cssText='flex-wrap:wrap;gap:3px;padding:4px 6px;';
+      row.innerHTML=`
+        <div style="display:flex;align-items:center;gap:6px;width:100%">
+          <div style="width:9px;height:9px;border-radius:2px;background:${color};flex-shrink:0;border:1px solid rgba(255,255,255,.18)"></div>
+          <span class="focus-txt" style="font-family:var(--sans);font-size:11px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;min-width:0" title="${fn}" onclick="focusFeeder('${fe}')">${short}</span>
+          <span style="font-size:10px;cursor:pointer;padding:1px 5px;border-radius:4px;border:1px solid rgba(0,200,255,.25);color:rgba(0,200,255,.6);background:rgba(0,200,255,.07);font-family:var(--mono);letter-spacing:.5px;flex-shrink:0;transition:.2s" title="Edit Mode" onclick="quickEditMode('${fe}',event)">✏️</span>
+          <div class="tog" id="ftog-${idx}" style="flex-shrink:0" onclick="toggleSingleFeeder('${fe}',${idx},event)"></div>
+        </div>
+        <div style="display:flex;gap:3px;padding-left:15px;margin-top:2px;width:100%">
+          <button class="fi-btn fi-live"      data-feeder="${fe}" onclick="setFeederStatus('${fe}','live',this)">⚡ Live</button>
+          <button class="fi-btn fi-breakdown" data-feeder="${fe}" onclick="setFeederStatus('${fe}','breakdown',this)">🔴 Down</button>
+          <button class="fi-btn fi-idle"      data-feeder="${fe}" onclick="setFeederStatus('${fe}','idle',this)">⏸ Idle</button>
+        </div>`;
+      body.appendChild(row);
+    });
+
+    grpDiv.appendChild(body);
+    container.appendChild(grpDiv);
+  });
+}
+
+function filterFeeders(q){
+  q=q.trim().toLowerCase();
+  document.querySelectorAll('#feederChecks .fgrp').forEach(grpDiv=>{
+    let anyVisible=false;
+    grpDiv.querySelectorAll('.ftog-row').forEach(row=>{
+      const match=!q||row.dataset.fname.includes(q);
+      row.style.display=match?'':'none';
+      if(match)anyVisible=true;
+    });
+    grpDiv.style.display=anyVisible?'':'none';
+    // Auto-expand groups that have matches
+    if(q&&anyVisible){
+      const hd=grpDiv.querySelector('.fgrp-hd');
+      const body=grpDiv.querySelector('.fgrp-body');
+      if(hd&&body&&hd.classList.contains('collapsed')){
+        hd.classList.remove('collapsed');
+        body.classList.remove('collapsed');
+        body.style.maxHeight=body.scrollHeight+'px';
+      }
+    }
   });
 }
 
 function toggleAllFeeders(show){
-  globalFeederFallback = show; 
-  [...feederNames].forEach((fn,i)=>{
-    feederState[fn] = show;
-    const tog = document.getElementById('ftog-'+i);
-    if(tog) tog.classList.toggle('off', !show);
-  });
-  updateVisibility();
-  toast(show ? 'All feeders shown' : 'All feeders hidden');
+  globalFeederFallback=show;
+  [...feederNames].forEach((fn,i)=>{feederState[fn]=show;const tog=document.getElementById('ftog-'+i);if(tog)tog.classList.toggle('off',!show);});
+  requestVisibilityUpdate();
+  toast(show?'All feeders shown':'All feeders hidden');
 }
 
-function setCableFilter(f){
-  cableFilter=f;
-  document.querySelectorAll('#fp-all,#fp-ug,#fp-oh').forEach(p=>{
-    p.classList.remove('active'); p.style.background='transparent'; p.style.fontWeight='400';
-  });
-  document.getElementById('fp-'+f).classList.add('active');
-  document.getElementById('fp-'+f).style.background='rgba(0,200,255,.1)';
-  updateVisibility();
-  toast(f.toUpperCase()+' filter applied');
+function toggleLyr(key){
+  LGstate[key]=!LGstate[key];
+  document.getElementById('lyr-'+key).classList.toggle('off',!LGstate[key]);
+  requestVisibilityUpdate();
 }
 
-function toggleLyr(id){
-  LGstate[id] = !LGstate[id];
-  document.getElementById('lyr-'+id).classList.toggle('off', !LGstate[id]);
-  updateVisibility();
-  toast(id.toUpperCase()+' layer '+(LGstate[id]?'ON':'OFF'));
+function setCableFilter(v){
+  cableFilter=v;
+  ['all','ug','oh'].forEach(x=>{document.getElementById('fp-'+x).classList.toggle('active',x===v);});
+  requestVisibilityUpdate();
+  toast(v==='all'?'All cable types':v.toUpperCase()+' only');
 }
 
-let panelOpen=true;
 function togglePanel(){
-  panelOpen=!panelOpen;
-  document.getElementById('panel').classList.toggle('off',!panelOpen);
-  document.getElementById('ptab').classList.toggle('off',!panelOpen);
-  document.getElementById('ptab').textContent=panelOpen?'◀':'▶';
-  document.getElementById('legend').classList.toggle('shift',!panelOpen);
-  setTimeout(function(){ map.invalidateSize(); }, 350);
+  const p=document.getElementById('panel'),t=document.getElementById('ptab'),l=document.getElementById('legend');
+  p.classList.toggle('off');t.classList.toggle('off');
+  t.textContent=p.classList.contains('off')?'▶':'◀';
+  if(l)l.classList.toggle('shift',p.classList.contains('off'));
+  map.invalidateSize();
 }
 
+// Panel resize
 (function(){
-  const panel = document.getElementById('panel');
-  const ptab  = document.getElementById('ptab');
-  const legend= document.getElementById('legend');
-  const handle = document.createElement('div');
-  handle.id = 'panel-resize';
-  panel.appendChild(handle);
-
-  let dragging=false, startX=0, startW=0;
-  handle.addEventListener('mousedown',e=>{
-    dragging=true; startX=e.clientX; startW=panel.offsetWidth;
-    handle.classList.add('dragging'); document.body.style.cursor='col-resize'; document.body.style.userSelect='none'; e.preventDefault();
-  });
-  document.addEventListener('mousemove',e=>{
-    if(!dragging) return;
-    const w = Math.min(800, Math.max(200, startW + e.clientX - startX));
-    panel.style.width = w+'px'; ptab.style.left = w+'px'; legend.style.left = (w+10)+'px'; map.invalidateSize();
-  });
-  document.addEventListener('mouseup',()=>{
-    if(!dragging) return;
-    dragging=false; handle.classList.remove('dragging'); document.body.style.cursor=''; document.body.style.userSelect='';
-  });
+  const resizer=document.getElementById('panel-resize');
+  const panel=document.getElementById('panel');
+  const ptab=document.getElementById('ptab');
+  let dragging=false,startX=0,startW=0;
+  resizer.addEventListener('mousedown',e=>{dragging=true;startX=e.clientX;startW=panel.offsetWidth;resizer.classList.add('dragging');document.body.style.cursor='col-resize';document.body.style.userSelect='none';});
+  document.addEventListener('mousemove',e=>{if(!dragging)return;const nw=Math.min(Math.max(startW+(e.clientX-startX),200),600);panel.style.width=nw+'px';ptab.style.left=nw+'px';});
+  document.addEventListener('mouseup',()=>{if(dragging){dragging=false;resizer.classList.remove('dragging');document.body.style.cursor='';document.body.style.userSelect='';map.invalidateSize();}});
 })();
 
-document.getElementById('srchInput').addEventListener('input', function(e){
-  const q=e.target.value.toLowerCase().trim();
-  if(!q||q.length<2) return;
-  const found = allLayers.find(i => {
-    const p = i.layer.feature?.properties || i.layer.options || {};
-    return JSON.stringify(p).toLowerCase().includes(q);
-  });
-  
-  if (found && found.layer.getLatLng) {
-    const ll = found.layer.getLatLng();
-    map.flyTo(ll, 19, {animate:true});
-    if (found.layer.getPopup && found.layer.getPopup()) found.layer.openPopup();
-    
-    const pingIcon = L.divIcon({className: 'radar-ping', iconSize: [0,0]});
-    const pingMarker = L.marker(ll, {icon: pingIcon, zIndexOffset: 2000}).addTo(map);
-    setTimeout(() => map.removeLayer(pingMarker), 5000);
+// Search
+document.getElementById('srchInput').addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  const q=e.target.value.trim().toLowerCase();if(!q)return;
+  const found=allLayers.find(i=>{const p=i.layer.feature?.properties||i.layer.options||{};return JSON.stringify(p).toLowerCase().includes(q);});
+  if(found&&found.layer.getLatLng){
+    const ll=found.layer.getLatLng();
+    map.flyTo(ll,19,{animate:true,duration:.6,easeLinearity:.2});
+    if(found.layer.getPopup&&found.layer.getPopup())found.layer.openPopup();
+    const pingMarker=L.marker(ll,{icon:L.divIcon({className:'radar-ping',iconSize:[0,0]}),zIndexOffset:2000}).addTo(map);
+    setTimeout(()=>map.removeLayer(pingMarker),5000);
   }
 });
 
-map.on('mousemove',e=>{ document.getElementById('coords').textContent= e.latlng.lat.toFixed(5)+', '+e.latlng.lng.toFixed(5); });
+map.on('mousemove',e=>{document.getElementById('coords').textContent=e.latlng.lat.toFixed(5)+', '+e.latlng.lng.toFixed(5);});
+
+// ══════════════════════════════════════════════════
+// EDIT MODE ENGINE v2
+// ══════════════════════════════════════════════════
+let editModeActive=false;
+let editTargetItem=null;
+
+// Field definitions
+// key     = GeoJSON property name (space-separated, as used in data files)
+// csvKey  = CSV column name (underscore)
+// readOnly= auto-filled from feeder, not editable
+// dropdown= render as <select> with discovered options
+// isGeo   = lat/lng: text input + drag marker
+const EDIT_FIELDS=[
+  {key:'Feeder Name',         csvKey:'feeder_name',          label:'FEEDER NAME',          readOnly:true },
+  {key:'Nature of Feeder',    csvKey:'nature_of_feeder',     label:'NATURE OF FEEDER',     readOnly:true },
+  {key:'Type of Feeder',      csvKey:'Type_of_feeder',       label:'TYPE OF FEEDER',       dropdown:true },
+  {key:'Latitude',            csvKey:'latitude',             label:'LATITUDE',             isGeo:true    },
+  {key:'Longitude',           csvKey:'longitude',            label:'LONGITUDE',            isGeo:true    },
+  {key:'Pole Number',         csvKey:'pole_number',          label:'POLE NUMBER'                         },
+  {key:'Cut Point',           csvKey:'cut_point',            label:'CUT POINT',            dropdown:true },
+  {key:'Pole Feeding to',     csvKey:'pole_feeding_to',      label:'POLE FEEDING TO',      dropdown:true },
+  {key:'Type of Cable Point', csvKey:'type_of_cable_point',  label:'TYPE OF CABLE POINT',  dropdown:true },
+  {key:'Type of Pole',        csvKey:'type_of_pole',         label:'TYPE OF POLE',         dropdown:true },
+  {key:'Section',             csvKey:'section',              label:'SECTION',              readOnly:true },
+  {key:'Sub Division',        csvKey:'sub_division',         label:'SUB DIVISION',         readOnly:true },
+  {key:'Division',            csvKey:'division',             label:'DIVISION',             readOnly:true },
+];
+
+const CSV_COLS=['feeder_name','nature_of_feeder','Type_of_feeder','latitude','longitude',
+  'pole_number','cut_point','pole_feeding_to','type_of_cable_point','type_of_pole',
+  'section','sub_division','division'];
+
+const POINT_TYPES=['points','cut','ab','dp','fpoles'];
+
+// In-memory edit store
+const editChanges={};
+function getEditStore(fn){
+  if(!editChanges[fn])editChanges[fn]={edited:{},deleted:new Set()};
+  return editChanges[fn];
+}
+
+// ── Property resolver ──
+// Exact GeoJSON key aliases confirmed from live data popup
+const PROP_ALIASES={
+  'feeder_name':        ['Feeder Name','feeder_name','feeder name'],
+  'nature_of_feeder':   ['Nature of Feeder','nature_of_feeder','Nature_of_Feeder'],
+  'Type_of_feeder':     ['Type of Feeder','Type_of_feeder','type of feeder','type_of_feeder'],
+  'latitude':           ['Latitude','latitude'],
+  'longitude':          ['Longitude','longitude'],
+  'pole_number':        ['Pole Number','pole_number','Pole_Number'],
+  'cut_point':          ['Cut Point','cut_point','Cut_Point'],
+  'pole_feeding_to':    ['Pole Feeding to','Pole Feeding To','pole_feeding_to','Pole_Feeding_to'],
+  'type_of_cable_point':['Type of Cable Point','type_of_cable_point','Type_of_Cable_Point'],
+  'type_of_pole':       ['Type of Pole','type_of_pole','Type_of_Pole'],
+  'section':            ['Section','section'],
+  'sub_division':       ['Sub Division','sub_division','Sub_Division'],
+  'division':           ['Division','division'],
+};
+
+function resolveProp(props,keyOrCsvKey){
+  if(!props)return'';
+  // Try exact aliases first
+  const aliases=PROP_ALIASES[keyOrCsvKey];
+  if(aliases){
+    for(const a of aliases){if(a in props&&props[a]!==null&&props[a]!==undefined)return props[a];}
+  }
+  // Direct lookup
+  if(keyOrCsvKey in props&&props[keyOrCsvKey]!==null)return props[keyOrCsvKey];
+  // Normalized case-insensitive fallback
+  const norm=keyOrCsvKey.toLowerCase().replace(/[_ ]/g,'');
+  for(const k of Object.keys(props)){
+    if(k.toLowerCase().replace(/[_ ]/g,'')===norm&&props[k]!==null&&props[k]!==undefined)return props[k];
+  }
+  return'';
+}
+
+// ── Dropdown option store (built from all loaded features) ──
+const dropdownOptions={};
+
+function buildDropdownOptions(){
+  const sets={};
+  const dFields=EDIT_FIELDS.filter(f=>f.dropdown);
+  allLayers.forEach(item=>{
+    if(!POINT_TYPES.includes(item.reg.type))return;
+    const props=item.layer.feature?.properties||{};
+    dFields.forEach(f=>{
+      const val=resolveProp(props,f.csvKey)??resolveProp(props,f.key);
+      if(val===null||val===undefined||String(val).trim()==='')return;
+      if(!sets[f.key])sets[f.key]=new Set();
+      sets[f.key].add(String(val).trim());
+    });
+  });
+  dFields.forEach(f=>{
+    if(!sets[f.key]){dropdownOptions[f.key]=[];return;}
+    const arr=[...sets[f.key]].filter(Boolean);
+    const allNum=arr.every(v=>!isNaN(v)&&v!=='');
+    dropdownOptions[f.key]=arr.sort(allNum?(a,b)=>Number(a)-Number(b):(a,b)=>a.localeCompare(b));
+  });
+}
+
+// One-click edit entry from feeder panel ✏️ button
+function quickEditMode(fn,e){
+  e.stopPropagation();
+  // Focus the feeder first if not already focused
+  if(focusedFeeder!==fn)focusFeeder(fn);
+  // Then activate edit mode after a short delay (allow flyTo to start)
+  setTimeout(()=>{
+    if(!editModeActive)toggleEditMode();
+  },120);
+}
+
+// ── toggleEditMode ──
+function toggleEditMode(){
+  if(!focusedFeeder)return;
+  editModeActive=!editModeActive;
+  const btn=document.getElementById('etEditBtn');
+  btn.classList.toggle('active',editModeActive);
+  btn.textContent=editModeActive?'✏️ ON':'✏️ EDIT MODE';
+  allLayers.forEach(item=>{
+    if(item.feederName!==focusedFeeder)return;
+    if(!POINT_TYPES.includes(item.reg.type))return;
+    const el=item.layer.getElement?.();
+    item.layer.off('click');
+    if(editModeActive){
+      if(el)el.classList.add('edit-mode-point');
+      item.layer.on('click',function(e){L.DomEvent.stopPropagation(e);openEditPanel(item);});
+    }else{
+      if(el)el.classList.remove('edit-mode-point');
+      item.layer.on('click',function(e){L.DomEvent.stopPropagation(e);item.layer.openPopup(e.latlng||item.layer.getLatLng());});
+    }
+  });
+  if(!editModeActive)closeEditPanel();
+  toast(editModeActive?'Edit Mode ON — click any point to edit':'Edit Mode OFF');
+}
+
+// ── openEditPanel ──
+function openEditPanel(item){
+  cancelPickMode();
+  editTargetItem=item;
+  const props=item.layer.feature?.properties||{};
+  const latlng=item.layer.getLatLng?.()??{lat:0,lng:0};
+  const store=getEditStore(item.feederName);
+  const saved=store.edited[item.layer._editId]||{};
+
+  // Header pole ID
+  const poleNum=resolveProp(props,'Pole Number')||resolveProp(props,'pole_number')||'—';
+  document.getElementById('epPoleId').textContent='POLE '+poleNum;
+
+  const body=document.getElementById('editPanelBody');
+  body.innerHTML='';
+
+  EDIT_FIELDS.forEach(f=>{
+    // Determine current value — try saved first, then all key variants
+    // Priority: saved edit → direct csvKey prop → f.key via resolveProp → csvKey via resolveProp
+    let curVal='';
+    if(f.isGeo){
+      curVal=f.csvKey==='latitude'
+        ?(saved.lat!=null?saved.lat:latlng.lat)
+        :(saved.lng!=null?saved.lng:latlng.lng);
+      curVal=parseFloat(curVal||0).toFixed(6);
+    }else if(f.key==='Feeder Name'){
+      curVal=item.feederName||'';
+    }else{
+      // Use csvKey for alias lookup (most reliable), then f.key as fallback
+      const v=saved.props?.[f.csvKey]
+        ??resolveProp(props,f.csvKey)
+        ??resolveProp(props,f.key)
+        ??'';
+      curVal=v;
+    }
+    const safeVal=String(curVal??'').trim();
+
+    const d=document.createElement('div');
+    d.className='ep-field';
+
+    let inner=`<label class="ep-label">${f.label}</label>`;
+
+    if(f.readOnly){
+      inner+=`<div class="ep-readonly">${safeVal||'—'}</div>`;
+    }else if(f.isGeo){
+      inner+=`<input class="ep-input ep-geo-input" type="number" step="0.000001"
+        data-key="${f.key}" data-geo="true" data-csvkey="${f.csvKey}" value="${safeVal}"/>`;
+    }else if(f.dropdown){
+      const opts=dropdownOptions[f.key]||[];
+      const trimVal=safeVal.trim();
+      const hasVal=trimVal!=='';
+      const inList=opts.some(o=>o===trimVal);
+      inner+=`<select class="ep-select" data-key="${f.key}" data-csvkey="${f.csvKey}">
+        <option value="">— select —</option>
+        ${opts.map(o=>`<option value="${escH(o)}"${o===trimVal?' selected':''}>${o}</option>`).join('')}
+        ${hasVal&&!inList?`<option value="${escH(trimVal)}" selected>${trimVal}</option>`:''}
+      </select>`;
+    }else{
+      // Plain text input (e.g. Pole Number)
+      inner+=`<input class="ep-input" type="text"
+        data-key="${f.key}" data-csvkey="${f.csvKey}" value="${escH(safeVal)}"/>`;
+    }
+
+    d.innerHTML=inner;
+    body.appendChild(d);
+  });
+
+  // ── Pick on Map button (inserted after longitude field) ──
+  const pickBtn=document.createElement('button');
+  pickBtn.className='ep-pick-btn';
+  pickBtn.id='pickMapBtn';
+  pickBtn.textContent='📍 PICK ON MAP';
+  pickBtn.onclick=startPickMode;
+  const lngField=body.querySelector('[data-key="longitude"]');
+  if(lngField)lngField.closest('.ep-field').insertAdjacentElement('afterend',pickBtn);
+  else body.appendChild(pickBtn);
+
+  document.getElementById('editPanel').classList.add('open');
+}
+
+function escH(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+
+// ── closeEditPanel ──
+function closeEditPanel(){
+  cancelPickMode();
+  document.getElementById('editPanel').classList.remove('open');
+  editTargetItem=null;
+}
+
+// ══ PICK ON MAP ENGINE ══════════════════════════
+let pickModeActive=false;
+let _pickHandler=null;
+let _pickEsc=null;
+
+function startPickMode(){
+  if(pickModeActive){cancelPickMode();return;}
+  pickModeActive=true;
+  const btn=document.getElementById('pickMapBtn');
+  if(btn){btn.classList.add('picking');btn.textContent='📍 PICKING… (Esc to cancel)';}
+  document.getElementById('pickBanner').classList.add('active');
+  map.getContainer().style.cursor='crosshair';
+
+  _pickHandler=function(e){
+    const lat=e.latlng.lat,lng=e.latlng.lng;
+    const li=document.querySelector('#editPanelBody [data-key="latitude"]');
+    const lo=document.querySelector('#editPanelBody [data-key="longitude"]');
+    if(li)li.value=lat.toFixed(6);
+    if(lo)lo.value=lng.toFixed(6);
+    // Move existing marker to picked location
+    if(editTargetItem?.layer?.setLatLng)editTargetItem.layer.setLatLng([lat,lng]);
+    cancelPickMode();
+    toast(`📍 Picked: ${lat.toFixed(6)}, ${lng.toFixed(6)}`,2500);
+  };
+  _pickEsc=function(e){if(e.key==='Escape')cancelPickMode();};
+
+  map.once('click',_pickHandler);
+  document.addEventListener('keydown',_pickEsc);
+}
+
+function cancelPickMode(){
+  pickModeActive=false;
+  const btn=document.getElementById('pickMapBtn');
+  if(btn){btn.classList.remove('picking');btn.textContent='📍 PICK ON MAP';}
+  document.getElementById('pickBanner').classList.remove('active');
+  map.getContainer().style.cursor='';
+  if(_pickHandler){map.off('click',_pickHandler);_pickHandler=null;}
+  if(_pickEsc){document.removeEventListener('keydown',_pickEsc);_pickEsc=null;}
+}
+
+// ── saveEditPoint ──
+function saveEditPoint(){
+  if(!editTargetItem)return;
+  const item=editTargetItem;
+  const store=getEditStore(item.feederName);
+  const newProps={};
+  let newLat=null,newLng=null;
+
+  document.querySelectorAll('#editPanelBody input[data-csvkey],#editPanelBody select[data-csvkey]').forEach(el=>{
+    const csvk=el.dataset.csvkey;
+    if(el.dataset.geo==='true'){
+      if(el.dataset.key==='latitude')newLat=parseFloat(el.value)||null;
+      else newLng=parseFloat(el.value)||null;
+    }else{
+      newProps[csvk]=el.value;
+    }
+  });
+
+  store.edited[item.layer._editId]={props:newProps,lat:newLat,lng:newLng};
+  if(newLat&&newLng&&item.layer.setLatLng)item.layer.setLatLng([newLat,newLng]);
+  if(item.layer.feature)Object.assign(item.layer.feature.properties,newProps);
+  closeEditPanel();
+  toast('Point saved ✓',2000);
+}
+
+// ── deleteEditPoint ──
+function deleteEditPoint(){
+  if(!editTargetItem)return;
+  const item=editTargetItem;
+  const store=getEditStore(item.feederName);
+  store.deleted.add(item.layer._editId);
+  item._deleted=true;
+  if(map.hasLayer(item.layer))map.removeLayer(item.layer);
+  if(item.layer.flowLayer&&map.hasLayer(item.layer.flowLayer))map.removeLayer(item.layer.flowLayer);
+  closeEditPanel();
+  toast('Point deleted 🗑',2000);
+}
+
+// ── exitFocusedFeeder ──
+function exitFocusedFeeder(){
+  if(editModeActive){editModeActive=true;toggleEditMode();}
+  closeEditPanel();
+  focusedFeeder=null;
+  allLayers.forEach(i=>{
+    if(i.layer.setStyle&&(i.reg.type==='lines'||i.reg.type==='fsegs')){
+      i.layer.setStyle({opacity:.92});
+      if(i.layer.flowLayer){const cs=feederStatus[i.feederName]||'live';safelyManageClass(i.layer.flowLayer,'hidden-flow',cs!=='live');}
+    }else if(i.layer.setOpacity)i.layer.setOpacity(1);
+  });
+  document.getElementById('editToolbar').classList.remove('visible');
+  toast('Focus cleared');
+}
+
+// ── CSV DOWNLOAD ──
+function downloadFeederCSV(){
+  if(!focusedFeeder){toast('Select a feeder first');return;}
+  const fn=focusedFeeder;
+  const store=editChanges[fn]||{edited:{},deleted:new Set()};
+
+  function csvCell(v){
+    v=String(v??'');
+    if(v.includes(',')||v.includes('"')||v.includes('\n'))v='"'+v.replace(/"/g,'""')+'"';
+    return v;
+  }
+
+  const rows=[CSV_COLS.join(',')];
+
+  allLayers.forEach(item=>{
+    if(item.feederName!==fn)return;
+    if(!POINT_TYPES.includes(item.reg.type))return;
+    if(item._deleted||store.deleted.has(item.layer._editId))return;
+    const saved=store.edited[item.layer._editId]||{};
+    const props=item.layer.feature?.properties||{};
+    const latlng=item.layer.getLatLng?.()??{lat:'',lng:''};
+    const row=CSV_COLS.map(csvk=>{
+      if(csvk==='latitude')return csvCell(saved.lat!=null?saved.lat:latlng.lat);
+      if(csvk==='longitude')return csvCell(saved.lng!=null?saved.lng:latlng.lng);
+      const field=EDIT_FIELDS.find(f=>f.csvKey===csvk);
+      const v=saved.props?.[csvk]??resolveProp(props,csvk)??resolveProp(props,field?.key||csvk);
+      return csvCell(v);
+    });
+    rows.push(row.join(','));
+  });
+
+  const blob=new Blob(['\uFEFF'+rows.join('\r\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=fn.replace(/[^a-z0-9]/gi,'_').substring(0,50)+'_edited.csv';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  toast(`Downloaded ${rows.length-1} points ⬇️`,3000);
+}
 
 let _tt;
 function toast(msg,dur=2200){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),dur);
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),dur);
 }
 
-const fill=document.getElementById('ldfill'); let pct=0;
-const iv=setInterval(()=>{ pct+=Math.random()*15+7; if(pct>=100){pct=100;clearInterval(iv);} fill.style.width=pct+'%'; },80);
+// Loader
+const fill=document.getElementById('ldfill');let pct=0;
+const iv=setInterval(()=>{pct+=Math.random()*15+7;if(pct>=100){pct=100;clearInterval(iv);}fill.style.width=pct+'%';},80);
 
 function dismissLoader(){
   const ov=document.getElementById('loader');
-  if(ov){ ov.classList.add('gone'); setTimeout(()=>ov.remove(),500); }
+  if(ov){ov.classList.add('gone');setTimeout(()=>ov.remove(),500);}
   map.invalidateSize();
-  
-  // ── DEFERRED SCRIPT (Mapped smartly) ──
+  // Deferred Feeder_Segments_148
   setTimeout(()=>{
     const s=document.createElement('script');
-    s.src='data/Feeder_Segments_81.js';
+    s.src='data/Feeder_Segments_148.js';
     s.onload=()=>{
       try{
-        if(typeof json_Feeder_Segments_81!=='undefined' && json_Feeder_Segments_81.features){
-          json_Feeder_Segments_81.features.forEach(feat=>{
-            try {
-              if(!feat.geometry) return;
-              const p = feat.properties || {};
-              
-              let pairType = String(p['Pair_Type'] || p['Type of Feeder'] || p['Feeder_Type'] || p['Feeder Type'] || '').trim().toUpperCase();
-              let isOH = (pairType === 'OH' || pairType === 'OVERHEAD');
-              let isTRANS = (pairType === 'TRANS');
-              
-              let color = isOH ? '#f44336' : '#2196f3'; 
-              if (isTRANS) color = '#9c27b0'; 
-              let segCable = isOH ? 'OH' : (isTRANS ? '-' : 'UG');
-              
+        if(typeof json_Feeder_Segments_148!=='undefined'&&json_Feeder_Segments_148.features){
+          json_Feeder_Segments_148.features.forEach(feat=>{
+            try{
+              if(!feat.geometry)return;
+              const p=feat.properties||{};
+              let pairType=String(p['Pair_Type']||p['Type of Feeder']||p['Feeder_Type']||'').trim().toUpperCase();
+              let isOH=(pairType==='OH'||pairType==='OVERHEAD');
+              let isTRANS=(pairType==='TRANS');
+              let color=isOH?'#f44336':'#2196f3';if(isTRANS)color='#9c27b0';
+              let segCable=isOH?'OH':(isTRANS?'-':'UG');
               if(feat.geometry.type==='LineString'||feat.geometry.type==='MultiLineString'){
-                const coords=feat.geometry.type==='LineString' ? feat.geometry.coordinates.map(c=>[c[1],c[0]]) : feat.geometry.coordinates[0].map(c=>[c[1],c[0]]);
-                
-                // Mapped Feeder Name guarantees the segment hides/highlights correctly!
-                let rawFName = p['Feeder_Name'] || p['Name of the Feeder'] || 'Feeder Segments';
-                let fName = extractFeeder(p, rawFName);
-                
-                let cStatus = feederStatus[fName] || 'live';
-                let customClass = cStatus === 'breakdown' ? 'feeder-breakdown' : '';
-                
-                const layer = L.polyline(coords,{color: color, weight: 6, opacity: 0.9, className: customClass});
-                
-                let flowClass = 'feeder-flow-overlay' + (cStatus !== 'live' ? ' hidden-flow' : '');
-                layer.flowLayer = L.polyline(coords, {
-                    color: '#ffffff', weight: 3, className: flowClass,
-                    interactive: false, bubblingMouseEvents: false, pane: 'flowPane'
-                });
-
-                const regData = {type:'fsegs', feeder:'Feeder Segments', cable:'-'};
-                
-                layer.bindPopup(popup(feat, regData));
-                layer.on('popupopen', function(e) { e.popup.setContent(popup(feat, regData)); });
-
-                layer.on('mouseover',e=>{
-                    e.target.setStyle({weight:8,opacity:1});
-                    if(e.target.flowLayer) e.target.flowLayer.setStyle({weight: 4});
-                });
-                layer.on('mouseout',e=>{
-                    const isFocused = focusedFeeder && focusedFeeder !== fName;
-                    e.target.setStyle({weight:6, opacity: isFocused ? 0.15 : 0.9});
-                    if(e.target.flowLayer) e.target.flowLayer.setStyle({weight: 3});
-                });
-                
-                allLayers.push({layer, reg: regData, feederName: fName, cable: segCable, poleNo: null});
-                if(!feederLayerMap[fName]) feederLayerMap[fName] = [];
-                feederLayerMap[fName].push({layer, reg: regData, cable: segCable});
+                const coords=feat.geometry.type==='LineString'?feat.geometry.coordinates.map(c=>[c[1],c[0]]):feat.geometry.coordinates[0].map(c=>[c[1],c[0]]);
+                let fName=p['Feeder_Name']||p['Name of the Feeder']||'Feeder Segments';
+                let cStatus=feederStatus[fName]||'live';
+                const layer=L.polyline(coords,{color,weight:5.5,opacity:.92,lineCap:'round',lineJoin:'round',className:cStatus==='breakdown'?'feeder-breakdown':''});
+                layer.flowLayer=L.polyline(coords,{color:'#ffffff',weight:3,className:'feeder-flow-overlay'+(cStatus!=='live'?' hidden-flow':''),interactive:false,bubblingMouseEvents:false,pane:'flowPane'});
+                const regData={type:'fsegs',feeder:'Feeder Segments',cable:'-'};
+                layer.bindPopup(popup(feat,regData));
+                layer.on('popupopen',function(e){e.popup.setContent(popup(feat,regData));});
+                layer.on('mouseover',e=>{e.target.setStyle({weight:7.5,opacity:1});if(e.target.flowLayer)e.target.flowLayer.setStyle({weight:4});});
+                layer.on('mouseout',e=>{const isFocused=focusedFeeder&&focusedFeeder!==fName;e.target.setStyle({weight:5.5,opacity:isFocused?.15:.92});if(e.target.flowLayer)e.target.flowLayer.setStyle({weight:3});});
+                allLayers.push({layer,reg:regData,feederName:fName,cable:segCable,poleNo:null});
+                if(!feederLayerMap[fName])feederLayerMap[fName]=[];
+                feederLayerMap[fName].push({layer,reg:regData,cable:segCable});
               }
-            } catch(e){}
+            }catch(e){}
           });
-          updateCounts();
-          updateVisibility();
-          toast('Detailed Feeder Segments Loaded',1500);
+          updateCounts();requestVisibilityUpdate();
+          toast('Feeder Segments loaded',1500);
         }
       }catch(e){}
     };
     document.head.appendChild(s);
-  }, 1000);
+  },1000);
 }
 
 setTimeout(()=>{
-  dismissLoader();
-  buildFeederChecks();
-  updateCounts();
-  (window.requestIdleCallback || setTimeout)(()=>{
-    updateVisibility();
-    syncLabels();
-  }, {timeout:500});
-  toast('NIMS / Jubilee Hills / Road No.13 section loaded — '+allLayers.length+' features', 3000);
-}, 600);
-setTimeout(()=>dismissLoader(), 5000);
+  dismissLoader();buildFeederChecks();updateCounts();buildDropdownOptions();
+  (window.requestIdleCallback||setTimeout)(()=>{requestVisibilityUpdate();syncLabels();},{timeout:500});
+  toast('NIMS 33KV section loaded — '+allLayers.length+' features',3000);
+},600);
+setTimeout(()=>dismissLoader(),5000);
 
-function syncLabels() {
-  const z = map.getZoom();
-  const showPoleLabels = z >= 17; 
-  const showSSLabels = z >= 13;
-
-  allLayers.forEach(item => {
-    if(item.reg.type.startsWith('ss') || item.reg.type.startsWith('eht')) {
-        if(item.layer.getTooltip) {
-            const tip = item.layer.getTooltip();
-            if(tip) {
-                if(showSSLabels && map.hasLayer(item.layer)) item.layer.openTooltip && item.layer.openTooltip();
-                else item.layer.closeTooltip && item.layer.closeTooltip();
-            }
-        }
+function syncLabels(){
+  const z=map.getZoom();
+  const showPoleLabels=z>=17;const showSSLabels=z>=13;
+  allLayers.forEach(item=>{
+    if(item.reg.type.startsWith('ss')||item.reg.type.startsWith('eht')){
+      if(item.layer.getTooltip){const tip=item.layer.getTooltip();if(tip){if(showSSLabels&&map.hasLayer(item.layer))item.layer.openTooltip&&item.layer.openTooltip();else item.layer.closeTooltip&&item.layer.closeTooltip();}}
     }
-    if(item.poleNo) {
-        if(showPoleLabels && map.hasLayer(item.layer)) {
-            if(!item.layer.getTooltip()) {
-                item.layer.bindTooltip(item.poleNo, {permanent: true, direction: 'right', className: 'pole-label', offset: [6, 0]});
-            }
-        } else {
-            if(item.layer.getTooltip()) {
-                item.layer.unbindTooltip();
-            }
-        }
+    if(item.poleNo){
+      if(showPoleLabels&&map.hasLayer(item.layer)){if(!item.layer.getTooltip())item.layer.bindTooltip(item.poleNo,{permanent:true,direction:'right',className:'pole-label',offset:[6,0]});}
+      else{if(item.layer.getTooltip())item.layer.unbindTooltip();}
     }
   });
-  
-  document.getElementById('zoomLvl').textContent = z;
+  document.getElementById('zoomLvl').textContent=z;
 }
-map.on('zoomend', syncLabels);
-
-document.getElementById('loader').addEventListener('click', dismissLoader);
+map.on('zoomend',syncLabels);
+document.getElementById('loader').addEventListener('click',dismissLoader);
 </script>
 </body>
 </html>
